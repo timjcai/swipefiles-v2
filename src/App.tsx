@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase-config";
+import { SignIn } from "./components/auth/SignIn";
+import { SignUp } from "./components/auth/SignUp";
 
 export const App = () => {
     const [users, setUsers] = useState([]);
@@ -34,6 +36,17 @@ export const App = () => {
 
     return (
         <>
+            <SignUp />
+            <SignIn />
+        </>
+    );
+};
+
+export default App;
+
+export const Index = () => {
+    return (
+        <div>
             <h1>Firestore - Test - Swipefiles</h1>
             <div>
                 <form onSubmit={createUser}>
@@ -65,8 +78,6 @@ export const App = () => {
                     </div>
                 );
             })}
-        </>
+        </div>
     );
 };
-
-export default App;
