@@ -18,6 +18,16 @@ const firebaseConfig = {
   measurementId: "G-LY5TSJ41EN"
 };
 
+// const firebaseConfig = {
+//   apiKey: import.meta.env.firebase_APIKey,
+//   authDomain: import.meta.env.firebase_AuthDomain,
+//   projectId: import.meta.env.firebase_ProjectId,
+//   storageBucket: import.meta.env.firebase_StorageBucket,
+//   messagingSenderId: import.meta.env.firebase_MessagingSenderId,
+//   appId: import.meta.env.firebase_AppId,
+//   measurementId: import.meta.env.firebase_MeasurementId
+// };
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = initializeFirestore(app, {
