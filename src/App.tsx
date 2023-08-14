@@ -4,38 +4,53 @@ import { addDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase-config";
 import { SignIn } from "./components/auth/SignIn";
 import { SignUp } from "./components/auth/SignUp";
+import { Swipecard } from "./components/swipes/Swipecard";
+import { ISwipeData } from "./types";
 
 export const App = () => {
-    const [users, setUsers] = useState([]);
-    const [currentUsername, setCurrentUsername] = useState("");
-    const [currentFullname, setCurrentFullname] = useState("");
-    const [currentEmail, setCurrentEmail] = useState("");
-    const [currentPassword, setCurrentPassword] = useState("");
-    const userCollection = collection(db, "user");
+    const [swipes, setSwipes] = useState([]);
+    const swipeCollection = collection(db, "swipes");
 
     useEffect(() => {
         const getUsers = async () => {
-            const data = await getDocs(userCollection);
-            setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+            const data = await getDocs(swipeCollection);
+            setSwipes(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         };
 
         getUsers();
-    }, [users]);
+    }, []);
 
-    const createUser = async (e) => {
-        e.preventDefault();
-        const payload = {
-            username: currentUsername,
-            fullname: currentFullname,
-            email: currentEmail,
-            password: currentPassword,
-        };
-        console.log(payload);
-        await addDoc(userCollection, payload);
-    };
+    // const createUser = async (e) => {
+    //     e.preventDefault();
+    //     const payload = {
+    //         username: currentUsername,
+    //         fullname: currentFullname,
+    //         email: currentEmail,
+    //         password: currentPassword,
+    //     };
+    //     console.log(payload);
+    //     await addDoc(userCollection, payload);
+    // };
 
     return (
         <>
+            {swipes.map((swipe: ISwipeData) => {
+                return (
+                    <Swipecard
+                        key={swipe.id}
+                        title={swipe.title}
+                        author={swipe.author}
+                        board_id={swipe.board_id}
+                        hyperlink={swipe.hyperlink}
+                        platform={swipe.platform}
+                        user_id={swipe.user_id}
+                        id={swipe.id}
+                        notes={swipe.notes}
+                        images={swipe.images}
+                        keyword_tags={swipe.keyword_tags}
+                    />
+                );
+            })}
             <SignUp />
             <SignIn />
         </>
@@ -44,40 +59,40 @@ export const App = () => {
 
 export default App;
 
-export const Index = () => {
-    return (
-        <div>
-            <h1>Firestore - Test - Swipefiles</h1>
-            <div>
-                <form onSubmit={createUser}>
-                    <input
-                        placeholder="Username:"
-                        onChange={(e) => setCurrentUsername(e.target.value)}
-                    />
-                    <input
-                        placeholder="Fullname:"
-                        onChange={(e) => setCurrentFullname(e.target.value)}
-                    />
-                    <input
-                        placeholder="Email:"
-                        onChange={(e) => setCurrentEmail(e.target.value)}
-                    />
-                    <input
-                        placeholder="Password:"
-                        onChange={(e) => setCurrentPassword(e.target.value)}
-                    />
-                    <button type="submit">Create</button>
-                </form>
-            </div>
-            {users.map((user) => {
-                return (
-                    <div key={user.id}>
-                        <p>{user.id}</p>
-                        <p>{user.email}</p>
-                        <p>{user.fullname}</p>
-                    </div>
-                );
-            })}
-        </div>
-    );
-};
+// export const Index = () => {
+//     return (
+//         <div>
+//             <h1>Firestore - Test - Swipefiles</h1>
+//             <div>
+//                 <form onSubmit={createUser}>
+//                     <input
+//                         placeholder="Username:"
+//                         onChange={(e) => setCurrentUsername(e.target.value)}
+//                     />
+//                     <input
+//                         placeholder="Fullname:"
+//                         onChange={(e) => setCurrentFullname(e.target.value)}
+//                     />
+//                     <input
+//                         placeholder="Email:"
+//                         onChange={(e) => setCurrentEmail(e.target.value)}
+//                     />
+//                     <input
+//                         placeholder="Password:"
+//                         onChange={(e) => setCurrentPassword(e.target.value)}
+//                     />
+//                     <button type="submit">Create</button>
+//                 </form>
+//             </div>
+//             {users.map((user) => {
+//                 return (
+//                     <div key={user.id}>
+//                         <p>{user.id}</p>
+//                         <p>{user.email}</p>
+//                         <p>{user.fullname}</p>
+//                     </div>
+//                 );
+//             })}
+//         </div>
+//     );
+// };

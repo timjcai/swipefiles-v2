@@ -8,6 +8,7 @@ export interface ISwipeData {
     platform: PlatformTypes;
     title: string;
     user_id: string;
+    id: string;
 }
 
 export type PlatformTypes =

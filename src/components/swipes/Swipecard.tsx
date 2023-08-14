@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import React from "react";
+import React, { FC } from "react";
 import { ISwipeData } from "../../types";
 
-export const Swipecard = (swipedata: ISwipeData) => {
+export const Swipecard: FC<ISwipeData> = (swipedata) => {
     const {
         author,
         images,
@@ -13,20 +13,22 @@ export const Swipecard = (swipedata: ISwipeData) => {
         title,
         board_id,
         user_id,
+        id,
     } = swipedata;
+    console.log(swipedata);
 
     return (
-        <div>
-            <h1>{title}</h1>
+        <div key={id}>
+            <h1 key={title}>{title}</h1>
             {keyword_tags &&
                 keyword_tags.map((words) => {
-                    return <p>{words}</p>;
+                    return <p key={words}>{words}</p>;
                 })}
-            <p>@{author}</p>
-            <p>{platform}</p>
-            <p>{board_id}</p>
-            <p>{links}</p>
-            <p>{notes}</p>
+            <p key={author}>@{author}</p>
+            <p key={platform}>{platform}</p>
+            <p key={board_id}>{board_id}</p>
+            <p key={links}>{links}</p>
+            <p key={notes}>{notes}</p>
         </div>
     );
 };
