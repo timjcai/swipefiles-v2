@@ -6,18 +6,19 @@ import { SignIn } from "./components/auth/SignIn";
 import { SignUp } from "./components/auth/SignUp";
 import { Swipecard } from "./components/swipes/Swipecard";
 import { ISwipeData } from "./types";
+import { Navbar } from "./components/navbar/Navbar";
 
 export const App = () => {
     const [swipes, setSwipes] = useState([]);
     const swipeCollection = collection(db, "swipes");
 
     useEffect(() => {
-        const getUsers = async () => {
+        const getSwipes = async () => {
             const data = await getDocs(swipeCollection);
             setSwipes(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         };
 
-        getUsers();
+        getSwipes();
     }, []);
 
     // const createUser = async (e) => {
@@ -34,6 +35,8 @@ export const App = () => {
 
     return (
         <>
+            <Navbar />
+            <h1>Dashboard - All Swipes</h1>
             {swipes.map((swipe: ISwipeData) => {
                 return (
                     <Swipecard
