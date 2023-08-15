@@ -12,6 +12,8 @@ import { db } from "../../../firebase-config";
 
 export const CreateForm: FC = () => {
     const [payload, setPayload] = useState<ISwipeData | null>();
+    const [images, setImages] = useState<string[] | null>();
+    const [keywordTags, setKeywordTags] = useState<string[] | null>();
 
     const titleRef = useRef<HTMLInputElement | null>(null);
     const linkRef = useRef<HTMLInputElement | null>(null);
@@ -22,6 +24,10 @@ export const CreateForm: FC = () => {
     //     setCurrentKeyword(e.target.value);
     // };
 
+    const handleKeywordTagChange = (arrayList) => {
+        setKeywordTags(arrayList);
+    };
+
     const handleSubmission = (e) => {
         e.preventDefault();
         const currentPayload = {
@@ -29,7 +35,7 @@ export const CreateForm: FC = () => {
             author: authorRef.current.value,
             hyperlink: linkRef.current.value,
             images: [],
-            keyword_tags: [],
+            keyword_tags: keywordTags,
             notes: notesRef.current.value,
             platform: platformRef.current.value,
             user_id: "test",
@@ -76,7 +82,7 @@ export const CreateForm: FC = () => {
                 label={"notes"}
                 cta={"Notes: "}
             />
-            <KeywordTagInput />
+            <KeywordTagInput onArrayChange={handleKeywordTagChange} />
             <button type="submit">Create Swipe</button>
             {/* onclickAdd keywords - push value into keywords tag */}
 

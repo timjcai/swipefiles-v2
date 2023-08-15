@@ -2,17 +2,20 @@ import React, { ChangeEvent, FC, MouseEvent, useRef, useState } from "react";
 import { TextLabelInput } from "./Input";
 import styled from "styled-components";
 
-export const KeywordTagInput = () => {
+export const KeywordTagInput = ({ onArrayChange }) => {
     const [keywordTags, setKeywordTags] = useState<string[] | []>([]);
     const Keyword = useRef<HTMLInputElement | null>(null);
 
     const addKeywords = (e: MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
+        let newArray;
         if (Keyword.current) {
+            newArray = [...keywordTags, Keyword.current.value];
             setKeywordTags([...keywordTags, Keyword.current.value]);
         } else {
             console.log("error - keyword doesn't exist");
         }
+        onArrayChange(newArray);
     };
 
     return (
