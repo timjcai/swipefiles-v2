@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { FieldTypes, ISwipeData } from "../../types";
 import { TextLabelInput } from "./Input";
 import { KeywordTagInput } from ".";
+import { collection, doc, setDoc } from "firebase/firestore";
+import { db } from "../../../firebase-config";
 
 // type CreateFormProps = {
 //     fields: keyof ISwipeData[] & FieldTypes[];
@@ -34,6 +36,12 @@ export const CreateForm: FC = () => {
             board_id: [],
         };
         console.log(currentPayload);
+        const createSwipe = async () => {
+            const newSwipesRef = doc(collection(db, "swipes"));
+            const docRef = await setDoc(newSwipesRef, currentPayload);
+            docRef;
+        };
+        createSwipe();
     };
 
     return (
