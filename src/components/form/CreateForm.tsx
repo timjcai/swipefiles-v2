@@ -1,10 +1,11 @@
-import React, { FC, useRef, useState } from "react";
+import React, { FC, useContext, useRef, useState } from "react";
 import styled from "styled-components";
 import { FieldTypes, ISwipeData } from "../../types";
 import { TextLabelInput } from "./Input";
 import { KeywordTagInput } from ".";
 import { Timestamp, collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase-config";
+import { UserContext } from "../../context";
 
 // type CreateFormProps = {
 //     fields: keyof ISwipeData[] & FieldTypes[];
@@ -14,6 +15,7 @@ export const CreateForm: FC = () => {
     const [payload, setPayload] = useState<ISwipeData | null>();
     const [images, setImages] = useState<string[] | null>();
     const [keywordTags, setKeywordTags] = useState<string[] | null>();
+    const user = useContext(UserContext);
 
     const titleRef = useRef<HTMLInputElement | null>(null);
     const linkRef = useRef<HTMLInputElement | null>(null);
@@ -38,7 +40,7 @@ export const CreateForm: FC = () => {
             keyword_tags: keywordTags,
             notes: notesRef.current.value,
             platform: platformRef.current.value,
-            user_id: "test",
+            user_id: user?.uid,
             board_id: [],
             create_date: Timestamp.fromDate(new Date()),
         };

@@ -4,6 +4,7 @@ import { Navbar } from "./components/navbar/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Board, Create, Dashboard, Settings, SwipesIndex } from "./pages";
 import { LandingPage } from "./pages/LandingPage";
+import { UserProvider } from "./context";
 
 export const App = () => {
     // const createUser = async (e) => {
@@ -19,7 +20,7 @@ export const App = () => {
     // };
 
     return (
-        <>
+        <UserProvider>
             <BrowserRouter>
                 <Navbar />
                 <Routes>
@@ -31,7 +32,7 @@ export const App = () => {
                     <Route path="/swipes" element={<SwipesIndex />} />
                 </Routes>
             </BrowserRouter>
-        </>
+        </UserProvider>
     );
 };
 

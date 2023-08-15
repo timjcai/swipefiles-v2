@@ -1,22 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { SignIn } from "../components/auth/SignIn";
 import { SignUp } from "../components/auth/SignUp";
-import { auth } from "../../firebase-config";
-import { User, onAuthStateChanged } from "firebase/auth";
 import Logout from "../components/auth/Logout";
+import { UserContext } from "../context";
 
 export const LandingPage = () => {
-    const [user, setUser] = useState<User | null>({});
-
-    onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
-    });
+    const user = useContext(UserContext);
 
     return (
         <div>
             <SignIn />
             <SignUp />
             <p> User logged in: {user?.email}</p>
+            <p> User id: {user?.uid}</p>
             <Logout />
             {/* <section>
                 <h1>Hero Section</h1>
