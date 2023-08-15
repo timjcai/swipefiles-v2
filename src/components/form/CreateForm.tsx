@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FieldTypes, ISwipeData } from "../../types";
 import { TextLabelInput } from "./Input";
 import { KeywordTagInput } from ".";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { Timestamp, collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase-config";
 
 // type CreateFormProps = {
@@ -40,6 +40,7 @@ export const CreateForm: FC = () => {
             platform: platformRef.current.value,
             user_id: "test",
             board_id: [],
+            create_date: Timestamp.fromDate(new Date()),
         };
         console.log(currentPayload);
         const createSwipe = async () => {
