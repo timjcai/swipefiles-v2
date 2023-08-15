@@ -14,7 +14,7 @@ export interface ISwipeData {
 export type PlatformTypes =
     | "Linkedin"
     | "Facebook"
-    | "Redbubble"
+    | "Dribbble"
     | "Twitter"
     | "YouTube"
     | "TikTok"

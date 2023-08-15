@@ -1,28 +1,10 @@
-import { useEffect, useState } from "react";
+import React from "react";
 import "./App.css";
-import { addDoc, collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase-config";
-import { SignIn } from "./components/auth/SignIn";
-import { SignUp } from "./components/auth/SignUp";
-import { Swipecard } from "./components/swipes/Swipecard";
-import { ISwipeData } from "./types";
 import { Navbar } from "./components/navbar/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Board, Create, Dashboard, Settings, Swipes } from "./pages";
 
 export const App = () => {
-    const [swipes, setSwipes] = useState([]);
-    const swipeCollection = collection(db, "swipes");
-
-    useEffect(() => {
-        const getSwipes = async () => {
-            const data = await getDocs(swipeCollection);
-            setSwipes(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        };
-
-        getSwipes();
-    }, []);
-
     // const createUser = async (e) => {
     //     e.preventDefault();
     //     const payload = {
@@ -47,23 +29,6 @@ export const App = () => {
                     <Route path="/swipes" element={<Swipes />} />
                 </Routes>
             </BrowserRouter>
-            {swipes.map((swipe: ISwipeData) => {
-                return (
-                    <Swipecard
-                        key={swipe.id}
-                        title={swipe.title}
-                        author={swipe.author}
-                        board_id={swipe.board_id}
-                        hyperlink={swipe.hyperlink}
-                        platform={swipe.platform}
-                        user_id={swipe.user_id}
-                        id={swipe.id}
-                        notes={swipe.notes}
-                        images={swipe.images}
-                        keyword_tags={swipe.keyword_tags}
-                    />
-                );
-            })}
         </>
     );
 };
