@@ -3,6 +3,7 @@ import "./App.css";
 import { Navbar } from "./components/navbar/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Board, Create, Dashboard, Settings, SwipesIndex } from "./pages";
+import { LandingPage } from "./pages/LandingPage";
 
 export const App = () => {
     // const createUser = async (e) => {
@@ -22,7 +23,8 @@ export const App = () => {
             <BrowserRouter>
                 <Navbar />
                 <Routes>
-                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/settings" element={<Settings />} />
                     <Route path="/create" element={<Create />} />
                     <Route path="/board" element={<Board />} />
