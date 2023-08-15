@@ -7,6 +7,8 @@ import { SignUp } from "./components/auth/SignUp";
 import { Swipecard } from "./components/swipes/Swipecard";
 import { ISwipeData } from "./types";
 import { Navbar } from "./components/navbar/Navbar";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Board, Create, Dashboard, Settings, Swipes } from "./pages";
 
 export const App = () => {
     const [swipes, setSwipes] = useState([]);
@@ -35,8 +37,16 @@ export const App = () => {
 
     return (
         <>
-            <Navbar />
-            <h1>Dashboard - All Swipes</h1>
+            <BrowserRouter>
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/create" element={<Create />} />
+                    <Route path="/board" element={<Board />} />
+                    <Route path="/swipes" element={<Swipes />} />
+                </Routes>
+            </BrowserRouter>
             {swipes.map((swipe: ISwipeData) => {
                 return (
                     <Swipecard
@@ -54,8 +64,6 @@ export const App = () => {
                     />
                 );
             })}
-            <SignUp />
-            <SignIn />
         </>
     );
 };

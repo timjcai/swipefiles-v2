@@ -15,7 +15,6 @@ export const Swipecard: FC<ISwipeData> = (swipedata) => {
         user_id,
         id,
     } = swipedata;
-    console.log(swipedata);
 
     return (
         <div key={id}>
