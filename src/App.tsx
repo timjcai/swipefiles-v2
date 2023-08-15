@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { Navbar } from "./components/navbar/Navbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Board, Create, Dashboard, Settings, Swipes } from "./pages";
+import { Board, Create, Dashboard, Settings, SwipesIndex } from "./pages";
 
 export const App = () => {
     // const createUser = async (e) => {
@@ -26,7 +26,7 @@ export const App = () => {
                     <Route path="/settings" element={<Settings />} />
                     <Route path="/create" element={<Create />} />
                     <Route path="/board" element={<Board />} />
-                    <Route path="/swipes" element={<Swipes />} />
+                    <Route path="/swipes" element={<SwipesIndex />} />
                 </Routes>
             </BrowserRouter>
         </>

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Swipecard } from "../components/swipes/Swipecard";
 import { ISwipeData } from "../types";
 
-export const Swipes = () => {
+export const SwipesIndex = () => {
     const [swipes, setSwipes] = useState([]);
     const swipeCollection = collection(db, "swipes");
 
@@ -19,7 +19,7 @@ export const Swipes = () => {
 
     return (
         <div>
-            <h1>Create swipes page</h1>
+            <h1>Swipes Index</h1>
             {swipes.map((swipe: ISwipeData) => {
                 return (
                     <Swipecard
@@ -40,5 +40,3 @@ export const Swipes = () => {
         </div>
     );
 };
-
-export default Swipes;

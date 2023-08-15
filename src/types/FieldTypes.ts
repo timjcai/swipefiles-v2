@@ -1,1 +1,1 @@
-export type FieldTypes = "Name" | "Email" | "Phone" 
+export type FieldTypes = "Name" | "Email" | "Phone" | "Username"

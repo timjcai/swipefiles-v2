@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconType } from "../../types";
@@ -9,6 +9,7 @@ import {
     faChalkboard,
     faFile,
     faFont,
+    faHashtag,
     faImage,
     faLink,
     faNoteSticky,
@@ -37,6 +38,7 @@ const iconMapping: {
     title: faFont,
     user_id: faUser,
     id: faFile,
+    platform: faHashtag,
     Linkedin: faLinkedin,
     Facebook: faSquareFacebook,
     Dribbble: faSquareDribbble,
@@ -46,7 +48,11 @@ const iconMapping: {
     Reddit: faSquareReddit,
 };
 
-export const Icon = (label: IconType): React.JSX.Element => {
+type IconProps = {
+    label: IconType;
+};
+
+export const Icon: FC<IconProps> = ({ label }) => {
     const icon = iconMapping[label];
     return <FontAwesomeIcon icon={icon}></FontAwesomeIcon>;
 };
