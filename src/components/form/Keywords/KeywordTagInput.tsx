@@ -1,8 +1,15 @@
 import React, { ChangeEvent, FC, MouseEvent, useRef, useState } from "react";
-import { TextLabelInput } from "./Input";
+import { TextLabelInput } from "../Input";
 import styled from "styled-components";
+import { KeywordTag } from ".";
 
-export const KeywordTagInput = ({ onArrayChange }) => {
+type KeywordTagInputProps = {
+    onArrayChange?: (newArray: string[] | undefined) => void;
+};
+
+export const KeywordTagInput: FC<KeywordTagInputProps> = ({
+    onArrayChange,
+}) => {
     const [keywordTags, setKeywordTags] = useState<string[] | []>([]);
     const Keyword = useRef<HTMLInputElement | null>(null);
 
@@ -15,7 +22,7 @@ export const KeywordTagInput = ({ onArrayChange }) => {
         } else {
             console.log("error - keyword doesn't exist");
         }
-        onArrayChange(newArray);
+        onArrayChange!(newArray);
     };
 
     return (
@@ -30,40 +37,8 @@ export const KeywordTagInput = ({ onArrayChange }) => {
             <button onClick={addKeywords}>Add Keywords</button>
             <p>keyword tags</p>
             {keywordTags.map((words) => {
-                return <KWTag color={"rgb(28, 56, 41)"} tag={words} />;
+                return <KeywordTag color={"rgb(28, 56, 41)"} tag={words} />;
             })}
         </div>
     );
 };
-
-type KWTagProps = {
-    tag: string;
-    color: string;
-};
-
-export const KWTag: FC<KWTagProps> = ({ tag, color }) => {
-    return (
-        <>
-            <TagStyle role="button" color={color}>
-                {tag}
-            </TagStyle>
-        </>
-    );
-};
-
-const TagStyle = styled.div`
-    background-color: ${(props) => props.color};
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    width: fit-content;
-    max-width: 200px;
-    height: 20px;
-    border-radius: 3px;
-    padding-left: 8px;
-    padding-right: 8px;
-    margin: 2px 2px;
-    font-size: 14px;
-    line-height: 120%;
-    overflow: hidden;
-`;

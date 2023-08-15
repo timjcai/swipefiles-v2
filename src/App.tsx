@@ -7,18 +7,6 @@ import { LandingPage } from "./pages/LandingPage";
 import { UserProvider } from "./context";
 
 export const App = () => {
-    // const createUser = async (e) => {
-    //     e.preventDefault();
-    //     const payload = {
-    //         username: currentUsername,
-    //         fullname: currentFullname,
-    //         email: currentEmail,
-    //         password: currentPassword,
-    //     };
-    //     console.log(payload);
-    //     await addDoc(userCollection, payload);
-    // };
-
     return (
         <UserProvider>
             <BrowserRouter>
@@ -28,7 +16,7 @@ export const App = () => {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/settings" element={<Settings />} />
                     <Route path="/create" element={<Create />} />
-                    <Route path="/board" element={<Board />} />
+                    <Route path="/boards" element={<Board />} />
                     <Route path="/swipes" element={<SwipesIndex />} />
                 </Routes>
             </BrowserRouter>
@@ -37,41 +25,3 @@ export const App = () => {
 };
 
 export default App;
-
-// export const Index = () => {
-//     return (
-//         <div>
-//             <h1>Firestore - Test - Swipefiles</h1>
-//             <div>
-//                 <form onSubmit={createUser}>
-//                     <input
-//                         placeholder="Username:"
-//                         onChange={(e) => setCurrentUsername(e.target.value)}
-//                     />
-//                     <input
-//                         placeholder="Fullname:"
-//                         onChange={(e) => setCurrentFullname(e.target.value)}
-//                     />
-//                     <input
-//                         placeholder="Email:"
-//                         onChange={(e) => setCurrentEmail(e.target.value)}
-//                     />
-//                     <input
-//                         placeholder="Password:"
-//                         onChange={(e) => setCurrentPassword(e.target.value)}
-//                     />
-//                     <button type="submit">Create</button>
-//                 </form>
-//             </div>
-//             {users.map((user) => {
-//                 return (
-//                     <div key={user.id}>
-//                         <p>{user.id}</p>
-//                         <p>{user.email}</p>
-//                         <p>{user.fullname}</p>
-//                     </div>
-//                 );
-//             })}
-//         </div>
-//     );
-// };

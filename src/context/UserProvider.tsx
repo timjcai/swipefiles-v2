@@ -9,7 +9,6 @@ export const UserProvider = ({ children }) => {
 
     onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
-        console.log(currentUser);
     });
     return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
