@@ -18,4 +18,7 @@ export type PlatformTypes =
     | "Twitter"
     | "YouTube"
     | "TikTok"
-    | "Reddit";
+    | "Reddit"
+    | "Google"
+    | "Apple"
+    | "Github"

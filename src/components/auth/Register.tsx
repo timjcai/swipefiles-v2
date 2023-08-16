@@ -1,9 +1,15 @@
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+    createUserWithEmailAndPassword,
+    updateProfile,
+    signInWithPopup,
+} from "firebase/auth";
 import React, { useState, useEffect, useRef } from "react";
-import { auth } from "../../../firebase-config";
+import { auth, providerGoogle } from "../../../firebase-config";
 import styled from "styled-components";
 import { Icon } from "../common/Icon";
 import { Link } from "react-router-dom";
+import { OAuthButton } from "./OAuthButton";
+import { GoogleAuthRegistration } from "../../util/authUtils";
 
 const USERNAME_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -293,6 +299,15 @@ export const Register = () => {
                         >
                             Create account
                         </button>
+                        <br />
+                        <p>or</p>
+                        <OAuthButton
+                            label={"Google"}
+                            authFunction={GoogleAuthRegistration}
+                        />
+                        <OAuthButton label={"Facebook"} />
+                        <OAuthButton label={"Apple"} />
+                        <OAuthButton label={"Github"} />
                         <p>
                             Already registered?
                             <br />
