@@ -9,7 +9,10 @@ import styled from "styled-components";
 import { Icon } from "../common/Icon";
 import { Link } from "react-router-dom";
 import { OAuthButton } from "./OAuthButton";
-import { GoogleAuthRegistration } from "../../util/authUtils";
+import {
+    FacebookAuthRegistration,
+    GoogleAuthRegistration,
+} from "../../util/authUtils";
 
 const USERNAME_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -305,7 +308,10 @@ export const Register = () => {
                             label={"Google"}
                             authFunction={GoogleAuthRegistration}
                         />
-                        <OAuthButton label={"Facebook"} />
+                        <OAuthButton
+                            label={"Facebook"}
+                            authFunction={FacebookAuthRegistration}
+                        />
                         <OAuthButton label={"Apple"} />
                         <OAuthButton label={"Github"} />
                         <p>
