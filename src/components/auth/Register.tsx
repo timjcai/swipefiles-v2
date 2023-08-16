@@ -13,6 +13,7 @@ import {
     FacebookAuthRegistration,
     GoogleAuthRegistration,
 } from "../../util/authUtils";
+import { SectionRegistration, StyledRegisterForm } from "./auth.styles";
 
 const USERNAME_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -307,13 +308,15 @@ export const Register = () => {
                         <OAuthButton
                             label={"Google"}
                             authFunction={GoogleAuthRegistration}
+                            cta={"Register with"}
                         />
                         <OAuthButton
                             label={"Facebook"}
                             authFunction={FacebookAuthRegistration}
+                            cta={"Register with"}
                         />
-                        <OAuthButton label={"Apple"} />
-                        <OAuthButton label={"Github"} />
+                        {/* <OAuthButton label={"Apple"} />
+                        <OAuthButton label={"Github"} /> */}
                         <p>
                             Already registered?
                             <br />
@@ -325,18 +328,3 @@ export const Register = () => {
         </>
     );
 };
-
-const StyledRegisterForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    width: 480px;
-`;
-
-const SectionRegistration = styled.section`
-    height: 100%;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`;

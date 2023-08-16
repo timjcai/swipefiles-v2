@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { SignIn } from "../components/auth/SignIn";
 import { Register } from "../components/auth/Register";
-import Logout from "../components/auth/Logout";
 import { UserContext } from "../context";
+import { Logout } from "../components/auth";
 
 export const LandingPage = () => {
     const user = useContext(UserContext);
