@@ -7,13 +7,18 @@ import {
     IconDefinition,
     faAt,
     faChalkboard,
+    faCheck,
+    faCircleCheck,
+    faCircleXmark,
     faFile,
     faFont,
     faHashtag,
     faImage,
+    faInfoCircle,
     faLink,
     faNoteSticky,
     faTag,
+    faTimes,
     faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -46,13 +51,19 @@ const iconMapping: {
     YouTube: faSquareYoutube,
     TikTok: faTiktok,
     Reddit: faSquareReddit,
+    Info: faInfoCircle,
+    Valid: faCircleCheck,
+    Invalid: faCircleXmark,
 };
 
 type IconProps = {
     label: IconType;
+    className?: string;
 };
 
-export const Icon: FC<IconProps> = ({ label }) => {
+export const Icon: FC<IconProps> = ({ label, className }) => {
     const icon = iconMapping[label];
-    return <FontAwesomeIcon icon={icon}></FontAwesomeIcon>;
+    return (
+        <FontAwesomeIcon icon={icon} className={className}></FontAwesomeIcon>
+    );
 };

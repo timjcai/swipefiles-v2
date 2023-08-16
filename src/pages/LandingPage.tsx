@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { SignIn } from "../components/auth/SignIn";
-import { SignUp } from "../components/auth/SignUp";
+import { Register } from "../components/auth/Register";
 import Logout from "../components/auth/Logout";
 import { UserContext } from "../context";
 
@@ -10,7 +10,6 @@ export const LandingPage = () => {
     return (
         <div>
             <SignIn />
-            <SignUp />
             <p> User logged in: {user?.email}</p>
             <p> User id: {user?.uid}</p>
             <Logout />
