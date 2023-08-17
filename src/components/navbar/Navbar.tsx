@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { UserContext } from "../../context";
 
 export const Navbar = () => {
+    const user = useContext(UserContext);
     return (
         <NavbarWrapper>
             <NavbarSection>
                 <Link to="/">Logo</Link>
             </NavbarSection>
             <NavbarSection>
-                <Link to="/swipes">Swipes</Link>
-                <Link to="/boards">Boards</Link>
-                <Link to="/settings">Settings</Link>
-                <Link to="/create">Create</Link>
+                {user !== null && <Link to="/swipes">Swipes</Link>}
+                {user !== null && <Link to="/boards">Boards</Link>}
+                {/* <Link to="/settings">Settings</Link>
+                <Link to="/create">Create</Link> */}
+                <Link to="/login">Log in</Link>
+                <Link to="/register">Sign up</Link>
             </NavbarSection>
         </NavbarWrapper>
     );

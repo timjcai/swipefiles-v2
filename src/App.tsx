@@ -6,7 +6,7 @@ import { Board, Create, Dashboard, Settings, SwipesIndex } from "./pages";
 import { LandingPage } from "./pages/LandingPage";
 import { UserProvider } from "./context";
 import { Register } from "./components/auth/Register";
-import { SignIn } from "./components/auth/SignIn";
+import { Login } from "./components/auth/Login";
 
 export const App = () => {
     return (
@@ -16,7 +16,7 @@ export const App = () => {
                 <Routes>
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/sign-in" element={<SignIn />} />
+                    <Route path="/login" element={<Login />} />
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/settings" element={<Settings />} />
                     <Route path="/create" element={<Create />} />

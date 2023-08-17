@@ -1,16 +1,24 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../firebase-config";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Swipecard } from "../components/swipes/Swipecard";
 import { ISwipeData } from "../types";
+import { UserContext } from "../context";
 
 export const SwipesIndex = () => {
     const [swipes, setSwipes] = useState([]);
+    const user = useContext(UserContext);
     const swipeCollection = collection(db, "swipes");
 
     useEffect(() => {
+        const userQuery = query(
+            swipeCollection,
+            where("user_id", "==", `${user.uid}`)
+        );
+
         const getSwipes = async () => {
-            const data = await getDocs(swipeCollection);
+            const data = await getDocs(userQuery);
+            console.log(data);
             setSwipes(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         };
 

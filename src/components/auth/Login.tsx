@@ -5,7 +5,7 @@ import { OAuthButton, SectionRegistration, StyledRegisterForm } from ".";
 import { Icon } from "../common/Icon";
 import { GoogleAuthRegistration } from "../../util/authUtils";
 
-export const SignIn = () => {
+export const Login = () => {
     const [email, setEmail] = useState("");
     const [validEmail, setValidEmail] = useState<boolean>(false);
     const [emailFocus, setEmailFocus] = useState<boolean>(false);
