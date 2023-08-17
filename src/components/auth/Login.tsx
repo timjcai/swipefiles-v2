@@ -4,6 +4,7 @@ import { auth } from "../../../firebase-config";
 import { OAuthButton, SectionRegistration, StyledRegisterForm } from ".";
 import { Icon } from "../common/Icon";
 import { GoogleAuthRegistration } from "../../util/authUtils";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Login = () => {
     const [email, setEmail] = useState("");
@@ -14,6 +15,9 @@ export const Login = () => {
     const [validPassword, setValidPassword] = useState<boolean>(false);
     const [passwordFocus, setPasswordFocus] = useState<boolean>(false);
 
+    const user = useAuth();
+
+    console.log(user);
     const signIn = (e) => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)

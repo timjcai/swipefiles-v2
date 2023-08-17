@@ -18,10 +18,6 @@ import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import { useAuth } from "./hooks/useAuth";
 
 export const App = () => {
-    const user = useAuth();
-
-    console.log(user);
-
     return (
         <AuthProvider>
             <BrowserRouter>
