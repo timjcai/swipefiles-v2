@@ -1,5 +1,8 @@
+@import url('./assets/satoshi.css');
+
 :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    /* font-family: ; */
+    font-family: Satoshi-Variable, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
 
@@ -13,6 +16,8 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
 }
+
+
 
 a {
     font-weight: 500;
