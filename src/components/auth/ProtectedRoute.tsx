@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import { InAppWrapper, NonsidebarWrapper, Sidebar } from "../navbar";
 
 export const ProtectedRoute = ({ children }) => {
     const user = useAuth();
@@ -8,5 +9,12 @@ export const ProtectedRoute = ({ children }) => {
     if (user == null) {
         return <Navigate to="/login" />;
     }
-    return <div>{children}</div>;
+    return (
+        <InAppWrapper>
+            <Sidebar />
+            <NonsidebarWrapper>
+                <div>{children}</div>
+            </NonsidebarWrapper>
+        </InAppWrapper>
+    );
 };

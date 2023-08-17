@@ -1,3 +1,9 @@
-import { ActionTypes, FieldTypes, ISwipeData, PlatformTypes, ValidationTypes } from ".";
+import { ActionTypes, FieldTypes, ISwipeData, NavigationTypes, PlatformTypes, ValidationTypes } from ".";
 
-export type IconType = keyof ISwipeData | FieldTypes | PlatformTypes | ValidationTypes | ActionTypes
+export type IconType = 
+    | keyof ISwipeData 
+    | FieldTypes 
+    | PlatformTypes 
+    | ValidationTypes 
+    | ActionTypes 
+    | NavigationTypes

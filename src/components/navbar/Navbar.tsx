@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Navbar = () => {
+    const user = useAuth();
     return (
         <NavbarWrapper>
             <NavbarSection>
@@ -12,7 +14,8 @@ export const Navbar = () => {
                 <Link to="/pricing">Pricing</Link>
                 <Link to="/faq">FAQ</Link>
                 <Link to="/login">Log in</Link>
-                <Link to="/register">Sign up</Link>
+                {!user && <Link to="/register">Sign up</Link>}
+                {user && <Link to="/dashboard">Dashboard</Link>}
             </NavbarSection>
         </NavbarWrapper>
     );

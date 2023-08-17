@@ -28,3 +28,10 @@ export type ActionTypes =
     | "Stop"
     | "Next"
     | "Skip"
+
+export type NavigationTypes = 
+    | "Home" 
+    | "Swipes" 
+    | "Settings" 
+    | "Boards" 
+    | "Create"

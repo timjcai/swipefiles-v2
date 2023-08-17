@@ -10,14 +10,19 @@ import {
     faChevronRight,
     faCircleCheck,
     faCircleXmark,
+    faCog,
     faFile,
     faFont,
     faHashtag,
+    faHouse,
     faImage,
     faInfoCircle,
+    faLayerGroup,
     faLink,
     faNoteSticky,
+    faPaperPlane,
     faPlay,
+    faSquarePlus,
     faTag,
     faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -62,6 +67,11 @@ const iconMapping: {
     Invalid: faCircleXmark,
     Next: faChevronRight,
     Play: faPlay,
+    Home: faHouse,
+    Swipes: faPaperPlane,
+    Settings: faCog,
+    Boards: faLayerGroup,
+    Create: faSquarePlus,
 };
 
 type IconProps = {
