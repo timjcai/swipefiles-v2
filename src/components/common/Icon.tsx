@@ -7,6 +7,7 @@ import {
     IconDefinition,
     faAt,
     faChalkboard,
+    faChevronRight,
     faCircleCheck,
     faCircleXmark,
     faFile,
@@ -16,6 +17,7 @@ import {
     faInfoCircle,
     faLink,
     faNoteSticky,
+    faPlay,
     faTag,
     faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -58,6 +60,8 @@ const iconMapping: {
     Info: faInfoCircle,
     Valid: faCircleCheck,
     Invalid: faCircleXmark,
+    Next: faChevronRight,
+    Play: faPlay,
 };
 
 type IconProps = {
