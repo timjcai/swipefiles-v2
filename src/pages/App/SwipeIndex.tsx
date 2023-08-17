@@ -1,13 +1,13 @@
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../../firebase-config";
-import React, { useContext, useEffect, useState } from "react";
-import { Swipecard } from "../components/swipes/Swipecard";
-import { ISwipeData } from "../types";
-import { UserContext } from "../context";
+import { db } from "../../../firebase-config";
+import React, { useEffect, useState } from "react";
+import { Swipecard } from "../../components/swipes/Swipecard";
+import { ISwipeData } from "../../types";
+import { useAuth } from "../../hooks/useAuth";
 
 export const SwipesIndex = () => {
     const [swipes, setSwipes] = useState([]);
-    const user = useContext(UserContext);
+    const user = useAuth();
     const swipeCollection = collection(db, "swipes");
 
     useEffect(() => {

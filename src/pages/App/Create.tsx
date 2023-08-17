@@ -1,6 +1,5 @@
 import React from "react";
-import { ImageInput, TextInput } from "../components/form/Input";
-import { CreateForm } from "../components/form/CreateForm";
+import { CreateForm } from "../../components/form/CreateForm";
 
 export const Create = () => {
     return (

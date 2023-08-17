@@ -1,31 +1,22 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { UserContext } from "../../context";
 
 export const Navbar = () => {
-    const user = useContext(UserContext);
     return (
         <NavbarWrapper>
             <NavbarSection>
                 <Link to="/">Logo</Link>
             </NavbarSection>
             <NavbarSection>
-                {user !== null && <Link to="/swipes">Swipes</Link>}
-                {user !== null && <Link to="/boards">Boards</Link>}
-                {/* <Link to="/settings">Settings</Link>
-                <Link to="/create">Create</Link> */}
+                <Link to="/pricing">Pricing</Link>
+                <Link to="/faq">FAQ</Link>
                 <Link to="/login">Log in</Link>
                 <Link to="/register">Sign up</Link>
             </NavbarSection>
         </NavbarWrapper>
     );
 };
-
-const Bar = styled.div`
-    top: 1px;
-    text-align: center;
-`;
 
 const NavbarWrapper = styled.div`
     position: sticky;
@@ -40,5 +31,5 @@ const NavbarSection = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    gap: 10px;
+    gap: 25px;
 `;

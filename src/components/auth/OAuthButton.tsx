@@ -25,9 +25,9 @@ export const OAuthButton: FC<OAuthButtonProps> = ({
             <IconWrapper>
                 <Icon label={label} />
             </IconWrapper>
-            <p>
+            <OAuthText>
                 {cta} {label}
-            </p>
+            </OAuthText>
         </StyledOAuthButton>
     );
 };
@@ -48,6 +48,11 @@ const StyledOAuthButton = styled.button`
     cursor: pointer;
     transition: border-color 0.25s;
     margin-bottom: 8px;
+    color: #ffffff;
+`;
+
+const OAuthText = styled.p`
+    color: #ffffff;
 `;
 
 const IconWrapper = styled.div`
