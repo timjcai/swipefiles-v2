@@ -21,7 +21,6 @@ export const App = () => {
     return (
         <AuthProvider>
             <BrowserRouter>
-                <Navbar />
                 <Routes>
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/pricing" element={<Pricing />} />

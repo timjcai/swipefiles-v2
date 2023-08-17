@@ -18,6 +18,7 @@ import {
     TwoColumn,
 } from "../../components/landingpage";
 import { useAuth } from "../../hooks/useAuth";
+import { Navbar } from "../../components/navbar/Navbar";
 
 const fakeData = {
     image: "https://cleanshot.com/img/tylertringas.44f2409a.webp",
@@ -31,6 +32,7 @@ export const LandingPage = () => {
     console.log(user);
     return (
         <LandingPageWrapper>
+            <Navbar />
             <StyledHeader>
                 <TwoColumn>
                     <ColumnTextLeft>

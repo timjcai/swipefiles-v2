@@ -14,6 +14,7 @@ import {
     GoogleAuthRegistration,
 } from "../../util/authUtils";
 import { SectionRegistration, StyledRegisterForm } from "./auth.styles";
+import { Navbar } from "../navbar/Navbar";
 
 const USERNAME_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -107,11 +108,13 @@ export const Register = () => {
         <>
             {success ? (
                 <SectionRegistration>
+                    <Navbar />
                     <h1>Success!</h1>
                     <Link to="/swipes">Start Swiping</Link>
                 </SectionRegistration>
             ) : (
                 <SectionRegistration>
+                    <Navbar />
                     <p
                         ref={errRef}
                         className={errMsg ? "errmsg" : "offscreen"}
