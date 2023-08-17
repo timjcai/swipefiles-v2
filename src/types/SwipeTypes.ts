@@ -22,3 +22,9 @@ export type PlatformTypes =
     | "Google"
     | "Apple"
     | "Github"
+
+export type ActionTypes = 
+    | "Play"
+    | "Stop"
+    | "Next"
+    | "Skip"

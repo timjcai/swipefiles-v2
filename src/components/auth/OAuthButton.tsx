@@ -6,8 +6,13 @@ import { PlatformTypes } from "../../types";
 type OAuthButtonProps = {
     label: PlatformTypes;
     authFunction: () => void;
+    cta?: string;
 };
-export const OAuthButton: FC<OAuthButtonProps> = ({ label, authFunction }) => {
+export const OAuthButton: FC<OAuthButtonProps> = ({
+    label,
+    authFunction,
+    cta,
+}) => {
     // const [value, setValue] = useState();
 
     const handleOAuthClick = (e) => {
@@ -20,7 +25,9 @@ export const OAuthButton: FC<OAuthButtonProps> = ({ label, authFunction }) => {
             <IconWrapper>
                 <Icon label={label} />
             </IconWrapper>
-            <p>Register with {label}</p>
+            <p>
+                {cta} {label}
+            </p>
         </StyledOAuthButton>
     );
 };
