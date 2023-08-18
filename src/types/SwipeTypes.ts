@@ -12,16 +12,23 @@ export interface ISwipeData {
 }
 
 export type PlatformTypes =
-    | "Linkedin"
     | "Facebook"
-    | "Dribbble"
+    | "Linkedin"
     | "Twitter"
+    | "Pinterest"
+    | "Reddit"
+    | "Tumblr"
+    | "Medium"
+    // | "Substack"
+    | "Dribbble"
     | "YouTube"
     | "TikTok"
-    | "Reddit"
     | "Google"
     | "Apple"
     | "Github"
+    | "Instagram"
+    | "Behance"
+    | "Amazon"
 
 export type ActionTypes = 
     | "Play"
