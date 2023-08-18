@@ -35,6 +35,7 @@ export type ActionTypes =
     | "Stop"
     | "Next"
     | "Skip"
+    | "Share"
 
 export type NavigationTypes = 
     | "Home" 

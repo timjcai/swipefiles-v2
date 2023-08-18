@@ -22,6 +22,7 @@ import {
     faNoteSticky,
     faPaperPlane,
     faPlay,
+    faShare,
     faSquarePlus,
     faTag,
     faUser,
@@ -72,6 +73,7 @@ const iconMapping: {
     Settings: faCog,
     Boards: faLayerGroup,
     Create: faSquarePlus,
+    Share: faShare,
 };
 
 type IconProps = {
