@@ -8,7 +8,6 @@ export const Sidebar = () => {
     const [selected, setSelected] = useState(null);
 
     const handleClick = (e) => {
-        e.preventDefault();
         setSelected(e.target.id);
     };
 
@@ -20,7 +19,7 @@ export const Sidebar = () => {
                         <div>Logo</div>
                     </BetweenRow>
                     <InlineColumn>
-                        <Link to="/dashboard" onClick={handleClick}>
+                        <Link to="/dashboard">
                             <SidenavButton
                                 label="Home"
                                 selected={selected}
@@ -52,7 +51,6 @@ export const Sidebar = () => {
                 </div>
                 <div>
                     <div>Picture</div>
-                    <p>{selected}</p>
                     <div>
                         <Link to="/settings" onClick={handleClick}>
                             <SidenavButton
