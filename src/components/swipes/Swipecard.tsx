@@ -5,8 +5,12 @@ import { generateRandomString } from "../../util/randomUtils";
 import { ColorBrandIcon } from "../common/ColorBrandIcon";
 import {
     BottomRow,
+    HighlightGroup,
+    HighlightWrapper,
     KeywordWrapper,
     StyledSwipecard,
+    SwipeLinkWrapper,
+    SwipecardHeading,
     TopRow,
 } from "./Swipecard.styles";
 import { Badge } from "../landingpage";
@@ -30,26 +34,51 @@ export const Swipecard: FC<ISwipeData> = (swipedata) => {
     } = swipedata;
     console.log(swipedata);
 
+    const numbBoards = board_id.length;
+    const numbImages = images.length;
+
     return (
         <StyledSwipecard key={id}>
             <Link to={`/swipes/${id}`}>
-                <TopRow>
-                    {platform !== "" && <ColorBrandIcon label={platform} />}
-                    {author !== "" && <Badge>{author}</Badge>}
-                </TopRow>
-                <h2 key={title}>{title}</h2>
-                <KeywordWrapper>
-                    {keyword_tags &&
-                        keyword_tags.map((words) => {
-                            return (
-                                <KeywordTag
-                                    key={generateRandomString(10)}
-                                    color={"#009956"}
-                                    tag={words}
-                                />
-                            );
-                        })}
-                </KeywordWrapper>
+                <SwipeLinkWrapper>
+                    <TopRow>
+                        {platform !== "" && <ColorBrandIcon label={platform} />}
+                        {author !== "" && <Badge>@ {author}</Badge>}
+                    </TopRow>
+                    <SwipecardHeading key={title}>{title}</SwipecardHeading>
+                    <KeywordWrapper>
+                        {keyword_tags &&
+                            keyword_tags.map((words) => {
+                                return (
+                                    <KeywordTag
+                                        key={generateRandomString(10)}
+                                        bgcolor={"#009956"}
+                                        tag={words}
+                                    />
+                                );
+                            })}
+                    </KeywordWrapper>
+                    <HighlightWrapper>
+                        <HighlightGroup>
+                            <p>Boards:</p>
+                            <KeywordTag
+                                key={generateRandomString(10)}
+                                bgcolor={"#F6635C"}
+                                color={"#ffffff"}
+                                tag={numbBoards}
+                            />
+                        </HighlightGroup>
+                        <HighlightGroup>
+                            <p>Images:</p>
+                            <KeywordTag
+                                key={generateRandomString(10)}
+                                bgcolor={"#C23373"}
+                                color={"#ffffff"}
+                                tag={numbImages}
+                            />
+                        </HighlightGroup>
+                    </HighlightWrapper>
+                </SwipeLinkWrapper>
                 <BottomRow>
                     <RoundButton
                         label={"hyperlink"}

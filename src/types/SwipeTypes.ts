@@ -29,6 +29,7 @@ export type PlatformTypes =
     | "Instagram"
     | "Behance"
     | "Amazon"
+    | "Website"
 
 export type ActionTypes = 
     | "Play"

@@ -26,6 +26,7 @@ import {
     faSquarePlus,
     faTag,
     faUser,
+    faWindowMaximize,
 } from "@fortawesome/free-solid-svg-icons";
 import {
     faApple,
@@ -74,6 +75,7 @@ const iconMapping: {
     Boards: faLayerGroup,
     Create: faSquarePlus,
     Share: faShare,
+    Website: faWindowMaximize,
 };
 
 type IconProps = {

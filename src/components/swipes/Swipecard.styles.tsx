@@ -5,12 +5,21 @@ export const StyledSwipecard = styled.div`
     flex-direction: column;
     border: 1px solid #000000;
     border-radius: 16px;
-    height: 400px;
-    width: 400px;
+    width: 300px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 10px solid rgba(255, 255, 255, 0.3);
+`;
+
+export const SwipeLinkWrapper = styled.div`
+    position: relative;
+    width: 300px;
 `;
 
 export const TopRow = styled.div`
-    padding: 1em 1.5em;
+    padding: 1em 1.5em 0em 1.5em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -18,20 +27,48 @@ export const TopRow = styled.div`
 `;
 
 export const KeywordWrapper = styled.div`
-    padding: 1em 1.5em;
-    height: 40px;
+    padding: 0.25em 1.25em;
+    min-height: 1.4em;
+    max-height: 2.8em;
     display: flex;
     flex-direction: row;
-    white-space: nowrap;
-    overflow-x: auto;
-    overflow-y: auto;
+    flex-wrap: wrap;
+    overflow-x: clip;
+    overflow-y: clip;
+    color: beige;
+`;
+
+export const HighlightWrapper = styled.div`
+    padding: 0em 1.25em;
+    min-height: 1.4em;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    gap: 10px;
+    align-items: center;
+`;
+
+export const HighlightGroup = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 `;
 
 export const BottomRow = styled.div`
-    padding: 0.5em 1em;
+    position: absolute;
+    bottom: 0px;
+    padding: 0.5em 1.5em;
     display: flex;
     flex-direction: row;
     justify-content: left;
     align-items: center;
     gap: 10px;
+`;
+
+export const SwipecardHeading = styled.h2`
+    width: 230px;
+    font-size: 20px;
+    overflow: hidden;
+    padding: 0em 1em 0em 1em;
+    white-space: nowrap;
 `;

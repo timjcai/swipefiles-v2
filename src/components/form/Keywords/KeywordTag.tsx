@@ -3,21 +3,28 @@ import styled from "styled-components";
 
 type KeywordTagProps = {
     tag: string;
-    color: string;
+    bgcolor?: string;
+    color?: string;
 };
 
-export const KeywordTag: FC<KeywordTagProps> = ({ tag, color }) => {
+export const KeywordTag: FC<KeywordTagProps> = ({ tag, bgcolor, color }) => {
     return (
         <>
-            <TagStyle role="button" color={color}>
+            <TagStyle role="button" bgcolor={bgcolor} color={color}>
                 {tag}
             </TagStyle>
         </>
     );
 };
 
-const TagStyle = styled.div`
-    background-color: ${(props) => props.color};
+type TagStyleProps = {
+    bgcolor?: string;
+    color?: string;
+};
+
+const TagStyle = styled.div<TagStyleProps>`
+    background-color: ${(props) => props.bgcolor};
+    color: ${(props) => props.color};
     display: flex;
     align-items: center;
     flex-shrink: 0;

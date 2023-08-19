@@ -5,6 +5,8 @@ import { Swipecard } from "../../components/swipes/Swipecard";
 import { ISwipeData } from "../../types";
 import { useAuth } from "../../hooks/useAuth";
 import { Loading } from "./Loading";
+import styled from "styled-components";
+import { deviceSize } from "../../util";
 
 export const SwipesIndex = () => {
     const [swipes, setSwipes] = useState([]);
@@ -31,25 +33,54 @@ export const SwipesIndex = () => {
     return (
         <div>
             <h1>Swipes Index</h1>
-            {!loading &&
-                swipes.map((swipe: ISwipeData) => {
-                    return (
-                        <Swipecard
-                            key={swipe.id}
-                            title={swipe.title}
-                            author={swipe.author}
-                            board_id={swipe.board_id}
-                            hyperlink={swipe.hyperlink}
-                            platform={swipe.platform}
-                            user_id={swipe.user_id}
-                            id={swipe.id}
-                            notes={swipe.notes}
-                            images={swipe.images}
-                            keyword_tags={swipe.keyword_tags}
-                        />
-                    );
-                })}
+            <SwipeGrid>
+                {!loading &&
+                    swipes.map((swipe: ISwipeData) => {
+                        return (
+                            <Swipecard
+                                key={swipe.id}
+                                title={swipe.title}
+                                author={swipe.author}
+                                board_id={swipe.board_id}
+                                hyperlink={swipe.hyperlink}
+                                platform={swipe.platform}
+                                user_id={swipe.user_id}
+                                id={swipe.id}
+                                notes={swipe.notes}
+                                images={swipe.images}
+                                keyword_tags={swipe.keyword_tags}
+                            />
+                        );
+                    })}
+            </SwipeGrid>
             {loading && <Loading />}
         </div>
     );
 };
+
+const SwipeGrid = styled.div`
+    display: grid;
+    row-gap: 20px;
+    column-gap: 12px;
+    grid-auto-rows: 300px;
+    position: relative;
+
+    @media ${deviceSize.xxl} {
+        grid-template-columns: repeat(6, auto);
+    }
+    @media ${deviceSize.xl} {
+        grid-template-columns: repeat(5, auto);
+    }
+    @media ${deviceSize.lg} {
+        grid-template-columns: repeat(4, auto);
+    }
+    @media ${deviceSize.md} {
+        grid-template-columns: repeat(3, auto);
+    }
+    @media ${deviceSize.sm} {
+        grid-template-columns: repeat(2, auto);
+    }
+    @media ${deviceSize.xs} {
+        grid-template-columns: repeat(1, auto);
+    }
+`;
