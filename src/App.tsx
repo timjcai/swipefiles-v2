@@ -16,6 +16,7 @@ import {
 } from "./pages";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import { useAuth } from "./hooks/useAuth";
+import { SingleSwipe } from "./pages/App/SingleSwipe";
 
 export const App = () => {
     return (
@@ -64,6 +65,14 @@ export const App = () => {
                         element={
                             <ProtectedRoute>
                                 <Board />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/swipes/:id"
+                        element={
+                            <ProtectedRoute>
+                                <SingleSwipe />
                             </ProtectedRoute>
                         }
                     />

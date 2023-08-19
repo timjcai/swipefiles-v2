@@ -69,7 +69,7 @@ export const Sidebar = () => {
 const SidebarWrapper = styled.aside`
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 240px;
     height: 100vh;
     background: #121212;
     color: #ffffff;
@@ -80,6 +80,7 @@ export const NonsidebarWrapper = styled.div`
     background: #ffffff;
     height: 100vh;
     width: 100vw;
+    padding-left: 96px;
 `;
 
 export const InAppWrapper = styled.div`

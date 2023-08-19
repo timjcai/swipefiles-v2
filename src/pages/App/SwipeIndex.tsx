@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Swipecard } from "../../components/swipes/Swipecard";
 import { ISwipeData } from "../../types";
 import { useAuth } from "../../hooks/useAuth";
+import { Loading } from "./Loading";
 
 export const SwipesIndex = () => {
     const [swipes, setSwipes] = useState([]);
@@ -48,6 +49,7 @@ export const SwipesIndex = () => {
                         />
                     );
                 })}
+            {loading && <Loading />}
         </div>
     );
 };

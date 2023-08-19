@@ -13,6 +13,7 @@ import { Badge } from "../landingpage";
 import { KeywordTag } from "../form";
 import { Icon } from "../common/Icon";
 import { RoundButton } from "../common/Button";
+import { Link } from "react-router-dom";
 
 export const Swipecard: FC<ISwipeData> = (swipedata) => {
     const {
@@ -31,43 +32,46 @@ export const Swipecard: FC<ISwipeData> = (swipedata) => {
 
     return (
         <StyledSwipecard key={id}>
-            <TopRow>
-                {platform !== "" && <ColorBrandIcon label={platform} />}
-                {author !== "" && <Badge>{author}</Badge>}
-            </TopRow>
-            <h2 key={title}>{title}</h2>
-            <KeywordWrapper>
-                {keyword_tags &&
-                    keyword_tags.map((words) => {
-                        return (
-                            <KeywordTag
-                                key={generateRandomString(10)}
-                                color={"#009956"}
-                                tag={words}
-                            />
-                        );
-                    })}
-            </KeywordWrapper>
-            <BottomRow>
-                <RoundButton
-                    label={"hyperlink"}
-                    backgroundColor="#3272F7"
-                    color="#ffffff"
-                    url={hyperlink}
-                />
-                <RoundButton
-                    label={"notes"}
-                    backgroundColor="#3272F7"
-                    color="#ffffff"
-                    url={hyperlink}
-                />
-                <RoundButton
-                    label={"Share"}
-                    backgroundColor="#3272F7"
-                    color="#ffffff"
-                    url={hyperlink}
-                />
-            </BottomRow>
+            <Link to={`/swipes/${id}`}>
+                <TopRow>
+                    {platform !== "" && <ColorBrandIcon label={platform} />}
+                    {author !== "" && <Badge>{author}</Badge>}
+                </TopRow>
+                <h2 key={title}>{title}</h2>
+                <KeywordWrapper>
+                    {keyword_tags &&
+                        keyword_tags.map((words) => {
+                            return (
+                                <KeywordTag
+                                    key={generateRandomString(10)}
+                                    color={"#009956"}
+                                    tag={words}
+                                />
+                            );
+                        })}
+                </KeywordWrapper>
+                <BottomRow>
+                    <RoundButton
+                        label={"hyperlink"}
+                        backgroundColor="#3272F7"
+                        color="#ffffff"
+                        url={hyperlink}
+                    />
+                    <RoundButton
+                        label={"notes"}
+                        backgroundColor="#3272F7"
+                        color="#ffffff"
+                        url={hyperlink}
+                    />
+                    <RoundButton
+                        label={"Share"}
+                        backgroundColor="#3272F7"
+                        color="#ffffff"
+                        url={hyperlink}
+                    />
+                </BottomRow>
+            </Link>
+
             {/* <p key={`${generateRandomString(10)}`}>@{author}</p>
             <p key={platform}>{platform}</p>
             <p key={board_id}>{board_id}</p>
