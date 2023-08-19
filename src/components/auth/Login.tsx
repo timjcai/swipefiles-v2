@@ -6,6 +6,7 @@ import { Icon } from "../common/Icon";
 import { GoogleAuthRegistration } from "../../util/authUtils";
 import { useAuth } from "../../hooks/useAuth";
 import { Navbar } from "../navbar/Navbar";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
     const [email, setEmail] = useState("");
@@ -36,98 +37,104 @@ export const Login = () => {
     return (
         <>
             {success ? (
-                <SectionRegistration>
+                <>
                     <Navbar />
-                    <h1>Success!</h1>
-                    <Link to="/swipes">Start Swiping</Link>
-                </SectionRegistration>
+                    <SectionRegistration>
+                        <h1>Success!</h1>
+                        <Link to="/swipes">Start Swiping</Link>
+                    </SectionRegistration>
+                </>
             ) : (
-                <SectionRegistration>
+                <>
                     <Navbar />
-                    <StyledRegisterForm onSubmit={signIn}>
-                        <h1>Log In</h1>
-                        <label htmlFor="email">
-                            Email:
-                            <span className={validEmail ? "valid" : "hide"}>
-                                <Icon label={"Valid"} />
-                            </span>
-                            <span
+                    <SectionRegistration>
+                        <StyledRegisterForm onSubmit={signIn}>
+                            <h1>Log In</h1>
+                            <label htmlFor="email">
+                                Email:
+                                <span className={validEmail ? "valid" : "hide"}>
+                                    <Icon label={"Valid"} />
+                                </span>
+                                <span
+                                    className={
+                                        validEmail || !email
+                                            ? "hide"
+                                            : "invalid"
+                                    }
+                                >
+                                    <Icon label={"Invalid"} />
+                                </span>
+                            </label>
+                            <input
+                                type="text"
+                                id="email"
+                                autoComplete="off"
+                                placeholder="Enter your email"
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                                aria-invalid={validEmail ? "false" : "true"}
+                                aria-describedby="emailnote"
+                                onFocus={() => setEmailFocus(true)}
+                                onBlur={() => setEmailFocus(false)}
+                            />
+                            <p
+                                id="emailnote"
                                 className={
-                                    validEmail || !email ? "hide" : "invalid"
+                                    emailFocus && email && !validEmail
+                                        ? "instructions"
+                                        : "offscreen"
                                 }
                             >
-                                <Icon label={"Invalid"} />
-                            </span>
-                        </label>
-                        <input
-                            type="text"
-                            id="email"
-                            autoComplete="off"
-                            placeholder="Enter your email"
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                            aria-invalid={validEmail ? "false" : "true"}
-                            aria-describedby="emailnote"
-                            onFocus={() => setEmailFocus(true)}
-                            onBlur={() => setEmailFocus(false)}
-                        />
-                        <p
-                            id="emailnote"
-                            className={
-                                emailFocus && email && !validEmail
-                                    ? "instructions"
-                                    : "offscreen"
-                            }
-                        >
-                            <Icon label={"Info"} />
-                            {/* 4 to 24 characters.
+                                <Icon label={"Info"} />
+                                {/* 4 to 24 characters.
         <br /> */}
-                            Must begin with a letter. <br />
-                            Letters, numbers, underscores, hypens allowed.
-                        </p>
-                        <br />
-                        <label htmlFor="password">
-                            Password:
-                            <Icon
-                                label={"Valid"}
-                                className={validPassword ? "valid" : "hide"}
+                                Must begin with a letter. <br />
+                                Letters, numbers, underscores, hypens allowed.
+                            </p>
+                            <br />
+                            <label htmlFor="password">
+                                Password:
+                                <Icon
+                                    label={"Valid"}
+                                    className={validPassword ? "valid" : "hide"}
+                                />
+                                <Icon
+                                    label={"Invalid"}
+                                    className={
+                                        validPassword || !password
+                                            ? "hide"
+                                            : "invalid"
+                                    }
+                                />
+                            </label>
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Enter your password"
+                                onChange={(e) => setPassword(e.target.value)}
+                                value={password}
+                                required
+                                aria-invalid={validPassword ? "false" : "true"}
+                                aria-describedby="passwordnote"
+                                onFocus={() => setPasswordFocus(true)}
+                                onBlur={() => setPasswordFocus(false)}
                             />
-                            <Icon
-                                label={"Invalid"}
-                                className={
-                                    validPassword || !password
-                                        ? "hide"
-                                        : "invalid"
-                                }
+                            <button type="submit">Log In</button>
+                            <br />
+                            <p>or</p>
+                            <OAuthButton
+                                label={"Google"}
+                                authFunction={GoogleAuthRegistration}
+                                cta={"Sign in with"}
                             />
-                        </label>
-                        <input
-                            type="password"
-                            id="password"
-                            placeholder="Enter your password"
-                            onChange={(e) => setPassword(e.target.value)}
-                            value={password}
-                            required
-                            aria-invalid={validPassword ? "false" : "true"}
-                            aria-describedby="passwordnote"
-                            onFocus={() => setPasswordFocus(true)}
-                            onBlur={() => setPasswordFocus(false)}
-                        />
-                        <button type="submit">Log In</button>
-                        <br />
-                        <p>or</p>
-                        <OAuthButton
-                            label={"Google"}
-                            authFunction={GoogleAuthRegistration}
-                            cta={"Sign in with"}
-                        />
-                        <OAuthButton
-                            label={"Facebook"}
-                            authFunction={GoogleAuthRegistration}
-                            cta={"Sign in with"}
-                        />
-                    </StyledRegisterForm>
-                </SectionRegistration>
+                            <OAuthButton
+                                label={"Facebook"}
+                                authFunction={GoogleAuthRegistration}
+                                cta={"Sign in with"}
+                            />
+                        </StyledRegisterForm>
+                    </SectionRegistration>
+                </>
             )}
         </>
     );

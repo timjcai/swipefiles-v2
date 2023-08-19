@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useAuth } from "../../hooks/useAuth";
+import { Badge } from "../landingpage";
 
 export const Navbar = () => {
     const user = useAuth();
@@ -14,8 +15,16 @@ export const Navbar = () => {
                 <Link to="/pricing">Pricing</Link>
                 <Link to="/faq">FAQ</Link>
                 <Link to="/login">Log in</Link>
-                {!user && <Link to="/register">Sign up</Link>}
-                {user && <Link to="/dashboard">Dashboard</Link>}
+                {!user && (
+                    <Badge size="16px">
+                        <Link to="/register">Sign up</Link>
+                    </Badge>
+                )}
+                {user && (
+                    <Badge size="16px">
+                        <Link to="/dashboard">Dashboard</Link>
+                    </Badge>
+                )}
             </NavbarSection>
         </NavbarWrapper>
     );
@@ -33,6 +42,7 @@ const NavbarWrapper = styled.div`
 const NavbarSection = styled.div`
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-around;
     gap: 25px;
 `;

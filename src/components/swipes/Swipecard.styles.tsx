@@ -10,7 +10,7 @@ export const StyledSwipecard = styled.div`
 `;
 
 export const TopRow = styled.div`
-    padding: 0.5em 1em;
+    padding: 1em 1.5em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -18,7 +18,7 @@ export const TopRow = styled.div`
 `;
 
 export const KeywordWrapper = styled.div`
-    padding: 0.5em 1em;
+    padding: 1em 1.5em;
     height: 40px;
     display: flex;
     flex-direction: row;
@@ -33,4 +33,5 @@ export const BottomRow = styled.div`
     flex-direction: row;
     justify-content: left;
     align-items: center;
+    gap: 10px;
 `;
