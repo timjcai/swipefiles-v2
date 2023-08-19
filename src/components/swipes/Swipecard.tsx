@@ -60,7 +60,7 @@ export const Swipecard: FC<ISwipeData> = (swipedata) => {
                     </KeywordWrapper>
                     <HighlightWrapper>
                         <HighlightGroup>
-                            <p>Boards:</p>
+                            <p>Boards?: </p>
                             <KeywordTag
                                 key={generateRandomString(10)}
                                 bgcolor={"#F6635C"}

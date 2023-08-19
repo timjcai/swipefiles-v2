@@ -66,16 +66,16 @@ const SwipeGrid = styled.div`
     position: relative;
 
     @media ${deviceSize.xxl} {
-        grid-template-columns: repeat(6, auto);
-    }
-    @media ${deviceSize.xl} {
         grid-template-columns: repeat(5, auto);
     }
-    @media ${deviceSize.lg} {
+    @media ${deviceSize.xl} {
         grid-template-columns: repeat(4, auto);
     }
-    @media ${deviceSize.md} {
+    @media ${deviceSize.lg} {
         grid-template-columns: repeat(3, auto);
+    }
+    @media ${deviceSize.md} {
+        grid-template-columns: repeat(2, auto);
     }
     @media ${deviceSize.sm} {
         grid-template-columns: repeat(2, auto);
