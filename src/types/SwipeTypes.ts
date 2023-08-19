@@ -37,6 +37,8 @@ export type ActionTypes =
     | "Next"
     | "Skip"
     | "Share"
+    | "Delete"
+    | "Edit"
     | "Light"
     | "Dark"
 

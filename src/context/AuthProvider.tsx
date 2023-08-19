@@ -13,7 +13,7 @@ export const AuthProvider: FC = ({ children }) => {
     const [currentUser, setCurrentUser] = useState<User | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
-    function login(email, password) {
+    function login(email: string, password: string) {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
@@ -21,7 +21,7 @@ export const AuthProvider: FC = ({ children }) => {
         return auth.signOut();
     }
 
-    function signUp(email, password) {
+    function signUp(email: string, password: string) {
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
@@ -38,6 +38,7 @@ export const AuthProvider: FC = ({ children }) => {
             }
         });
     }
+
     useEffect(() => {
         const unsubscribe = () =>
             onAuthStateChanged(auth, (currentUser) => {

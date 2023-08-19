@@ -6,7 +6,7 @@ import { db } from "../../../firebase-config";
 import { useAuth } from "../../hooks/useAuth";
 import { Loading } from "./Loading";
 
-export const SingleSwipe: FC<ISwipeData> = () => {
+export const SingleSwipe: FC = () => {
     // const {
     //     author,
     //     images,
@@ -47,17 +47,18 @@ export const SingleSwipe: FC<ISwipeData> = () => {
 
     return (
         <div>
-            {!loading && (
-                <>
-                    <h2>{id}</h2>
-                    <h1>{swipedata.title}</h1>
-                    <p>{swipedata.user_id}</p>
-                    <p>{swipedata.author}</p>
-                    <p>{swipedata.hyperlink}</p>
-                    <p>{swipedata.platform}</p>
-                    <p>{swipedata.notes}</p>
-                </>
-            )}
+            {!loading ||
+                (swipedata !== null && (
+                    <>
+                        <h2>{id}</h2>
+                        <h1>{swipedata.title}</h1>
+                        <p>{swipedata.user_id}</p>
+                        <p>{swipedata.author}</p>
+                        <p>{swipedata.hyperlink}</p>
+                        <p>{swipedata.platform}</p>
+                        <p>{swipedata.notes}</p>
+                    </>
+                ))}
             {loading && <Loading />}
         </div>
     );

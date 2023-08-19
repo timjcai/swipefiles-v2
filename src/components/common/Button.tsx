@@ -1,8 +1,9 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import styled from "styled-components";
 import { Icon } from "./Icon";
 import { IconType } from "../../types";
 import { Link } from "react-router-dom";
+import { SwipeActionsContext } from "../../context/SwipeActionsProvider";
 
 type RoundButtonProps = {
     label: IconType;
@@ -17,24 +18,43 @@ export const RoundButton: FC<RoundButtonProps> = ({
     url,
 }) => {
     const linkType = IntExtLinkMap[label];
+    // const { deleteSwipe, updateSwipe } = useContext(SwipeActionsContext);
 
-    return (
-        <>
-            {linkType === "External" ? (
+    let button: JSX.Element;
+
+    if (linkType === "External") {
+        button = (
+            <>
                 <CircleWrapper backgroundColor={backgroundColor} color={color}>
                     <a href={url}>
                         <Icon label={label} className={"white"} />
                     </a>
                 </CircleWrapper>
-            ) : (
+            </>
+        );
+    } else if (linkType === "Internal") {
+        button = (
+            <>
+                {" "}
                 <CircleWrapper backgroundColor={backgroundColor} color={color}>
                     <Link to={`/${url}`}>
                         <Icon label={label} className={"white"} />
                     </Link>
                 </CircleWrapper>
-            )}
-        </>
-    );
+            </>
+        );
+    } else {
+        button = (
+            <>
+                {" "}
+                <CircleWrapper backgroundColor={backgroundColor} color={color}>
+                    <Icon label={label} className={"white"} />
+                </CircleWrapper>
+            </>
+        );
+    }
+
+    return <>{button}</>;
 };
 
 type CircleWrapperProps = {
@@ -57,4 +77,6 @@ const IntExtLinkMap = {
     hyperlink: "External",
     Share: "Internal",
     notes: "Internal",
+    Delete: "Action",
+    Edit: "Action",
 };

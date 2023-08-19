@@ -6,8 +6,8 @@ const ThemeContext = createContext(null);
 
 type Theme = "light" | "dark" | "vaporwave";
 
-export const ThemeProvider: FC = ({ children }) => {
-    const [theme, setTheme] = useState<Theme>("dark");
+export const ThemeProvider = ({ children }) => {
+    const [theme, setTheme] = useState<Theme>("light");
     const [loading, setLoading] = useState<boolean>(true);
 
     const toggleTheme = () => {

@@ -32,7 +32,6 @@ export const Swipecard: FC<ISwipeData> = (swipedata) => {
         user_id,
         id,
     } = swipedata;
-    console.log(swipedata);
 
     const numbBoards = board_id.length;
     const numbImages = images.length;
@@ -98,14 +97,14 @@ export const Swipecard: FC<ISwipeData> = (swipedata) => {
                         color="#ffffff"
                         url={hyperlink}
                     />
+                    <RoundButton
+                        label={"Delete"}
+                        backgroundColor="#C70039"
+                        color="#ffffff"
+                        url={hyperlink}
+                    />
                 </BottomRow>
             </Link>
-
-            {/* <p key={`${generateRandomString(10)}`}>@{author}</p>
-            <p key={platform}>{platform}</p>
-            <p key={board_id}>{board_id}</p>
-            <p key={links}>{links}</p>
-            <p key={notes}>{notes}</p> */}
         </StyledSwipecard>
     );
 };
