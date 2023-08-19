@@ -19,11 +19,11 @@
 }
 
 p {
-    color: #000000;
+    /* color: #000000; */
 }
 
 h1 {
-    color: #000000;
+    /* color: #000000; */
 }
 
 a {
@@ -57,11 +57,11 @@ button {
     background-color: #1a1a1a;
     cursor: pointer;
     transition: border-color 0.25s;
-    color: #ffffff;
+    /* color: #ffffff; */
 
-    p {
+    /* p {
         color: #ffffff;
-    }
+    } */
 }
 
 button:hover {

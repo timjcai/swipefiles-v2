@@ -19,11 +19,13 @@ import {
     faInfoCircle,
     faLayerGroup,
     faLink,
+    faMoon,
     faNoteSticky,
     faPaperPlane,
     faPlay,
     faShare,
     faSquarePlus,
+    faSun,
     faTag,
     faUser,
     faWindowMaximize,
@@ -76,6 +78,8 @@ const iconMapping: {
     Create: faSquarePlus,
     Share: faShare,
     Website: faWindowMaximize,
+    Light: faSun,
+    Dark: faMoon,
 };
 
 type IconProps = {

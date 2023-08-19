@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Icon } from "../common/Icon";
 import { NavigationTypes } from "../../types";
+import { ThemeButton } from "../../context";
 
 export const Sidebar = () => {
     const [selected, setSelected] = useState(null);
@@ -50,6 +51,7 @@ export const Sidebar = () => {
                     </InlineColumn>
                 </div>
                 <div>
+                    <ThemeButton />
                     <div>Picture</div>
                     <div>
                         <Link to="/settings" onClick={handleClick}>
@@ -77,7 +79,7 @@ const SidebarWrapper = styled.aside`
 `;
 
 export const NonsidebarWrapper = styled.div`
-    background: #ffffff;
+    // background: #ffffff;
     height: 100vh;
     width: 100vw;
     padding-left: 96px;
