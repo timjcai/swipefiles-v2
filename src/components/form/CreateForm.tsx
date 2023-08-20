@@ -1,12 +1,13 @@
 import React, { ChangeEvent, FC, useRef, useState } from "react";
 import styled from "styled-components";
 import { FieldTypes, ISwipeData } from "../../types";
-import { TextInput, TextLabelInput, TextareaInput } from "./Input";
+import { SelectInput, TextInput, TextLabelInput, TextareaInput } from "./Input";
 import { KeywordTagInput } from ".";
 import { Timestamp, collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase-config";
 import { useAuth } from "../../hooks/useAuth";
 import { activate } from "firebase/remote-config";
+import { ALL_PLATFORMS } from "../../util/PlatformUtil";
 
 // type CreateFormProps = {
 //     fields: keyof ISwipeData[] & FieldTypes[];
@@ -45,8 +46,9 @@ export const CreateForm: FC = () => {
         setNotes(e.target.value);
     };
 
-    const handlePlatformChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setPlatform(e.target.value);
+    const handlePlatformChange = (e) => {
+        console.log(e.target.id);
+        setPlatform(e.target.id);
     };
 
     const handleKeywordTagChange = (arrayList) => {
@@ -61,8 +63,8 @@ export const CreateForm: FC = () => {
             hyperlink: hyperlink,
             images: [],
             keyword_tags: keywordTags,
-            notes: notesRef.current.value,
-            platform: platformRef.current.value,
+            notes: notes,
+            platform: platform,
             user_id: user?.uid,
             board_id: [],
             create_date: Timestamp.fromDate(new Date()),
@@ -107,7 +109,13 @@ export const CreateForm: FC = () => {
                 label={"platform"}
                 cta={"Platform: "}
             /> */}
-
+            <SelectInput
+                placeholder={""}
+                label={""}
+                cta={"Platform: "}
+                changeFunction={handlePlatformChange}
+                data={ALL_PLATFORMS}
+            />
             <KeywordTagInput onArrayChange={handleKeywordTagChange} />
             <TextareaInput
                 placeholder={"Add notes"}

@@ -1,0 +1,20 @@
+export const ALL_PLATFORMS = [
+    "Facebook", 
+    "Linkedin", 
+    "Twitter", 
+    "Pinterest", 
+    "Reddit", 
+    "Tumblr", 
+    "Medium",
+    // "Substack", 
+    "Dribbble", 
+    "YouTube", 
+    "TikTok", 
+    "Google", 
+    "Apple", 
+    "Github", 
+    "Instagram", 
+    "Behance", 
+    "Amazon", 
+    "Website"
+]

@@ -2,6 +2,7 @@ import React, { ChangeEvent, FC, forwardRef, useState } from "react";
 import styled from "styled-components";
 import { Icon } from "../common/Icon";
 import { FieldTypes, ISwipeData } from "../../types";
+import { SelectPicker } from "./SelectPicker/SelectPicker";
 
 type InputProps = {
     label: keyof ISwipeData | FieldTypes;
@@ -41,8 +42,9 @@ type TextInputProps = {
     label: keyof ISwipeData | FieldTypes;
     placeholder?: string;
     cta?: string;
-    changeFunction: (e: ChangeEvent<HTMLInputElement>) => void;
+    changeFunction: (e: ChangeEvent<HTMLInputElement> | MouseEvent) => void;
     state: string;
+    data?: string[];
 };
 
 export const TextInput: FC<TextInputProps> = ({
@@ -140,3 +142,24 @@ const StyledInputGroup = styled.div`
     display: flex;
     flex-direction: row;
 `;
+
+export const SelectInput: FC<TextInputProps> = ({
+    label,
+    cta,
+    data,
+    placeholder,
+    changeFunction,
+}) => {
+    return (
+        <StyledInputGroup>
+            <label htmlFor={label}>{cta}</label>
+            <SelectPicker
+                label={label}
+                placeholder={placeholder}
+                list={data}
+                onChange={changeFunction}
+                color={"#212121"}
+            />
+        </StyledInputGroup>
+    );
+};
