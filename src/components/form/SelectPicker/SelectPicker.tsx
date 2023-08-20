@@ -13,12 +13,12 @@ interface ISelectPicker {
 
 export const SelectPicker: FC<ISelectPicker> = ({
     label,
-    placeholder,
+    value,
     list,
     color,
     onChange,
 }) => {
-    const [selectItem, setSelectItem] = useState(placeholder);
+    const [selectItem, setSelectItem] = useState(value);
     const [isHidden, setIsHidden] = useState(true);
     const selectorRef = useRef(null);
 

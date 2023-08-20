@@ -15,8 +15,8 @@ import { ALL_PLATFORMS } from "../../util/PlatformUtil";
 
 export const CreateForm: FC = () => {
     const user = useAuth();
-    const [payload, setPayload] = useState<ISwipeData | null>();
-    const [images, setImages] = useState<string[] | null>();
+    // const [payload, setPayload] = useState<ISwipeData | null>();
+    // const [images, setImages] = useState<string[] | null>();
 
     const [title, setTitle] = useState<string>("");
     const [hyperlink, setHyperlink] = useState<string>("");
@@ -70,15 +70,23 @@ export const CreateForm: FC = () => {
             create_date: Timestamp.fromDate(new Date()),
         };
         console.log(currentPayload);
-        // const createSwipe = async () => {
-        //     const newSwipesRef = doc(collection(db, "swipes"));
-        //     const docRef = await setDoc(newSwipesRef, currentPayload);
-        //     docRef;
-        // };
-        // createSwipe();
+        resetForm();
+        const createSwipe = async () => {
+            const newSwipesRef = doc(collection(db, "swipes"));
+            const docRef = await setDoc(newSwipesRef, currentPayload);
+            docRef;
+        };
+        createSwipe();
     };
 
-    const resetForm = () => {};
+    const resetForm = () => {
+        setTitle("");
+        setAuthor("");
+        setHyperlink("");
+        setKeywordTags([]);
+        setPlatform("");
+        setNotes("");
+    };
 
     return (
         <StyledCreateForm method="post" onSubmit={handleSubmission}>
@@ -110,8 +118,8 @@ export const CreateForm: FC = () => {
                 cta={"Platform: "}
             /> */}
             <SelectInput
-                placeholder={""}
-                label={""}
+                placeholder={platform}
+                label={"Platform"}
                 cta={"Platform: "}
                 changeFunction={handlePlatformChange}
                 data={ALL_PLATFORMS}
