@@ -31,6 +31,7 @@ import {
     faTrash,
     faUser,
     faWindowMaximize,
+    faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import {
     faAmazon,
@@ -93,6 +94,7 @@ const iconMapping: {
     Share: faShare,
     Delete: faTrash,
     Edit: faEdit,
+    Remove: faXmark,
     Website: faWindowMaximize,
     Light: faSun,
     Dark: faMoon,
@@ -106,6 +108,10 @@ type IconProps = {
 export const Icon: FC<IconProps> = ({ label, className }) => {
     const icon = iconMapping[label];
     return (
-        <FontAwesomeIcon icon={icon} className={className}></FontAwesomeIcon>
+        <FontAwesomeIcon
+            icon={icon}
+            className={className}
+            style={{ pointerEvents: "none" }}
+        />
     );
 };

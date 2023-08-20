@@ -1,17 +1,31 @@
 import React, { FC } from "react";
 import styled from "styled-components";
+import { Icon } from "../../common/Icon";
 
 type KeywordTagProps = {
     tag: string;
+    id: string;
     bgcolor?: string;
     color?: string;
+    editable?: boolean;
+    onXClick: (e) => void;
 };
 
-export const KeywordTag: FC<KeywordTagProps> = ({ tag, bgcolor, color }) => {
+export const KeywordTag: FC<KeywordTagProps> = ({
+    tag,
+    id,
+    bgcolor,
+    color,
+    editable,
+    onXClick,
+}) => {
     return (
         <>
-            <TagStyle role="button" bgcolor={bgcolor} color={color}>
-                {tag}
+            <TagStyle role="button" bgcolor={bgcolor} color={color} id={id}>
+                <p>{tag}</p>
+                <TagButtonWrapper onClick={onXClick} data-label={id}>
+                    {editable && <Icon label="Remove" data-label={id} />}
+                </TagButtonWrapper>
             </TagStyle>
         </>
     );
@@ -38,4 +52,11 @@ const TagStyle = styled.div<TagStyleProps>`
     font-size: 14px;
     line-height: 120%;
     overflow: hidden;
+    gap: 10px;
+`;
+
+const TagButtonWrapper = styled.div``;
+
+const TagText = styled.p`
+    pointer-events: none;
 `;

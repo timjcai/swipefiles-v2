@@ -5,13 +5,24 @@ import { KeywordTag } from ".";
 
 type KeywordTagInputProps = {
     onArrayChange?: (newArray: string[] | undefined) => void;
+    key: number;
 };
 
 export const KeywordTagInput: FC<KeywordTagInputProps> = ({
     onArrayChange,
+    key,
 }) => {
     const [keywordTags, setKeywordTags] = useState<string[] | []>([]);
     const Keyword = useRef<HTMLInputElement | null>(null);
+
+    const handleRemoveClick = (e) => {
+        const removeValue = e.target.dataset.label;
+        const currentArray = [...keywordTags];
+        const index = currentArray.indexOf(removeValue);
+        currentArray.splice(index, 1);
+        setKeywordTags(currentArray);
+        onArrayChange!(currentArray);
+    };
 
     const addKeywords = (e: MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
@@ -26,7 +37,7 @@ export const KeywordTagInput: FC<KeywordTagInputProps> = ({
     };
 
     return (
-        <div>
+        <div key={key}>
             <TextLabelInput
                 ref={Keyword}
                 placeholder={"Add keywords"}
@@ -39,9 +50,12 @@ export const KeywordTagInput: FC<KeywordTagInputProps> = ({
             {keywordTags.map((words) => {
                 return (
                     <KeywordTag
+                        id={words}
                         bgcolor={"rgb(28, 56, 41)"}
                         color={"#FFFFFF"}
                         tag={words}
+                        editable={true}
+                        onXClick={handleRemoveClick}
                     />
                 );
             })}

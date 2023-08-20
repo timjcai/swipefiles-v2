@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useRef, useState } from "react";
+import React, { ChangeEvent, FC, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { FieldTypes, ISwipeData } from "../../types";
 import { SelectInput, TextInput, TextLabelInput, TextareaInput } from "./Input";
@@ -25,6 +25,8 @@ export const CreateForm: FC = () => {
     const [platform, setPlatform] = useState<string>("");
 
     const [keywordTags, setKeywordTags] = useState<string[] | null>();
+    const [keywordTagKey, setKeywordTagKey] = useState(1);
+    const [platformKey, setPlatformKey] = useState(10000);
 
     // const editInputValues = (e: ChangeEvent<HTMLInputElement>): void => {
     //     setCurrentKeyword(e.target.value);
@@ -55,6 +57,11 @@ export const CreateForm: FC = () => {
         setKeywordTags(arrayList);
     };
 
+    const resetKeys = () => {
+        setKeywordTagKey(Math.floor(Math.random() * 10) + 1);
+        setPlatformKey(Math.floor(Math.random() * 10) + 11);
+    };
+
     const handleSubmission = (e) => {
         e.preventDefault();
         const currentPayload = {
@@ -71,12 +78,12 @@ export const CreateForm: FC = () => {
         };
         console.log(currentPayload);
         resetForm();
-        const createSwipe = async () => {
-            const newSwipesRef = doc(collection(db, "swipes"));
-            const docRef = await setDoc(newSwipesRef, currentPayload);
-            docRef;
-        };
-        createSwipe();
+        // const createSwipe = async () => {
+        //     const newSwipesRef = doc(collection(db, "swipes"));
+        //     const docRef = await setDoc(newSwipesRef, currentPayload);
+        //     docRef;
+        // };
+        // createSwipe();
     };
 
     const resetForm = () => {
@@ -86,6 +93,7 @@ export const CreateForm: FC = () => {
         setKeywordTags([]);
         setPlatform("");
         setNotes("");
+        resetKeys();
     };
 
     return (
@@ -118,13 +126,17 @@ export const CreateForm: FC = () => {
                 cta={"Platform: "}
             /> */}
             <SelectInput
+                key={platformKey}
                 placeholder={platform}
                 label={"Platform"}
                 cta={"Platform: "}
                 changeFunction={handlePlatformChange}
                 data={ALL_PLATFORMS}
             />
-            <KeywordTagInput onArrayChange={handleKeywordTagChange} />
+            <KeywordTagInput
+                onArrayChange={handleKeywordTagChange}
+                key={keywordTagKey}
+            />
             <TextareaInput
                 placeholder={"Add notes"}
                 label={"notes"}

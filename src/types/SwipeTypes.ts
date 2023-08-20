@@ -41,6 +41,7 @@ export type ActionTypes =
     | "Edit"
     | "Light"
     | "Dark"
+    | "Remove"
 
 export type NavigationTypes = 
     | "Home" 

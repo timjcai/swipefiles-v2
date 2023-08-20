@@ -60,13 +60,14 @@ export const RoundButton: FC<RoundButtonProps> = ({
 type CircleWrapperProps = {
     backgroundColor?: string;
     color?: string;
+    size?: string;
 };
-const CircleWrapper = styled.div<CircleWrapperProps>`
+export const CircleWrapper = styled.div<CircleWrapperProps>`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 28px;
-    width: 28px;
+    height: ${(props) => (props.size ? props.size : "28px")};
+    width: ${(props) => (props.size ? props.size : "28px")};
     padding: 0.25em 0.25em;
     border-radius: 50%;
     background-color: ${(props) => props.backgroundColor};
