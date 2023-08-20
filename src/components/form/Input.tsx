@@ -45,6 +45,7 @@ type TextInputProps = {
     changeFunction: (e: ChangeEvent<HTMLInputElement> | MouseEvent) => void;
     state: string;
     data?: string[];
+    key?: number | string;
 };
 
 export const TextInput: FC<TextInputProps> = ({

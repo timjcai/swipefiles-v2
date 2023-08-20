@@ -22,12 +22,12 @@ interface ISelectPicker {
 
 export const SelectPicker: FC<ISelectPicker> = ({
     label,
-    value,
+    placeholder,
     list,
     color,
     onChange,
 }) => {
-    const [selectItem, setSelectItem] = useState(value);
+    const [selectItem, setSelectItem] = useState(placeholder);
     const [isHidden, setIsHidden] = useState(true);
     const selectorRef = useRef(null);
 
@@ -48,6 +48,7 @@ export const SelectPicker: FC<ISelectPicker> = ({
 
     // unable to implement a closepopup box - not sure how to implement this after 2-3 hours of work
 
+    useEffect(() => {}, [selectItem]);
     useEffect(() => {
         function closePopup(e: MouseEvent) {
             if (e.target !== selectorRef.current) {

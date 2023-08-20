@@ -7,7 +7,7 @@ import { Timestamp, collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase-config";
 import { useAuth } from "../../hooks/useAuth";
 import { activate } from "firebase/remote-config";
-import { ALL_PLATFORMS } from "../../util/PlatformUtil";
+import { ALL_PLATFORMS, extractAndFormatDomain } from "../../util/PlatformUtil";
 
 // type CreateFormProps = {
 //     fields: keyof ISwipeData[] & FieldTypes[];
@@ -37,7 +37,10 @@ export const CreateForm: FC = () => {
     };
 
     const handleHyperlinkChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setHyperlink(e.target.value);
+        const url = e.target.value;
+        setHyperlink(url);
+        const platform = extractAndFormatDomain(url);
+        setPlatform(platform);
     };
 
     const handleAuthorChange = (e: ChangeEvent<HTMLInputElement>) => {
