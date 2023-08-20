@@ -1,30 +1,53 @@
-import React, { FC, useRef, useState } from "react";
+import React, { ChangeEvent, FC, useRef, useState } from "react";
 import styled from "styled-components";
 import { FieldTypes, ISwipeData } from "../../types";
-import { TextLabelInput } from "./Input";
+import { TextInput, TextLabelInput, TextareaInput } from "./Input";
 import { KeywordTagInput } from ".";
 import { Timestamp, collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase-config";
 import { useAuth } from "../../hooks/useAuth";
+import { activate } from "firebase/remote-config";
 
 // type CreateFormProps = {
 //     fields: keyof ISwipeData[] & FieldTypes[];
 // };
 
 export const CreateForm: FC = () => {
+    const user = useAuth();
     const [payload, setPayload] = useState<ISwipeData | null>();
     const [images, setImages] = useState<string[] | null>();
-    const [keywordTags, setKeywordTags] = useState<string[] | null>();
-    const user = useAuth();
 
-    const titleRef = useRef<HTMLInputElement | null>(null);
-    const linkRef = useRef<HTMLInputElement | null>(null);
-    const authorRef = useRef<HTMLInputElement | null>(null);
-    const platformRef = useRef<HTMLInputElement | null>(null);
-    const notesRef = useRef<HTMLInputElement | null>(null);
+    const [title, setTitle] = useState<string>("");
+    const [hyperlink, setHyperlink] = useState<string>("");
+    const [author, setAuthor] = useState<string>("");
+    const [notes, setNotes] = useState<string>("");
+    const [platform, setPlatform] = useState<string>("");
+
+    const [keywordTags, setKeywordTags] = useState<string[] | null>();
+
     // const editInputValues = (e: ChangeEvent<HTMLInputElement>): void => {
     //     setCurrentKeyword(e.target.value);
     // };
+
+    const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.target.value);
+    };
+
+    const handleHyperlinkChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setHyperlink(e.target.value);
+    };
+
+    const handleAuthorChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setAuthor(e.target.value);
+    };
+
+    const handleNotesChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setNotes(e.target.value);
+    };
+
+    const handlePlatformChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setPlatform(e.target.value);
+    };
 
     const handleKeywordTagChange = (arrayList) => {
         setKeywordTags(arrayList);
@@ -33,9 +56,9 @@ export const CreateForm: FC = () => {
     const handleSubmission = (e) => {
         e.preventDefault();
         const currentPayload = {
-            title: titleRef.current.value,
-            author: authorRef.current.value,
-            hyperlink: linkRef.current.value,
+            title: title,
+            author: author,
+            hyperlink: hyperlink,
             images: [],
             keyword_tags: keywordTags,
             notes: notesRef.current.value,
@@ -45,47 +68,53 @@ export const CreateForm: FC = () => {
             create_date: Timestamp.fromDate(new Date()),
         };
         console.log(currentPayload);
-        const createSwipe = async () => {
-            const newSwipesRef = doc(collection(db, "swipes"));
-            const docRef = await setDoc(newSwipesRef, currentPayload);
-            docRef;
-        };
-        createSwipe();
+        // const createSwipe = async () => {
+        //     const newSwipesRef = doc(collection(db, "swipes"));
+        //     const docRef = await setDoc(newSwipesRef, currentPayload);
+        //     docRef;
+        // };
+        // createSwipe();
     };
+
+    const resetForm = () => {};
 
     return (
         <StyledCreateForm method="post" onSubmit={handleSubmission}>
-            <TextLabelInput
-                ref={titleRef}
+            <TextInput
                 placeholder={"Add a custom title"}
                 label={"title"}
                 cta={"Title: "}
+                changeFunction={handleTitleChange}
+                state={title}
             />
-            <TextLabelInput
-                ref={linkRef}
-                placeholder={"Add a link"}
+            <TextInput
+                placeholder={"Add a custom hyperlink"}
                 label={"hyperlink"}
-                cta={"Link: "}
+                cta={"Hyperlink: "}
+                changeFunction={handleHyperlinkChange}
+                state={hyperlink}
             />
-            <TextLabelInput
-                ref={authorRef}
-                placeholder={"Who is the author?"}
+            <TextInput
+                placeholder={"Add a custom author"}
                 label={"author"}
                 cta={"Author: "}
+                changeFunction={handleAuthorChange}
+                state={author}
             />
-            <TextLabelInput
+            {/* <TextLabelInput
                 ref={platformRef}
                 placeholder={"Which platform?"}
                 label={"platform"}
                 cta={"Platform: "}
-            />
-            <TextLabelInput
-                ref={notesRef}
+            /> */}
+
+            <KeywordTagInput onArrayChange={handleKeywordTagChange} />
+            <TextareaInput
                 placeholder={"Add notes"}
                 label={"notes"}
                 cta={"Notes: "}
+                changeFunction={handleNotesChange}
             />
-            <KeywordTagInput onArrayChange={handleKeywordTagChange} />
             <button type="submit">Create Swipe</button>
             {/* onclickAdd keywords - push value into keywords tag */}
 
@@ -98,4 +127,5 @@ export const CreateForm: FC = () => {
 const StyledCreateForm = styled.form`
     display: flex;
     flex-direction: column;
+    font-size: 16px;
 `;

@@ -33,11 +33,17 @@ export const KeywordTagInput: FC<KeywordTagInputProps> = ({
                 label={"keyword_tags"}
                 cta={"Keywords: "}
             />
-            <p></p>
+            <br />
             <button onClick={addKeywords}>Add Keywords</button>
             <p>keyword tags</p>
             {keywordTags.map((words) => {
-                return <KeywordTag color={"rgb(28, 56, 41)"} tag={words} />;
+                return (
+                    <KeywordTag
+                        bgcolor={"rgb(28, 56, 41)"}
+                        color={"#FFFFFF"}
+                        tag={words}
+                    />
+                );
             })}
         </div>
     );

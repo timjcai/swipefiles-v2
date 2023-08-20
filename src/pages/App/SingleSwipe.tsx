@@ -25,7 +25,7 @@ export const SingleSwipe: FC = () => {
     const swipeCollection = collection(db, "swipes");
     const user = useAuth();
     const { id } = useParams();
-    console.log(id);
+
     useEffect(() => {
         const userQuery = query(
             swipeCollection,

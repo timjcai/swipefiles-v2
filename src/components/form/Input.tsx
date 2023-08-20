@@ -3,6 +3,13 @@ import styled from "styled-components";
 import { Icon } from "../common/Icon";
 import { FieldTypes, ISwipeData } from "../../types";
 
+type InputProps = {
+    label: keyof ISwipeData | FieldTypes;
+    placeholder?: string;
+    cta?: string;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
 export const TextLabelInput: FC<InputProps> = forwardRef(
     ({ placeholder, label, cta }, ref) => {
         const [inputValue, setInputValue] = useState<string>();
@@ -30,6 +37,74 @@ export const TextLabelInput: FC<InputProps> = forwardRef(
     }
 );
 
+type TextInputProps = {
+    label: keyof ISwipeData | FieldTypes;
+    placeholder?: string;
+    cta?: string;
+    changeFunction: (e: ChangeEvent<HTMLInputElement>) => void;
+    state: string;
+};
+
+export const TextInput: FC<TextInputProps> = ({
+    placeholder,
+    label,
+    cta,
+    changeFunction,
+    state,
+}) => {
+    return (
+        <StyledInputGroup>
+            <label htmlFor={label}>
+                <Icon label={label} />
+                {cta}
+            </label>
+            <input
+                type="text"
+                id={label}
+                name={label}
+                placeholder={placeholder}
+                value={state}
+                onChange={changeFunction}
+            />
+        </StyledInputGroup>
+    );
+};
+
+export const TextareaInput: FC<TextInputProps> = ({
+    placeholder,
+    label,
+    cta,
+    changeFunction,
+    state,
+}) => {
+    return (
+        <StyledInputGroup>
+            <label htmlFor={label}>
+                <Icon label={label} />
+                {cta}
+            </label>
+            <StyledTextarea
+                type="text"
+                id={label}
+                cols={50}
+                rows={10}
+                name={label}
+                placeholder={placeholder}
+                value={state}
+                onChange={changeFunction}
+            />
+        </StyledInputGroup>
+    );
+};
+
+const StyledTextarea = styled.textarea`
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    outline: none;
+    resize: none;
+`;
+
+// not used anywhere
 export const IconLabelInput: FC<InputProps> = ({ placeholder, label }) => {
     return (
         <StyledInputGroup>
@@ -59,13 +134,6 @@ export const ImageInput: FC<InputProps> = ({ label, cta }) => {
             />
         </StyledInputGroup>
     );
-};
-
-type InputProps = {
-    label: keyof ISwipeData | FieldTypes;
-    placeholder?: string;
-    cta?: string;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const StyledInputGroup = styled.div`

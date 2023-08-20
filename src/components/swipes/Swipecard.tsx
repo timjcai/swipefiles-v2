@@ -52,6 +52,7 @@ export const Swipecard: FC<ISwipeData> = (swipedata) => {
                                     <KeywordTag
                                         key={generateRandomString(10)}
                                         bgcolor={"#009956"}
+                                        color={"#ffffff"}
                                         tag={words}
                                     />
                                 );
