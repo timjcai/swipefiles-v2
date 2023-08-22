@@ -18,6 +18,12 @@ import { KeywordTag } from "../form";
 import { Icon } from "../common/Icon";
 import { RoundButton } from "../common/Button";
 import { Link } from "react-router-dom";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../../../firebase-config";
+
+type SwipecardProps = {
+    swipedata: ISwipeData;
+};
 
 export const Swipecard: FC<ISwipeData> = (swipedata) => {
     const {
@@ -35,6 +41,13 @@ export const Swipecard: FC<ISwipeData> = (swipedata) => {
 
     const numbBoards = board_id.length;
     const numbImages = images.length;
+
+    const deleteCard = (e: MouseEvent) => {
+        e.preventDefault();
+        const docRef = doc(db, "swipes", id);
+        deleteDoc(docRef);
+        console.log(`deleting card: ${id}`);
+    };
 
     return (
         <StyledSwipecard key={id}>
@@ -103,6 +116,7 @@ export const Swipecard: FC<ISwipeData> = (swipedata) => {
                         backgroundColor="#C70039"
                         color="#ffffff"
                         url={hyperlink}
+                        onClick={deleteCard}
                     />
                 </BottomRow>
             </Link>

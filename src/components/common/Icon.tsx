@@ -11,6 +11,7 @@ import {
     faCircleCheck,
     faCircleXmark,
     faCog,
+    faDownload,
     faEdit,
     faFile,
     faFont,
@@ -29,6 +30,7 @@ import {
     faSun,
     faTag,
     faTrash,
+    faUpload,
     faUser,
     faWindowMaximize,
     faXmark,
@@ -98,6 +100,8 @@ const iconMapping: {
     Website: faWindowMaximize,
     Light: faSun,
     Dark: faMoon,
+    Upload: faUpload,
+    Download: faDownload,
 };
 
 type IconProps = {

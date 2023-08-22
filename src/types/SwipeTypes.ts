@@ -42,6 +42,8 @@ export type ActionTypes =
     | "Light"
     | "Dark"
     | "Remove"
+    | "Upload"
+    | "Download"
 
 export type NavigationTypes = 
     | "Home" 

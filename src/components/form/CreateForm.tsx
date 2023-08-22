@@ -1,7 +1,7 @@
-import React, { ChangeEvent, FC, useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import styled from "styled-components";
-import { FieldTypes, ISwipeData, PlatformTypes } from "../../types";
-import { SelectInput, TextInput, TextLabelInput, TextareaInput } from "./Input";
+import { ISwipeData, PlatformTypes } from "../../types";
+import { SelectInput, TextInput, TextareaInput } from "./Input";
 import { KeywordTagInput } from ".";
 import { Timestamp, collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase-config";
@@ -9,10 +9,6 @@ import { useAuth } from "../../hooks/useAuth";
 import { activate } from "firebase/remote-config";
 import { ALL_PLATFORMS, extractAndFormatDomain } from "../../util/PlatformUtil";
 import { Swipecard } from "../swipes/Swipecard";
-
-// type CreateFormProps = {
-//     fields: keyof ISwipeData[] & FieldTypes[];
-// };
 
 export const CreateForm: FC = () => {
     const user = useAuth();
@@ -146,7 +142,7 @@ export const CreateForm: FC = () => {
                         />
                         <SelectInput
                             key={platformKey}
-                            placeholder={platform}
+                            placeholder={payload.platform}
                             label={"Platform"}
                             cta={"Platform: "}
                             changeFunction={handleSelectChange}
@@ -157,6 +153,7 @@ export const CreateForm: FC = () => {
                             onArrayChange={handleKeywordTagChange}
                             key={keywordTagKey}
                         />
+                        {/* <ImageUploader /> */}
                         <TextareaInput
                             placeholder={"Add notes"}
                             label={"notes"}

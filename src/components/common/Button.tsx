@@ -10,12 +10,14 @@ type RoundButtonProps = {
     backgroundColor: string;
     color: string;
     url: string;
+    onClick?: (e: MouseEvent) => void;
 };
 export const RoundButton: FC<RoundButtonProps> = ({
     label,
     backgroundColor,
     color,
     url,
+    onClick,
 }) => {
     const linkType = IntExtLinkMap[label];
     // const { deleteSwipe, updateSwipe } = useContext(SwipeActionsContext);
@@ -35,7 +37,6 @@ export const RoundButton: FC<RoundButtonProps> = ({
     } else if (linkType === "Internal") {
         button = (
             <>
-                {" "}
                 <CircleWrapper backgroundColor={backgroundColor} color={color}>
                     <Link to={`/${url}`}>
                         <Icon label={label} className={"white"} />
@@ -46,8 +47,11 @@ export const RoundButton: FC<RoundButtonProps> = ({
     } else {
         button = (
             <>
-                {" "}
-                <CircleWrapper backgroundColor={backgroundColor} color={color}>
+                <CircleWrapper
+                    backgroundColor={backgroundColor}
+                    color={color}
+                    onClick={onClick}
+                >
                     <Icon label={label} className={"white"} />
                 </CircleWrapper>
             </>

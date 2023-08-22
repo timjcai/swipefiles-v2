@@ -1,4 +1,11 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+    collection,
+    deleteDoc,
+    doc,
+    getDocs,
+    query,
+    where,
+} from "firebase/firestore";
 import { db } from "../../../firebase-config";
 import React, { useEffect, useState } from "react";
 import { Swipecard } from "../../components/swipes/Swipecard";

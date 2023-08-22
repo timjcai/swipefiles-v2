@@ -71,7 +71,7 @@ export const SwipecardHeading = styled.h2`
     font-size: 1.4em;
     height: 2.8em;
     text-wrap: wrap;
-    text-overflow: ellipses;
+    overflow: hidden;
     padding: 0em 0em 0em 1em;
     margin-top: 0px;
 `;
