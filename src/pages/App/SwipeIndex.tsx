@@ -18,6 +18,7 @@ import { deviceSize } from "../../util";
 export const SwipesIndex = () => {
     const [swipes, setSwipes] = useState([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const [gridKey, setGridKey] = useState<number>(1);
     const user = useAuth();
     const swipeCollection = collection(db, "swipes");
 
@@ -29,33 +30,41 @@ export const SwipesIndex = () => {
 
         const getSwipes = async () => {
             const data = await getDocs(userQuery);
-            console.log(data);
             setSwipes(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
             setLoading(false);
         };
-
+        setLoading(true);
         getSwipes();
-    }, []);
+    }, [gridKey]);
+
+    const randomGridKey = () => {
+        let count = gridKey;
+        count += 1;
+        console.log(count);
+        setGridKey(count);
+    };
 
     return (
         <div>
             <h1>Swipes Index</h1>
-            <SwipeGrid>
+            <SwipeGrid key={gridKey}>
                 {!loading &&
                     swipes.map((swipe: ISwipeData) => {
                         return (
                             <Swipecard
-                                key={swipe.id}
-                                title={swipe.title}
-                                author={swipe.author}
-                                board_id={swipe.board_id}
-                                hyperlink={swipe.hyperlink}
-                                platform={swipe.platform}
-                                user_id={swipe.user_id}
-                                id={swipe.id}
-                                notes={swipe.notes}
-                                images={swipe.images}
-                                keyword_tags={swipe.keyword_tags}
+                                swipedata={swipe}
+                                handleParentChange={randomGridKey}
+                                // key={swipe.id}
+                                // title={swipe.title}
+                                // author={swipe.author}
+                                // board_id={swipe.board_id}
+                                // hyperlink={swipe.hyperlink}
+                                // platform={swipe.platform}
+                                // user_id={swipe.user_id}
+                                // id={swipe.id}
+                                // notes={swipe.notes}
+                                // images={swipe.images}
+                                // keyword_tags={swipe.keyword_tags}
                             />
                         );
                     })}

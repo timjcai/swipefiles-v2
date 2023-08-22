@@ -170,17 +170,18 @@ export const CreateForm: FC = () => {
                 <Column2>
                     {payload && (
                         <Swipecard
-                            key={payload.id}
-                            title={payload.title}
-                            author={payload.author}
-                            board_id={payload.board_id}
-                            hyperlink={payload.hyperlink}
-                            platform={payload.platform}
-                            user_id={payload.user_id}
-                            id={payload.id}
-                            notes={payload.notes}
-                            images={payload.images}
-                            keyword_tags={payload.keyword_tags}
+                            swipedata={payload}
+                            // key={payload.id}
+                            // title={payload.title}
+                            // author={payload.author}
+                            // board_id={payload.board_id}
+                            // hyperlink={payload.hyperlink}
+                            // platform={payload.platform}
+                            // user_id={payload.user_id}
+                            // id={payload.id}
+                            // notes={payload.notes}
+                            // images={payload.images}
+                            // keyword_tags={payload.keyword_tags}
                         />
                     )}
                 </Column2>

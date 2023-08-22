@@ -23,9 +23,13 @@ import { db } from "../../../firebase-config";
 
 type SwipecardProps = {
     swipedata: ISwipeData;
+    handleParentChange: () => void;
 };
 
-export const Swipecard: FC<ISwipeData> = (swipedata) => {
+export const Swipecard: FC<SwipecardProps> = ({
+    swipedata,
+    handleParentChange,
+}) => {
     const {
         author,
         images,
@@ -46,6 +50,7 @@ export const Swipecard: FC<ISwipeData> = (swipedata) => {
         e.preventDefault();
         const docRef = doc(db, "swipes", id);
         deleteDoc(docRef);
+        handleParentChange();
         console.log(`deleting card: ${id}`);
     };
 
