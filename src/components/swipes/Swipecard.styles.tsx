@@ -5,7 +5,8 @@ export const StyledSwipecard = styled.div`
     flex-direction: column;
     border: 1px solid #000000;
     border-radius: 16px;
-    max-width: 300px;
+    min-width: 300px;
+    min-height: 300px;
     background: rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
