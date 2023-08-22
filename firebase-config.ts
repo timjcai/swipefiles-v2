@@ -10,25 +10,16 @@ import { FacebookAuthProvider, getAuth, GoogleAuthProvider } from "firebase/auth
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBZRWQB-2gkR5Q2Ni8H-Aoli_PmFCdm2eQ",
-  authDomain: "swipefiles-4efde.firebaseapp.com",
-  projectId: "swipefiles-4efde",
-  storageBucket: "swipefiles-4efde.appspot.com",
-  messagingSenderId: "401831916609",
-  appId: "1:401831916609:web:8f7fc48196922ea22602c0",
-  measurementId: "G-LY5TSJ41EN"
-};
 
-// const firebaseConfig = {
-//   apiKey: import.meta.env.firebase_APIKey,
-//   authDomain: import.meta.env.firebase_AuthDomain,
-//   projectId: import.meta.env.firebase_ProjectId,
-//   storageBucket: import.meta.env.firebase_StorageBucket,
-//   messagingSenderId: import.meta.env.firebase_MessagingSenderId,
-//   appId: import.meta.env.firebase_AppId,
-//   measurementId: import.meta.env.firebase_MeasurementId
-// };
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_firebase_APIKey,
+  authDomain: import.meta.env.VITE_firebase_AuthDomain,
+  projectId: import.meta.env.VITE_firebase_ProjectId,
+  storageBucket: import.meta.env.VITE_firebase_StorageBucket,
+  messagingSenderId: import.meta.env.VITE_firebase_MessagingSenderId,
+  appId: import.meta.env.VITE_firebase_AppId,
+  measurementId: import.meta.env.VITE_firebase_MeasurementId
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

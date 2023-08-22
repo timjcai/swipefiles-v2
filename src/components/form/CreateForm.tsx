@@ -194,7 +194,7 @@ export const CreateForm: FC = () => {
                     </StyledCreateForm>
                 </Column1>
                 <Column2>
-                    <p></p>
+                    <p>{import.meta.env.VITE_SECRET}</p>
                     {payload && (
                         <Swipecard
                             key={payload.id}
