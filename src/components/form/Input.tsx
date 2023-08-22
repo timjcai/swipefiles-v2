@@ -151,6 +151,7 @@ export const SelectInput: FC<TextInputProps> = ({
     placeholder,
     changeFunction,
     key,
+    state,
 }) => {
     return (
         <StyledInputGroup key={key}>
@@ -161,6 +162,7 @@ export const SelectInput: FC<TextInputProps> = ({
                 list={data}
                 onChange={changeFunction}
                 color={"#212121"}
+                state={state}
             />
         </StyledInputGroup>
     );

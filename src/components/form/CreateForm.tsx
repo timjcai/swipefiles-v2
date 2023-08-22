@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { FieldTypes, ISwipeData } from "../../types";
+import { FieldTypes, ISwipeData, PlatformTypes } from "../../types";
 import { SelectInput, TextInput, TextLabelInput, TextareaInput } from "./Input";
 import { KeywordTagInput } from ".";
 import { Timestamp, collection, doc, setDoc } from "firebase/firestore";
@@ -52,6 +52,12 @@ export const CreateForm: FC = () => {
 
     const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
+    };
+
+    const handleSelectChange = (e) => {
+        const currentInput: keyof ISwipeData = "platform";
+        const value: PlatformTypes = e.target.id;
+        setPayload((prevState) => ({ ...prevState, [currentInput]: value }));
     };
 
     const handleHyperlinkChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -155,8 +161,9 @@ export const CreateForm: FC = () => {
                             placeholder={platform}
                             label={"Platform"}
                             cta={"Platform: "}
-                            changeFunction={handlePlatformChange}
+                            changeFunction={handleSelectChange}
                             data={ALL_PLATFORMS}
+                            state={payload.platform}
                         />
                         <KeywordTagInput
                             onArrayChange={handleKeywordTagChange}

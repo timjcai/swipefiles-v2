@@ -26,6 +26,7 @@ export const SelectPicker: FC<ISelectPicker> = ({
     list,
     color,
     onChange,
+    state,
 }) => {
     const [selectItem, setSelectItem] = useState(placeholder);
     const [isHidden, setIsHidden] = useState(true);
@@ -40,7 +41,8 @@ export const SelectPicker: FC<ISelectPicker> = ({
     const handleSelect = (e: MouseEvent) => {
         if (e.target !== null) {
             const value = e.target.id;
-            setSelectItem(value);
+            console.log(value);
+            // setSelectItem(value);
             onChange(e);
             setIsHidden(true);
         }
@@ -48,7 +50,6 @@ export const SelectPicker: FC<ISelectPicker> = ({
 
     // unable to implement a closepopup box - not sure how to implement this after 2-3 hours of work
 
-    useEffect(() => {}, [selectItem]);
     useEffect(() => {
         function closePopup(e: MouseEvent) {
             if (e.target !== selectorRef.current) {
@@ -78,18 +79,17 @@ export const SelectPicker: FC<ISelectPicker> = ({
                 ref={selectorRef}
                 onClick={handlePopup}
             >
-                <span id={label}>{selectItem}</span>
+                <span id={label}>{state}</span>
             </SelectButton>
             <PopupSelector
                 id="dropdownOptions"
                 role="listbox"
                 aria-label="Options"
                 label={label}
-                selected={selectItem}
+                selected={state}
                 list={list}
                 isHidden={isHidden}
                 handleSelect={handleSelect}
-                onChange={onChange}
             />
         </Selector>
     );
