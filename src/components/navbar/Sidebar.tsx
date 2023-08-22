@@ -82,7 +82,7 @@ export const NonsidebarWrapper = styled.div`
     // background: #ffffff;
     height: 100vh;
     width: 100vw;
-    padding-left: 96px;
+    padding-left: 64px;
 `;
 
 export const InAppWrapper = styled.div`

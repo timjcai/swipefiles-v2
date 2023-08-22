@@ -29,14 +29,6 @@ export const CreateForm: FC = () => {
         id: "",
     });
     // const [images, setImages] = useState<string[] | null>();
-
-    const [title, setTitle] = useState<string>("");
-    const [hyperlink, setHyperlink] = useState<string>("");
-    const [author, setAuthor] = useState<string>("");
-    const [notes, setNotes] = useState<string>("");
-    const [platform, setPlatform] = useState<string>("");
-
-    const [keywordTags, setKeywordTags] = useState<string[] | null>();
     const [keywordTagKey, setKeywordTagKey] = useState(1);
     const [platformKey, setPlatformKey] = useState(10000);
 
@@ -102,36 +94,28 @@ export const CreateForm: FC = () => {
         };
         console.log(currentPayload);
         resetForm();
-        // const createSwipe = async () => {
-        //     const newSwipesRef = doc(collection(db, "swipes"));
-        //     const docRef = await setDoc(newSwipesRef, currentPayload);
-        //     docRef;
-        // };
-        // createSwipe();
+        const createSwipe = async () => {
+            const newSwipesRef = doc(collection(db, "swipes"));
+            const docRef = await setDoc(newSwipesRef, currentPayload);
+            docRef;
+        };
+        createSwipe();
     };
 
     const resetForm = () => {
-        setTitle("");
-        setAuthor("");
-        setHyperlink("");
-        setKeywordTags([]);
-        setPlatform("");
-        setNotes("");
-        resetKeys();
+        setPayload({
+            author: "",
+            board_id: [],
+            images: [],
+            keyword_tags: [],
+            hyperlink: "",
+            notes: "",
+            platform: "",
+            title: "",
+            user_id: "",
+            id: "",
+        });
     };
-
-    // useEffect(() => {
-    //     const url = new URL(payload.hyperlink);
-    //     if (url) {
-    //         const newPlatform = extractAndFormatDomain(payload.hyperlink);
-    //         console.log(newPlatform);
-
-    //         setPayload((prevState) => ({
-    //             ...prevState,
-    //             [platform]: newPlatform,
-    //         }));
-    //     }
-    // }, [payload]);
 
     return (
         <>
@@ -160,12 +144,6 @@ export const CreateForm: FC = () => {
                             changeFunction={handleLabelChange}
                             state={payload.author}
                         />
-                        {/* <TextLabelInput
-                ref={platformRef}
-                placeholder={"Which platform?"}
-                label={"platform"}
-                cta={"Platform: "}
-            /> */}
                         <SelectInput
                             key={platformKey}
                             placeholder={platform}
@@ -187,14 +165,12 @@ export const CreateForm: FC = () => {
                             state={payload.notes}
                         />
                         <button type="submit">Create Swipe</button>
-                        {/* onclickAdd keywords - push value into keywords tag */}
 
                         {/* <p>images</p>
             <p>hidden: user_id, id, board_id</p> */}
                     </StyledCreateForm>
                 </Column1>
                 <Column2>
-                    <p>{import.meta.env.VITE_SECRET}</p>
                     {payload && (
                         <Swipecard
                             key={payload.id}

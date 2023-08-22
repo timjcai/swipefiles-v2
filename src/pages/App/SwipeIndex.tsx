@@ -61,8 +61,9 @@ export const SwipesIndex = () => {
 const SwipeGrid = styled.div`
     display: grid;
     row-gap: 20px;
-    column-gap: 12px;
-    grid-auto-rows: 300px;
+    column-gap: 10px;
+    grid-auto-rows: 310px;
+    margin-right: 10px;
     position: relative;
 
     @media ${deviceSize.xxl} {
@@ -78,9 +79,11 @@ const SwipeGrid = styled.div`
         grid-template-columns: repeat(2, auto);
     }
     @media ${deviceSize.sm} {
-        grid-template-columns: repeat(2, auto);
+        grid-template-columns: repeat(1, auto);
+        justify-content: center;
     }
     @media ${deviceSize.xs} {
         grid-template-columns: repeat(1, auto);
+        justify-content: center;
     }
 `;

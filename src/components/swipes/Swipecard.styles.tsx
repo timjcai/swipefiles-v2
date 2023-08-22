@@ -5,7 +5,7 @@ export const StyledSwipecard = styled.div`
     flex-direction: column;
     border: 1px solid #000000;
     border-radius: 16px;
-    min-width: 300px;
+    max-width: 300px;
     min-height: 300px;
     background: rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -29,8 +29,7 @@ export const TopRow = styled.div`
 
 export const KeywordWrapper = styled.div`
     padding: 0.25em 1.25em;
-    min-height: 1.4em;
-    max-height: 2.8em;
+    height: 2.8em;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -67,9 +66,12 @@ export const BottomRow = styled.div`
 `;
 
 export const SwipecardHeading = styled.h2`
+    display: flex;
     width: 230px;
-    font-size: 20px;
-    overflow: hidden;
-    padding: 0em 1em 0em 1em;
-    white-space: nowrap;
+    font-size: 1.4em;
+    height: 2.8em;
+    text-wrap: wrap;
+    text-overflow: ellipses;
+    padding: 0em 0em 0em 1em;
+    margin-top: 0px;
 `;
