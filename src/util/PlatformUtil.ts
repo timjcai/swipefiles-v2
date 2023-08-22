@@ -19,23 +19,25 @@ export const ALL_PLATFORMS = [
     "Website"
 ]
 
-const extractDomain = (url) => {
+const extractDomain = (url: string) => {
     const urlObj = new URL(url);
     const hostParts = urlObj.hostname.split('.')
     const domain = hostParts[hostParts.length - 2]
     return (domain)
 }
 
-function capitalizeFirstLetter(word) {
+function capitalizeFirstLetter(word: string) {
     return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 }
 
-function capsfirstandfourth(word) {
+function capsfirstandfourth(word: string) {
     return word.charAt(0).toUpperCase() + word.slice(1,3).toLowerCase() + word.charAt(3).toUpperCase() + word.slice(4).toLowerCase()
 }
 
-export const extractAndFormatDomain = (url) => {
-    const domain = extractDomain(url)
+export const extractAndFormatDomain = (url: string) => {
+  const urlObj = new URL(url);
+  const hostParts = urlObj.hostname.split('.')
+  const domain = hostParts[hostParts.length - 2]
     if (domain.toUpperCase() === "YOUTUBE" || domain.toUpperCase() === "TIKTOK" ) {
         return capsfirstandfourth(domain)
     } else {
@@ -43,23 +45,23 @@ export const extractAndFormatDomain = (url) => {
     }
 }
 
-export const extractYTTitle = (url) => {
-    fetch(url)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.text();
-  })
-  .then(html => {
-    const dom = new JSDOM(html);
-    const document = dom.window.document.head;
-    // Example: Extracting all links from the page
-    const links = document.querySelector('title').innerHTML;
-    console.log(links)
-  })
-  .catch(error => {
-    console.error('There was a problem with the fetch operation:', error);
-  });
+// export const extractYTTitle = (url: string) => {
+//     fetch(url)
+//   .then(response => {
+//     if (!response.ok) {
+//       throw new Error('Network response was not ok');
+//     }
+//     return response.text();
+//   })
+//   .then(html => {
+//     const dom = new JSDOM(html);
+//     const document = dom.window.document.head;
+//     // Example: Extracting all links from the page
+//     const links = document.querySelector('title').innerHTML;
+//     console.log(links)
+//   })
+//   .catch(error => {
+//     console.error('There was a problem with the fetch operation:', error);
+//   });
 
-}
+// }

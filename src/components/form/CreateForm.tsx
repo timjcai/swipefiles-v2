@@ -46,12 +46,10 @@ export const CreateForm: FC = () => {
 
     const handleLabelChange = (e) => {
         const currentInput: keyof ISwipeData = e.target.id;
+        console.log(currentInput);
         const value = e.target.value;
+        console.log(value);
         setPayload((prevState) => ({ ...prevState, [currentInput]: value }));
-    };
-
-    const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.target.value);
     };
 
     const handleSelectChange = (e) => {
@@ -60,28 +58,27 @@ export const CreateForm: FC = () => {
         setPayload((prevState) => ({ ...prevState, [currentInput]: value }));
     };
 
-    const handleHyperlinkChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const url = e.target.value;
-        setHyperlink(url);
-        const platform = extractAndFormatDomain(url);
-        setPlatform(platform);
-    };
+    // const handleHyperlinkChange = (e: ChangeEvent<HTMLInputElement>) => {
+    //     const url = e.target.value;
+    //     setPayload((prevState) => ({
+    //         ...prevState,
+    //         [hyperlink]: url,
+    //     }));
+    //     console.log(url);
+    //     const platform = extractAndFormatDomain(url);
 
-    const handleAuthorChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setAuthor(e.target.value);
-    };
-
-    const handleNotesChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setNotes(e.target.value);
-    };
-
-    const handlePlatformChange = (e) => {
-        console.log(e.target.id);
-        setPlatform(e.target.id);
-    };
+    //     setPayload((prevState) => ({
+    //         ...prevState,
+    //         [platform]: platform,
+    //     }));
+    // };
 
     const handleKeywordTagChange = (arrayList) => {
-        setKeywordTags(arrayList);
+        // setKeywordTags(arrayList);
+        setPayload((prevState) => ({
+            ...prevState,
+            ["keyword_tags"]: arrayList,
+        }));
     };
 
     const resetKeys = () => {
@@ -92,13 +89,13 @@ export const CreateForm: FC = () => {
     const handleSubmission = (e) => {
         e.preventDefault();
         const currentPayload = {
-            title: title,
-            author: author,
-            hyperlink: hyperlink,
+            title: payload.title,
+            author: payload.author,
+            hyperlink: payload.hyperlink,
             images: [],
-            keyword_tags: keywordTags,
-            notes: notes,
-            platform: platform,
+            keyword_tags: payload.keyword_tags,
+            notes: payload.notes,
+            platform: payload.platform,
             user_id: user?.uid,
             board_id: [],
             create_date: Timestamp.fromDate(new Date()),
@@ -122,6 +119,19 @@ export const CreateForm: FC = () => {
         setNotes("");
         resetKeys();
     };
+
+    // useEffect(() => {
+    //     const url = new URL(payload.hyperlink);
+    //     if (url) {
+    //         const newPlatform = extractAndFormatDomain(payload.hyperlink);
+    //         console.log(newPlatform);
+
+    //         setPayload((prevState) => ({
+    //             ...prevState,
+    //             [platform]: newPlatform,
+    //         }));
+    //     }
+    // }, [payload]);
 
     return (
         <>
@@ -184,6 +194,7 @@ export const CreateForm: FC = () => {
                     </StyledCreateForm>
                 </Column1>
                 <Column2>
+                    <p></p>
                     {payload && (
                         <Swipecard
                             key={payload.id}
