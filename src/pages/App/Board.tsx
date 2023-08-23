@@ -1,9 +1,38 @@
-import React from "react";
+import React, { FormEvent, useState } from "react";
 import styled from "styled-components";
 import { useMultistepForm } from "../../hooks/useMultistepForm";
 import { Hyperlink, IDdetails, Notes } from "../../components/multistep";
 
+type FormData = {
+    hyperlink: string;
+    title: string;
+    author: string;
+    platform: string;
+    keywords: string;
+    images: string;
+    boards: string;
+    notes: string;
+};
+
+const INITIAL_FORMSTATE: FormData = {
+    hyperlink: "",
+    title: "",
+    author: "",
+    platform: "",
+    keywords: "",
+    images: "",
+    boards: "",
+    notes: "",
+};
+
 export const Board = () => {
+    const [data, setData] = useState(INITIAL_FORMSTATE);
+
+    function updateFields(fields: Partial<FormData>) {
+        setData((prev) => {
+            return { ...prev, ...fields };
+        });
+    }
     const {
         steps,
         currentStepIndex,
@@ -12,13 +41,24 @@ export const Board = () => {
         back,
         next,
         step,
-    } = useMultistepForm([<Hyperlink />, <IDdetails />, <Notes />]);
+    } = useMultistepForm([
+        <Hyperlink {...data} updateFields={updateFields} />,
+        <IDdetails {...data} updateFields={updateFields} />,
+        <Notes {...data} updateFields={updateFields} />,
+    ]);
+
+    function submitHandler(e: FormEvent) {
+        e.preventDefault();
+        if (!isLastStep) return next();
+        console.log(data);
+        alert("successful account creation");
+    }
 
     return (
         <div>
             <h1>All Boards Page</h1>
             <FormContainer>
-                <form>
+                <form onSubmit={submitHandler}>
                     <StepContainer>
                         {currentStepIndex + 1}/{steps.length}
                     </StepContainer>
@@ -29,15 +69,9 @@ export const Board = () => {
                                 Back
                             </button>
                         )}
-                        {isLastStep ? (
-                            <button type="button" onClick={next}>
-                                Complete
-                            </button>
-                        ) : (
-                            <button type="button" onClick={next}>
-                                Next
-                            </button>
-                        )}
+                        <button type="submit" onClick={next}>
+                            {isLastStep ? "Complete" : "Next"}
+                        </button>
                     </ButtonContainer>
                 </form>
             </FormContainer>
@@ -52,7 +86,7 @@ const FormContainer = styled.div`
     padding: 2rem;
     margin: 1rem;
     border-radius: 0.5rem;
-    max-width: 500px;
+    max-width: max-content;
 `;
 
 const StepContainer = styled.div`
