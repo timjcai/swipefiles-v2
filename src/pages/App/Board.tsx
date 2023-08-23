@@ -4,11 +4,15 @@ import { useMultistepForm } from "../../hooks/useMultistepForm";
 import { Hyperlink, IDdetails, Notes } from "../../components/multistep";
 
 export const Board = () => {
-    const { steps, currentStepIndex } = useMultistepForm([
-        <Hyperlink />,
-        <IDdetails />,
-        <Notes />,
-    ]);
+    const {
+        steps,
+        currentStepIndex,
+        isFirstStep,
+        isLastStep,
+        back,
+        next,
+        step,
+    } = useMultistepForm([<Hyperlink />, <IDdetails />, <Notes />]);
 
     return (
         <div>
@@ -18,9 +22,22 @@ export const Board = () => {
                     <StepContainer>
                         {currentStepIndex + 1}/{steps.length}
                     </StepContainer>
+                    {step}
                     <ButtonContainer>
-                        <button>Back</button>
-                        <button>Next</button>
+                        {!isFirstStep && (
+                            <button type="button" onClick={back}>
+                                Back
+                            </button>
+                        )}
+                        {isLastStep ? (
+                            <button type="button" onClick={next}>
+                                Complete
+                            </button>
+                        ) : (
+                            <button type="button" onClick={next}>
+                                Next
+                            </button>
+                        )}
                     </ButtonContainer>
                 </form>
             </FormContainer>
@@ -35,6 +52,7 @@ const FormContainer = styled.div`
     padding: 2rem;
     margin: 1rem;
     border-radius: 0.5rem;
+    max-width: 500px;
 `;
 
 const StepContainer = styled.div`

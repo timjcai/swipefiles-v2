@@ -1,9 +1,11 @@
 import React from "react";
+import { FormWrapper } from ".";
 
 export const Hyperlink = () => {
     return (
-        <div>
-            <h1>Hyperlink</h1>
-        </div>
+        <FormWrapper title="Hyperlink">
+            <label htmlFor="hyperlink">Hyperlink</label>
+            <input autoFocus required type="text" id="hyperlink" />
+        </FormWrapper>
     );
 };
