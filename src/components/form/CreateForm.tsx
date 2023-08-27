@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import { ISwipeData, PlatformTypes } from "../../types";
 import { SelectInput, TextInput, TextareaInput } from "./Input";
@@ -6,8 +6,7 @@ import { KeywordTagInput } from ".";
 import { Timestamp, collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase-config";
 import { useAuth } from "../../hooks/useAuth";
-import { activate } from "firebase/remote-config";
-import { ALL_PLATFORMS, extractAndFormatDomain } from "../../util/PlatformUtil";
+import { ALL_PLATFORMS } from "../../util/PlatformUtil";
 import { Swipecard } from "../swipes/Swipecard";
 
 export const CreateForm: FC = () => {
@@ -25,12 +24,17 @@ export const CreateForm: FC = () => {
         id: "",
     });
     // const [images, setImages] = useState<string[] | null>();
-    const [keywordTagKey, setKeywordTagKey] = useState(1);
-    const [platformKey, setPlatformKey] = useState(10000);
-
     // const editInputValues = (e: ChangeEvent<HTMLInputElement>): void => {
     //     setCurrentKeyword(e.target.value);
     // };
+    const [currentKeyword, setCurrentKeyword] = useState<string>("");
+    const [submitDisabled, setSubmitDisabled] = useState<boolean>(true);
+
+    useEffect(() => {
+        if (payload.author) {
+            setSubmitDisabled(false);
+        }
+    }, [payload]);
 
     const handleLabelChange = (e) => {
         const currentInput: keyof ISwipeData = e.target.id;
@@ -44,6 +48,43 @@ export const CreateForm: FC = () => {
         const currentInput: keyof ISwipeData = "platform";
         const value: PlatformTypes = e.target.id;
         setPayload((prevState) => ({ ...prevState, [currentInput]: value }));
+    };
+
+    const deleteKeywordfromList = (e) => {
+        e.preventDefault();
+        const tag = e.target.id;
+        const currentTags = [...payload.keyword_tags];
+        const index = currentTags.indexOf(tag);
+        currentTags.splice(index, 1);
+        setPayload((prevState) => ({
+            ...prevState,
+            ["keyword_tags"]: currentTags,
+        }));
+    };
+
+    const addKeywordtoList = (keyword: string): void => {
+        console.log(keyword);
+        const keywordArray = payload.keyword_tags;
+
+        keywordArray.push(keyword);
+        setPayload((prevState) => ({
+            ...prevState,
+            ["keyword_tags"]: keywordArray,
+        }));
+        setCurrentKeyword("");
+        // if (Keyword.current) {
+        //     newArray = [...keywordTags, Keyword.current.value];
+        //     setKeywordTags([...keywordTags, Keyword.current.value]);
+        // } else {
+        //     console.log("error - keyword doesn't exist");
+        // }
+        // onArrayChange!(newArray);
+    };
+
+    const handleCurrentKeywordState = (e) => {
+        const value = e.target.value;
+        console.log(value);
+        setCurrentKeyword(value);
     };
 
     // const handleHyperlinkChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -61,18 +102,18 @@ export const CreateForm: FC = () => {
     //     }));
     // };
 
-    const handleKeywordTagChange = (arrayList) => {
-        // setKeywordTags(arrayList);
-        setPayload((prevState) => ({
-            ...prevState,
-            ["keyword_tags"]: arrayList,
-        }));
-    };
+    // const handleKeywordTagChange = (arrayList) => {
+    //     // setKeywordTags(arrayList);
+    //     // setPayload((prevState) => ({
+    //     //     ...prevState,
+    //     //     ["keyword_tags"]: arrayList,
+    //     // }));
+    // };
 
-    const resetKeys = () => {
-        setKeywordTagKey(Math.floor(Math.random() * 10) + 1);
-        setPlatformKey(Math.floor(Math.random() * 10) + 11);
-    };
+    // const resetKeys = () => {
+    //     setKeywordTagKey(Math.floor(Math.random() * 10) + 1);
+    //     setPlatformKey(Math.floor(Math.random() * 10) + 11);
+    // };
 
     const handleSubmission = (e) => {
         e.preventDefault();
@@ -141,17 +182,22 @@ export const CreateForm: FC = () => {
                             state={payload.author}
                         />
                         <SelectInput
-                            key={platformKey}
                             placeholder={payload.platform}
-                            label={"Platform"}
+                            label={"platform"}
                             cta={"Platform: "}
                             changeFunction={handleSelectChange}
                             data={ALL_PLATFORMS}
                             state={payload.platform}
                         />
                         <KeywordTagInput
-                            onArrayChange={handleKeywordTagChange}
-                            key={keywordTagKey}
+                            // onArrayChange={handleKeywordTagChange}
+                            tags={payload.keyword_tags}
+                            addKeywordTags={() =>
+                                addKeywordtoList(currentKeyword)
+                            }
+                            deleteTags={deleteKeywordfromList}
+                            handleKeywordState={handleCurrentKeywordState}
+                            state={currentKeyword}
                         />
                         {/* <ImageUploader /> */}
                         <TextareaInput
@@ -161,29 +207,30 @@ export const CreateForm: FC = () => {
                             changeFunction={handleLabelChange}
                             state={payload.notes}
                         />
-                        <button type="submit">Create Swipe</button>
+                        <button disabled={submitDisabled} type="submit">
+                            Create Swipe
+                        </button>
 
                         {/* <p>images</p>
             <p>hidden: user_id, id, board_id</p> */}
                     </StyledCreateForm>
                 </Column1>
                 <Column2>
-                    {payload && (
-                        <Swipecard
-                            swipedata={payload}
-                            // key={payload.id}
-                            // title={payload.title}
-                            // author={payload.author}
-                            // board_id={payload.board_id}
-                            // hyperlink={payload.hyperlink}
-                            // platform={payload.platform}
-                            // user_id={payload.user_id}
-                            // id={payload.id}
-                            // notes={payload.notes}
-                            // images={payload.images}
-                            // keyword_tags={payload.keyword_tags}
-                        />
-                    )}
+                    <Swipecard
+                        swipedata={payload}
+                        onDeleteCard={async () => {}}
+                        // key={payload.id}
+                        // title={payload.title}
+                        // author={payload.author}
+                        // board_id={payload.board_id}
+                        // hyperlink={payload.hyperlink}
+                        // platform={payload.platform}
+                        // user_id={payload.user_id}
+                        // id={payload.id}
+                        // notes={payload.notes}
+                        // images={payload.images}
+                        // keyword_tags={payload.keyword_tags}
+                    />
                 </Column2>
             </ColumnContainer>
         </>

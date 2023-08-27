@@ -1,53 +1,38 @@
-import React, { ChangeEvent, FC, MouseEvent, useRef, useState } from "react";
-import { TextLabelInput } from "../Input";
-import styled from "styled-components";
+import React, { FC, MouseEvent, useState } from "react";
+import { TextInput } from "../Input";
 import { KeywordTag } from ".";
 
 type KeywordTagInputProps = {
-    onArrayChange?: (newArray: string[] | undefined) => void;
-    key: number;
+    // onArrayChange?: (newArray?: string[]) => void;
+    tags: string[];
+    deleteTags: (e: MouseEvent) => void;
+    addKeywordTags: (keyword: string) => void;
+    handleKeywordState: (e) => void;
+    state: string;
 };
 
 export const KeywordTagInput: FC<KeywordTagInputProps> = ({
-    onArrayChange,
-    key,
+    tags,
+    deleteTags,
+    addKeywordTags,
+    handleKeywordState,
+    state,
 }) => {
-    const [keywordTags, setKeywordTags] = useState<string[] | []>([]);
-    const Keyword = useRef<HTMLInputElement | null>(null);
-
-    const handleRemoveClick = (e) => {
-        const removeValue = e.target.dataset.label;
-        const currentArray = [...keywordTags];
-        const index = currentArray.indexOf(removeValue);
-        currentArray.splice(index, 1);
-        setKeywordTags(currentArray);
-        onArrayChange!(currentArray);
-    };
-
-    const addKeywords = (e: MouseEvent<HTMLButtonElement>): void => {
-        e.preventDefault();
-        let newArray;
-        if (Keyword.current) {
-            newArray = [...keywordTags, Keyword.current.value];
-            setKeywordTags([...keywordTags, Keyword.current.value]);
-        } else {
-            console.log("error - keyword doesn't exist");
-        }
-        onArrayChange!(newArray);
-    };
-
     return (
-        <div key={key}>
-            <TextLabelInput
-                ref={Keyword}
+        <div>
+            <TextInput
                 placeholder={"Add keywords"}
                 label={"keyword_tags"}
                 cta={"Keywords: "}
+                changeFunction={handleKeywordState}
+                state={state}
             />
             <br />
-            <button onClick={addKeywords}>Add Keywords</button>
+            <button type="button" onClick={addKeywordTags}>
+                Add Keywords
+            </button>
             <p>keyword tags</p>
-            {keywordTags.map((words) => {
+            {tags.map((words) => {
                 return (
                     <KeywordTag
                         id={words}
@@ -55,7 +40,7 @@ export const KeywordTagInput: FC<KeywordTagInputProps> = ({
                         color={"#FFFFFF"}
                         tag={words}
                         editable={true}
-                        onXClick={handleRemoveClick}
+                        onXClick={deleteTags}
                     />
                 );
             })}

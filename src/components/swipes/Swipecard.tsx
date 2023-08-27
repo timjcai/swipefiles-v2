@@ -18,18 +18,13 @@ import { KeywordTag } from "../form";
 import { Icon } from "../common/Icon";
 import { RoundButton } from "../common/Button";
 import { Link } from "react-router-dom";
-import { deleteDoc, doc } from "firebase/firestore";
-import { db } from "../../../firebase-config";
 
 type SwipecardProps = {
     swipedata: ISwipeData;
-    handleParentChange: () => void;
+    onDeleteCard: (id: string) => Promise<void>;
 };
 
-export const Swipecard: FC<SwipecardProps> = ({
-    swipedata,
-    handleParentChange,
-}) => {
+export const Swipecard: FC<SwipecardProps> = ({ swipedata, onDeleteCard }) => {
     const {
         author,
         images,
@@ -46,14 +41,6 @@ export const Swipecard: FC<SwipecardProps> = ({
     const numbBoards = board_id.length;
     const numbImages = images.length;
 
-    const deleteCard = (e: MouseEvent) => {
-        e.preventDefault();
-        const docRef = doc(db, "swipes", id);
-        deleteDoc(docRef);
-        handleParentChange();
-        console.log(`deleting card: ${id}`);
-    };
-
     return (
         <StyledSwipecard key={id}>
             <Link to={`/swipes/${id}`}>
@@ -62,13 +49,13 @@ export const Swipecard: FC<SwipecardProps> = ({
                         {platform !== "" && <ColorBrandIcon label={platform} />}
                         {author !== "" && <Badge>@ {author}</Badge>}
                     </TopRow>
-                    <SwipecardHeading key={title}>{title}</SwipecardHeading>
+                    <SwipecardHeading>{title}</SwipecardHeading>
                     <KeywordWrapper>
                         {keyword_tags &&
-                            keyword_tags.map((words) => {
+                            keyword_tags.map((words, i) => {
                                 return (
                                     <KeywordTag
-                                        key={generateRandomString(10)}
+                                        key={i}
                                         bgcolor={"#009956"}
                                         color={"#ffffff"}
                                         tag={words}
@@ -80,7 +67,6 @@ export const Swipecard: FC<SwipecardProps> = ({
                         <HighlightGroup>
                             <p>Boards?: </p>
                             <KeywordTag
-                                key={generateRandomString(10)}
                                 bgcolor={"#F6635C"}
                                 color={"#ffffff"}
                                 tag={numbBoards}
@@ -89,7 +75,6 @@ export const Swipecard: FC<SwipecardProps> = ({
                         <HighlightGroup>
                             <p>Images:</p>
                             <KeywordTag
-                                key={generateRandomString(10)}
                                 bgcolor={"#C23373"}
                                 color={"#ffffff"}
                                 tag={numbImages}
@@ -121,7 +106,10 @@ export const Swipecard: FC<SwipecardProps> = ({
                         backgroundColor="#C70039"
                         color="#ffffff"
                         url={hyperlink}
-                        onClick={deleteCard}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            onDeleteCard(id);
+                        }}
                     />
                 </BottomRow>
             </Link>

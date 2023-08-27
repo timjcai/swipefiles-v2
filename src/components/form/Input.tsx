@@ -150,11 +150,10 @@ export const SelectInput: FC<TextInputProps> = ({
     data,
     placeholder,
     changeFunction,
-    key,
     state,
 }) => {
     return (
-        <StyledInputGroup key={key}>
+        <StyledInputGroup>
             <label htmlFor={label}>{cta}</label>
             <SelectPicker
                 label={label}

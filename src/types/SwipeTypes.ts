@@ -2,8 +2,8 @@ export interface ISwipeData {
     author: string;
     board_id: string[];
     hyperlink: string;
-    images: string[] | [];
-    keyword_tags: string[] | [];
+    images: string[];
+    keyword_tags: string[];
     notes: string;
     platform: PlatformTypes | "";
     title: string;

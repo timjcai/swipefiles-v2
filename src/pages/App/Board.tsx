@@ -26,7 +26,7 @@ const INITIAL_FORMSTATE: FormData = {
 };
 
 export const Board = () => {
-    const [data, setData] = useState(INITIAL_FORMSTATE);
+    const [data, setData] = useState<FormData>(INITIAL_FORMSTATE);
 
     function updateFields(fields: Partial<FormData>) {
         setData((prev) => {

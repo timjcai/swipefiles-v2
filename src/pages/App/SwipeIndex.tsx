@@ -18,42 +18,42 @@ import { deviceSize } from "../../util";
 export const SwipesIndex = () => {
     const [swipes, setSwipes] = useState([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const [gridKey, setGridKey] = useState<number>(1);
     const user = useAuth();
     const swipeCollection = collection(db, "swipes");
 
-    useEffect(() => {
+    const getAllSwipes = async (user) => {
         const userQuery = query(
             swipeCollection,
             where("user_id", "==", `${user.uid}`)
         );
 
-        const getSwipes = async () => {
-            const data = await getDocs(userQuery);
-            setSwipes(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-            setLoading(false);
-        };
         setLoading(true);
-        getSwipes();
-    }, [gridKey]);
+        const data = await getDocs(userQuery);
+        setSwipes(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        setLoading(false);
+    };
 
-    const randomGridKey = () => {
-        let count = gridKey;
-        count += 1;
-        console.log(count);
-        setGridKey(count);
+    useEffect(() => {
+        getAllSwipes(user);
+    }, [user]);
+
+    const deleteCard = async (id: string) => {
+        const docRef = doc(db, "swipes", id);
+        await deleteDoc(docRef);
+        await getAllSwipes(user);
+        console.log(`deleting card: ${id}`);
     };
 
     return (
         <div>
             <h1>Swipes Index</h1>
-            <SwipeGrid key={gridKey}>
+            <SwipeGrid>
                 {!loading &&
                     swipes.map((swipe: ISwipeData) => {
                         return (
                             <Swipecard
                                 swipedata={swipe}
-                                handleParentChange={randomGridKey}
+                                onDeleteCard={deleteCard}
                                 // key={swipe.id}
                                 // title={swipe.title}
                                 // author={swipe.author}
