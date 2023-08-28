@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Selector = styled.div`
-    margin-right: 1em;
+    margin-right: 0;
 `;
 
 export const SelectButton = styled.button`
@@ -10,7 +10,8 @@ export const SelectButton = styled.button`
     border-radius: 4px;
     width: fit-content;
     text-align: left;
-    width: 128px;
+    width: 100%;
+    // width: 128px;
     min-width: 47px;
     color: white;
     &: hover {

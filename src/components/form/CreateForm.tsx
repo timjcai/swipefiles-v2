@@ -8,6 +8,7 @@ import { db } from "../../../firebase-config";
 import { useAuth } from "../../hooks/useAuth";
 import { ALL_PLATFORMS } from "../../util/PlatformUtil";
 import { Swipecard } from "../swipes/Swipecard";
+import { Column1, Column2, ColumnContainer, StyledCreateForm } from "../common";
 
 export const CreateForm: FC = () => {
     const user = useAuth();
@@ -236,28 +237,3 @@ export const CreateForm: FC = () => {
         </>
     );
 };
-
-const StyledCreateForm = styled.form`
-    display: flex;
-    flex-direction: column;
-    font-size: 16px;
-`;
-
-const ColumnContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-`;
-
-const Column1 = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-`;
-
-const Column2 = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-`;

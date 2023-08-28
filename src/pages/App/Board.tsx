@@ -2,37 +2,56 @@ import React, { FormEvent, useState } from "react";
 import styled from "styled-components";
 import { useMultistepForm } from "../../hooks/useMultistepForm";
 import { Hyperlink, IDdetails, Notes } from "../../components/multistep";
+import {
+    Column1,
+    Column2,
+    ColumnContainer,
+    StyledCreateForm,
+} from "../../components/common";
+import { Swipecard } from "../../components/swipes/Swipecard";
+import { ISwipeData, PlatformTypes } from "../../types";
 
 type FormData = {
     hyperlink: string;
     title: string;
     author: string;
     platform: string;
-    keywords: string;
-    images: string;
-    boards: string;
+    images: string[];
+    board_id: string[];
     notes: string;
+    keyword_tags: string[];
+    user_id: string;
+    id: string;
 };
 
-const INITIAL_FORMSTATE: FormData = {
-    hyperlink: "",
-    title: "",
+const INITIAL_FORMSTATE: ISwipeData = {
     author: "",
-    platform: "",
-    keywords: "",
-    images: "",
-    boards: "",
+    board_id: [],
+    images: [],
+    keyword_tags: [],
+    hyperlink: "",
     notes: "",
+    platform: "",
+    title: "",
+    user_id: "",
+    id: "",
 };
 
 export const Board = () => {
-    const [data, setData] = useState<FormData>(INITIAL_FORMSTATE);
+    const [data, setData] = useState<ISwipeData>(INITIAL_FORMSTATE);
 
-    function updateFields(fields: Partial<FormData>) {
+    function updateFields(fields: Partial<ISwipeData>) {
         setData((prev) => {
             return { ...prev, ...fields };
         });
     }
+
+    function handleSelectChange(e) {
+        const currentInput: keyof ISwipeData = "platform";
+        const value: PlatformTypes = e.target.id;
+        setData((prevState) => ({ ...prevState, [currentInput]: value }));
+    }
+
     const {
         steps,
         currentStepIndex,
@@ -43,7 +62,11 @@ export const Board = () => {
         step,
     } = useMultistepForm([
         <Hyperlink {...data} updateFields={updateFields} />,
-        <IDdetails {...data} updateFields={updateFields} />,
+        <IDdetails
+            {...data}
+            updateFields={updateFields}
+            handleSelectChange={handleSelectChange}
+        />,
         <Notes {...data} updateFields={updateFields} />,
     ]);
 
@@ -57,24 +80,45 @@ export const Board = () => {
     return (
         <div>
             <h1>All Boards Page</h1>
-            <FormContainer>
-                <form onSubmit={submitHandler}>
-                    <StepContainer>
-                        {currentStepIndex + 1}/{steps.length}
-                    </StepContainer>
-                    {step}
-                    <ButtonContainer>
-                        {!isFirstStep && (
-                            <button type="button" onClick={back}>
-                                Back
-                            </button>
-                        )}
-                        <button type="submit" onClick={next}>
-                            {isLastStep ? "Complete" : "Next"}
-                        </button>
-                    </ButtonContainer>
-                </form>
-            </FormContainer>
+            <ColumnContainer>
+                <Column1>
+                    <FormContainer>
+                        <form onSubmit={submitHandler}>
+                            <StepContainer>
+                                {currentStepIndex + 1}/{steps.length}
+                            </StepContainer>
+                            {step}
+                            <ButtonContainer>
+                                {!isFirstStep && (
+                                    <button type="button" onClick={back}>
+                                        Back
+                                    </button>
+                                )}
+                                <button type="submit" onClick={next}>
+                                    {isLastStep ? "Complete" : "Next"}
+                                </button>
+                            </ButtonContainer>
+                        </form>
+                    </FormContainer>
+                </Column1>
+                <Column2>
+                    <Swipecard
+                        swipedata={data}
+                        onDeleteCard={async () => {}}
+                        // key={payload.id}
+                        // title={payload.title}
+                        // author={payload.author}
+                        // board_id={payload.board_id}
+                        // hyperlink={payload.hyperlink}
+                        // platform={payload.platform}
+                        // user_id={payload.user_id}
+                        // id={payload.id}
+                        // notes={payload.notes}
+                        // images={payload.images}
+                        // keyword_tags={payload.keyword_tags}
+                    />
+                </Column2>
+            </ColumnContainer>
         </div>
     );
 };
