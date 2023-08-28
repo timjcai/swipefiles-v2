@@ -38,9 +38,8 @@ export const LandingPage = () => {
                     <ColumnTextLeft>
                         <Badge className="badge">Desktop Only</Badge>
                         <div className="valueprop">
-                            <LPHeading1>
-                                Capture Swipefiles, Flexibly Sort
-                            </LPHeading1>
+                            <LPHeading1>Curate, Compile, Reshare</LPHeading1>
+                            <p>Collect content from anywhere on the Internet</p>
                         </div>
                         <div className="actions">
                             <button className="Sign Up">Sign Up</button>
@@ -66,12 +65,11 @@ export const LandingPage = () => {
             <StyledSection>
                 <TwoColumn>
                     <ColumnTextLeft>
-                        <LPHeading2>Feature 1</LPHeading2>
+                        <LPHeading2>Save links</LPHeading2>
                         <LPParagraph>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing
-                            elit. Accusantium commodi modi earum magnam
-                            aspernatur rerum mollitia, ducimus perspiciatis, hic
-                            omnis, nulla quaerat eos?
+                            Save links from blogs, TikTok videos, Instagram
+                            posts, reddit threads and more within 3 seconds from
+                            any device.
                         </LPParagraph>
                         <Badge>Hello</Badge>
                         <SectionQuote
@@ -92,12 +90,11 @@ export const LandingPage = () => {
                     </div>
                     <ColumnTextRight>
                         {" "}
-                        <LPHeading2>Feature 1</LPHeading2>
+                        <LPHeading2>Search your database</LPHeading2>
                         <LPParagraph>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing
-                            elit. Accusantium commodi modi earum magnam
-                            aspernatur rerum mollitia, ducimus perspiciatis, hic
-                            omnis, nulla quaerat eos?
+                            Say goodbye to folders, and hello to smart tagging
+                            and searching. Organising and saving interesting
+                            links should be easy
                         </LPParagraph>
                         <Badge>Hello</Badge>
                         <SectionQuote
@@ -111,12 +108,12 @@ export const LandingPage = () => {
             <StyledSection>
                 <TwoColumn>
                     <ColumnTextLeft>
-                        <LPHeading2>Feature 1</LPHeading2>
+                        <LPHeading2>Create boards, tags and lists</LPHeading2>
                         <LPParagraph>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing
-                            elit. Accusantium commodi modi earum magnam
-                            aspernatur rerum mollitia, ducimus perspiciatis, hic
-                            omnis, nulla quaerat eos?
+                            Organise your swipes at a later date, add tags, add
+                            notes, compile them into lists and boards.
+                            Swipefiles is the number #1 tool for curating
+                            content on the internet.
                         </LPParagraph>
                         <Badge>Hello</Badge>
                         <SectionQuote
