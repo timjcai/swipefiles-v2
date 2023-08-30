@@ -55,3 +55,4 @@ export type NavigationTypes =
     | "Settings" 
     | "Boards" 
     | "Create"
+    | "Tags"

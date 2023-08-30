@@ -8,7 +8,8 @@ import { ThemeButton } from "../../context";
 export const Sidebar = () => {
     const [selected, setSelected] = useState(null);
 
-    const handleClick = (e) => {
+    const handleClick = (e: MouseEvent) => {
+        console.log(e.target.id);
         setSelected(e.target.id);
     };
 
@@ -44,6 +45,13 @@ export const Sidebar = () => {
                         <Link to="/boards">
                             <SidenavButton
                                 label="Boards"
+                                selected={selected}
+                                onClick={handleClick}
+                            />
+                        </Link>
+                        <Link to="/tags">
+                            <SidenavButton
+                                label="Tags"
                                 selected={selected}
                                 onClick={handleClick}
                             />
@@ -123,7 +131,10 @@ const IconSpacer = styled.div`
     align-items: center;
     gap: 8px;
     cursor: pointer;
-    justify-content: center;
+    justify-content: space-between;
+    width: 20px;
+    height: 20px;
+    margin: 4px 10px 4px 10px;
 `;
 
 const Selected = styled.div`
@@ -142,7 +153,7 @@ const Selected = styled.div`
 type SidenavButtonProps = {
     label: NavigationTypes;
     selected: NavigationTypes | null;
-    onClick?: (e: Event) => void;
+    onClick?: (e: MouseEvent) => void;
 };
 
 export const SidenavButton: FC<SidenavButtonProps> = ({
@@ -158,13 +169,13 @@ export const SidenavButton: FC<SidenavButtonProps> = ({
                 <IconSpacer id={label} onClick={onClick}>
                     <Selected>
                         <Icon label={label} />
-                        {label}
+                        <p>{label}</p>
                     </Selected>
                 </IconSpacer>
             ) : (
                 <IconSpacer id={label} onClick={onClick}>
                     <Icon label={label} />
-                    {label}
+                    <p>{label}</p>
                 </IconSpacer>
             )}
         </>

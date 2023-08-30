@@ -94,6 +94,7 @@ const iconMapping: {
     Swipes: faPaperPlane,
     Settings: faCog,
     Boards: faLayerGroup,
+    Tags: faTag,
     Create: faSquarePlus,
     Share: faShare,
     Delete: faTrash,
