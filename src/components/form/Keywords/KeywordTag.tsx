@@ -8,7 +8,7 @@ type KeywordTagProps = {
     bgcolor?: string;
     color?: string;
     editable?: boolean;
-    onXClick: (e) => void;
+    onXClick?: (e) => void;
 };
 
 export const KeywordTag: FC<KeywordTagProps> = ({
@@ -16,16 +16,18 @@ export const KeywordTag: FC<KeywordTagProps> = ({
     id,
     bgcolor,
     color,
-    editable,
+    editable = false,
     onXClick = () => {},
 }) => {
     return (
         <>
             <TagStyle role="button" bgcolor={bgcolor} color={color} id={id}>
                 <p>{tag}</p>
-                <TagButtonWrapper onClick={onXClick} data-label={id}>
-                    {editable && <Icon label="Remove" data-label={id} />}
-                </TagButtonWrapper>
+                {editable && (
+                    <TagButtonWrapper onClick={onXClick} data-label={id}>
+                        {editable && <Icon label="Remove" data-label={id} />}
+                    </TagButtonWrapper>
+                )}
             </TagStyle>
         </>
     );
