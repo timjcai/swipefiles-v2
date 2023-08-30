@@ -22,7 +22,6 @@ export const SingleSwipe: FC = () => {
 
         const getSwipedata = async () => {
             const data = await getDocs(userQuery);
-            console.log(data);
             data.docs.map((doc) => setSwipedata({ ...doc.data(), id: id }));
             // setSwipedata(
             //     data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))

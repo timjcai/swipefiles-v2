@@ -7,7 +7,6 @@ import {
     FAQ,
     Pricing,
     LandingPage,
-    Board,
     Create,
     Dashboard,
     Settings,
@@ -65,7 +64,7 @@ export const App = () => {
                                 path="/boards"
                                 element={
                                     <ProtectedRoute>
-                                        <Board />
+                                        <h1>hi</h1>
                                     </ProtectedRoute>
                                 }
                             />

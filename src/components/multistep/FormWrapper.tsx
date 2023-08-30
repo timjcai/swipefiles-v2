@@ -27,3 +27,12 @@ const ChildrenWrapper = styled.div`
     justify-content: flex-start;
     grid-template-columns: auto minmax(auto, 400px);
 `;
+
+export const KWFormWrapper: FC<FormWrapperProps> = ({ title, children }) => {
+    return (
+        <>
+            <Heading>{title}</Heading>
+            <>{children}</>
+        </>
+    );
+};

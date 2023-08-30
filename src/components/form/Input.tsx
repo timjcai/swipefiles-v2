@@ -19,7 +19,7 @@ export const TextLabelInput: FC<InputProps> = forwardRef(
         };
 
         return (
-            <StyledInputGroup>
+            <StyledInputGroupRow>
                 <label htmlFor={label}>
                     <Icon label={label} />
                     {cta}
@@ -33,7 +33,7 @@ export const TextLabelInput: FC<InputProps> = forwardRef(
                     value={inputValue}
                     onChange={changeValue}
                 />
-            </StyledInputGroup>
+            </StyledInputGroupRow>
         );
     }
 );
@@ -56,7 +56,7 @@ export const TextInput: FC<TextInputProps> = ({
     state,
 }) => {
     return (
-        <StyledInputGroup>
+        <StyledInputGroupRow>
             <label htmlFor={label}>
                 <Icon label={label} />
                 {cta}
@@ -69,7 +69,32 @@ export const TextInput: FC<TextInputProps> = ({
                 value={state}
                 onChange={changeFunction}
             />
-        </StyledInputGroup>
+        </StyledInputGroupRow>
+    );
+};
+
+export const TextInputCol: FC<TextInputProps> = ({
+    placeholder,
+    label,
+    cta,
+    changeFunction,
+    state,
+}) => {
+    return (
+        <StyledInputGroupCol>
+            <label htmlFor={label}>
+                <Icon label={label} />
+                {cta}
+            </label>
+            <input
+                type="text"
+                id={label}
+                name={label}
+                placeholder={placeholder}
+                value={state}
+                onChange={changeFunction}
+            />
+        </StyledInputGroupCol>
     );
 };
 
@@ -81,7 +106,7 @@ export const TextareaInput: FC<TextInputProps> = ({
     state,
 }) => {
     return (
-        <StyledInputGroup>
+        <StyledInputGroupRow>
             <label htmlFor={label}>
                 <Icon label={label} />
                 {cta}
@@ -96,11 +121,11 @@ export const TextareaInput: FC<TextInputProps> = ({
                 value={state}
                 onChange={changeFunction}
             />
-        </StyledInputGroup>
+        </StyledInputGroupRow>
     );
 };
 
-const StyledTextarea = styled.textarea`
+export const StyledTextarea = styled.textarea`
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-size: 14px;
     outline: none;
@@ -110,7 +135,7 @@ const StyledTextarea = styled.textarea`
 // not used anywhere
 export const IconLabelInput: FC<InputProps> = ({ placeholder, label }) => {
     return (
-        <StyledInputGroup>
+        <StyledInputGroupRow>
             <label htmlFor={label}>
                 <Icon label={label} />
             </label>
@@ -120,13 +145,13 @@ export const IconLabelInput: FC<InputProps> = ({ placeholder, label }) => {
                 name={label}
                 placeholder={placeholder}
             />
-        </StyledInputGroup>
+        </StyledInputGroupRow>
     );
 };
 
 export const ImageInput: FC<InputProps> = ({ label, cta }) => {
     return (
-        <StyledInputGroup>
+        <StyledInputGroupRow>
             <label htmlFor={label}>{cta}</label>
             <input
                 type="file"
@@ -135,13 +160,18 @@ export const ImageInput: FC<InputProps> = ({ label, cta }) => {
                 multiple
                 accept="image/*"
             />
-        </StyledInputGroup>
+        </StyledInputGroupRow>
     );
 };
 
-const StyledInputGroup = styled.div`
+const StyledInputGroupRow = styled.div`
     display: flex;
     flex-direction: row;
+`;
+
+const StyledInputGroupCol = styled.div`
+    display: flex;
+    flex-direction: column;
 `;
 
 export const SelectInput: FC<TextInputProps> = ({
@@ -153,7 +183,7 @@ export const SelectInput: FC<TextInputProps> = ({
     state,
 }) => {
     return (
-        <StyledInputGroup>
+        <StyledInputGroupRow>
             <label htmlFor={label}>{cta}</label>
             <SelectPicker
                 label={label}
@@ -163,6 +193,6 @@ export const SelectInput: FC<TextInputProps> = ({
                 color={"#212121"}
                 state={state}
             />
-        </StyledInputGroup>
+        </StyledInputGroupRow>
     );
 };

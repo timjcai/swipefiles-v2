@@ -1,5 +1,5 @@
-export * from './Board'
 export * from './Create'
+export * from './what'
 export * from './Dashboard'
 export * from './Settings'
 export * from './SwipeIndex'

@@ -1,5 +1,6 @@
 import React, { FC, MouseEvent, useState } from "react";
-import { TextInput } from "../Input";
+import styled from "styled-components";
+import { TextInput, TextInputCol } from "../Input";
 import { KeywordTag } from ".";
 
 type KeywordTagInputProps = {
@@ -19,8 +20,8 @@ export const KeywordTagInput: FC<KeywordTagInputProps> = ({
     state,
 }) => {
     return (
-        <div>
-            <TextInput
+        <KWWrapper>
+            <TextInputCol
                 placeholder={"Add keywords"}
                 label={"keyword_tags"}
                 cta={"Keywords: "}
@@ -28,22 +29,35 @@ export const KeywordTagInput: FC<KeywordTagInputProps> = ({
                 state={state}
             />
             <br />
-            <button type="button" onClick={addKeywordTags}>
+            <button
+                type="button"
+                onClick={addKeywordTags}
+                style={{ width: "150px", alignSelf: "center" }}
+            >
                 Add Keywords
             </button>
-            <p>keyword tags</p>
-            {tags.map((words) => {
-                return (
-                    <KeywordTag
-                        id={words}
-                        bgcolor={"rgb(28, 56, 41)"}
-                        color={"#FFFFFF"}
-                        tag={words}
-                        editable={true}
-                        onXClick={deleteTags}
-                    />
-                );
-            })}
-        </div>
+            <div>
+                <p>keyword tags</p>
+                {tags.map((words) => {
+                    return (
+                        <KeywordTag
+                            id={words}
+                            bgcolor={"rgb(28, 56, 41)"}
+                            color={"#FFFFFF"}
+                            tag={words}
+                            editable={true}
+                            onXClick={deleteTags}
+                        />
+                    );
+                })}
+            </div>{" "}
+        </KWWrapper>
     );
 };
+
+const KWWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 460px;
+`;
