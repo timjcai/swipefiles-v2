@@ -17,7 +17,7 @@ export const KeywordTag: FC<KeywordTagProps> = ({
     bgcolor,
     color,
     editable,
-    onXClick,
+    onXClick = () => {},
 }) => {
     return (
         <>
@@ -56,7 +56,3 @@ const TagStyle = styled.div<TagStyleProps>`
 `;
 
 const TagButtonWrapper = styled.div``;
-
-const TagText = styled.p`
-    pointer-events: none;
-`;

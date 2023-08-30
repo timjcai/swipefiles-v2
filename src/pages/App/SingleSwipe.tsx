@@ -1,10 +1,11 @@
 import React, { FC, useEffect, useState } from "react";
 import { ISwipeData } from "../../types";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../../firebase-config";
 import { useAuth } from "../../hooks/useAuth";
 import { Loading } from "./Loading";
+import { SwipePage } from "../../components/swipes";
 
 export const SingleSwipe: FC = () => {
     const [swipedata, setSwipedata] = useState<ISwipeData | null>(null);
@@ -34,17 +35,7 @@ export const SingleSwipe: FC = () => {
 
     return (
         <div>
-            {!loading && (
-                <>
-                    <h2>{id}</h2>
-                    <h1>{swipedata.title}</h1>
-                    <p>{swipedata.user_id}</p>
-                    <p>{swipedata.author}</p>
-                    <p>{swipedata.hyperlink}</p>
-                    <p>{swipedata.platform}</p>
-                    <p>{swipedata.notes}</p>
-                </>
-            )}
+            {!loading && <SwipePage swipedata={swipedata} />}
             {loading && <Loading />}
         </div>
     );

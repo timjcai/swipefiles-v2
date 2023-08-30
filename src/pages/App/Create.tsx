@@ -91,21 +91,16 @@ export const Create: FC = () => {
         setCurrentKeyword("");
     }
 
-    function resetKeywords() {
-        setCurrentKeyword("");
-        setData((prevState) => ({
-            ...prevState,
-            ["keyword_tags"]: [],
-        }));
-    }
-
     function handleCurrentKeywordState(e) {
         const value = e.target.value;
         setCurrentKeyword(value);
     }
 
     function resetForm() {
-        setData(INITIAL_FORMSTATE);
+        const newForm = { ...INITIAL_FORMSTATE };
+        // newForm["keyword_tags"] = [];
+        console.log(newForm);
+        setData(newForm);
     }
 
     function submitHandler(e) {
@@ -118,7 +113,6 @@ export const Create: FC = () => {
         };
         createSwipe(payload);
         resetForm();
-        resetKeywords();
         goTo(0);
     }
 

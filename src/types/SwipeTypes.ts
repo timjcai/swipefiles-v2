@@ -10,6 +10,7 @@ export interface ISwipeData {
     user_id: string;
     id: string;
     create_date?: Date;
+    last_update?: Date;
 }
 
 export type PlatformTypes =
@@ -36,6 +37,7 @@ export type ActionTypes =
     | "Play"
     | "Stop"
     | "Next"
+    | "Back"
     | "Skip"
     | "Share"
     | "Delete"
@@ -45,6 +47,7 @@ export type ActionTypes =
     | "Remove"
     | "Upload"
     | "Download"
+    | "Back"
 
 export type NavigationTypes = 
     | "Home" 
