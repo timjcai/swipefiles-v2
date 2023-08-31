@@ -48,6 +48,7 @@ export type ActionTypes =
     | "Upload"
     | "Download"
     | "Back"
+    | "Square"
 
 export type NavigationTypes = 
     | "Home" 

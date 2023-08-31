@@ -16,6 +16,27 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
+
+    --default-Maroon: "rgb(128, 0, 0)";
+    --default-Red: "rgb(230, 25, 75)";
+    --default-Pink: "rgb(250, 190, 212)";
+    --default-Brown: "rgb(154, 99, 36)";
+    --default-Orange: "rgb(245, 130, 49)";
+    --default-Apricot: "rgb(252, 187, 122)";
+    --default-Olive: "rgb(128, 128, 0)";
+    --default-Yellow: "rgb(255, 229, 0, 0.83)";
+    --default-Beige: "rgb(203, 177, 100)";
+    --default-Lime: "rgb(191, 239, 69)";
+    --default-Green: "rgb(60, 180, 75)";
+    --default-Mint: "rgb(170, 255, 195)";
+    --default-Teal: "rgb(70, 153, 144)";
+    --default-Cyan: "rgb(66, 212, 244)";
+    --default-Navy: "rgb(67, 99, 216)";
+    --default-Blue: "rgb(145, 194, 247)";
+    --default-Purple: "rgb(145, 30, 180)";
+    --default-Lavender: "rgb(213, 177, 255)";
+    --default-Magenta: "rgb(240, 50, 230)";
+    --default-Grey: "rgb(169, 169, 169)";
 }
 
 p {
@@ -132,4 +153,86 @@ button:focus-visible {
 
 .white {
     color: #ffffff;
+}
+
+/* colors */
+
+.maroon {
+    color: var(--default-Maroon);
+}
+
+.red {
+    color: var(--default-Red);
+}
+
+.pink {
+    color: var(--default-Pink);
+}
+
+.brown {
+    color: var(--default-Brown);
+}
+
+.orange {
+    color: var(--default-Orange);
+}
+
+.apricot {
+    color: var(--default-Apricot);
+}
+
+.olive {
+    color: var(--default-Olive);
+}
+
+.yellow {
+    color: var(--default-Yellow);
+}
+
+.beige {
+    color: var(--default-Beige);
+}
+
+.lime {
+    color: var(--default-Lime);
+}
+
+.green {
+    color: var(--default-Green);
+}
+
+.mint {
+    color: var(--default-Mint);
+}
+
+.teal {
+    color: var(--default-Teal);
+}
+
+.cyan {
+    color: var(--default-Cyan);
+}
+
+.navy {
+    color: var(--default-Navy);
+}
+
+.blue {
+    color: var(--default-Blue);
+}
+
+.purple {
+    color: var(--default-Purple);
+}
+
+.lavender {
+    color: var(--default-Lavender);
+}
+
+.magenta {
+    color: var(--default-Magenta);
+}
+
+.grey {
+    color: var(--default-Grey);
 }

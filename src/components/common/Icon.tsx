@@ -27,6 +27,7 @@ import {
     faPaperPlane,
     faPlay,
     faShare,
+    faSquare,
     faSquarePlus,
     faSun,
     faTag,
@@ -90,6 +91,7 @@ const iconMapping: {
     Next: faChevronRight,
     Back: faChevronLeft,
     Play: faPlay,
+    Square: faSquare,
     Home: faHouse,
     Swipes: faPaperPlane,
     Settings: faCog,
@@ -110,14 +112,16 @@ const iconMapping: {
 type IconProps = {
     label: IconType;
     className?: string;
+    color?: string;
 };
 
-export const Icon: FC<IconProps> = ({ label, className }) => {
+export const Icon: FC<IconProps> = ({ label, className, color }) => {
     const icon = iconMapping[label];
     return (
         <FontAwesomeIcon
             icon={icon}
             className={className}
+            color={color}
             style={{ pointerEvents: "none" }}
         />
     );

@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import styled from "styled-components";
 import { Icon } from "../../common/Icon";
+import { tagColorObject2 } from "../../../util/colorUtils";
+import { DefaultColors } from "../../../types";
 
 type KeywordTagProps = {
     tag: string;
@@ -58,3 +60,17 @@ const TagStyle = styled.div<TagStyleProps>`
 `;
 
 const TagButtonWrapper = styled.div``;
+
+type ColorTagProps = {
+    colorname: DefaultColors;
+};
+export const ColorTag: FC<ColorTagProps> = ({ colorname }) => {
+    return (
+        <>
+            <TagStyle>
+                <Icon label={"Square"} color={tagColorObject2[colorname]} />
+                <p>{colorname}</p>
+            </TagStyle>
+        </>
+    );
+};

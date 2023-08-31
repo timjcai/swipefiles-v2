@@ -1,5 +1,6 @@
 export interface ITagColorDB {
-    color: string;
+    colorname: string;
+    colorcode: string;
     tag: string;
     user_id?: string;   
 }
