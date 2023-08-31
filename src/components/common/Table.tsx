@@ -2,6 +2,7 @@ import React, { FC, useState } from "react";
 import styled from "styled-components";
 import { ITableTags, ITagTableDB } from "../../types";
 import { ColorTag, KeywordTag } from "../form";
+import { Icon } from ".";
 
 const Table: FC<ITableTags> = ({ title, data }) => {
     const [columnTitle, setColumnTitle] = useState(columns(data));
@@ -9,23 +10,24 @@ const Table: FC<ITableTags> = ({ title, data }) => {
 
     function columns(data: ITagTableDB[]) {
         // get all keys of the object in the first element + "example"
-        const firstElement = data[0];
-        const currentColumns = Object.keys(firstElement);
-        if (currentColumns.includes("user_id")) {
-            const itemToRemove = "user_id";
-            const index = currentColumns.findIndex(
-                (element) => element === itemToRemove
-            );
-            currentColumns.splice(index, 1);
-        }
-        if (currentColumns.includes("colorcode")) {
-            const itemToRemove = "colorcode";
-            const index = currentColumns.findIndex(
-                (element) => element === itemToRemove
-            );
-            currentColumns.splice(index, 1);
-        }
-        currentColumns.push("Example");
+        // const firstElement = data[0];
+        // const currentColumns = Object.keys(firstElement);
+        // if (currentColumns.includes("user_id")) {
+        //     const itemToRemove = "user_id";
+        //     const index = currentColumns.findIndex(
+        //         (element) => element === itemToRemove
+        //     );
+        //     currentColumns.splice(index, 1);
+        // }
+        // if (currentColumns.includes("colorcode")) {
+        //     const itemToRemove = "colorcode";
+        //     const index = currentColumns.findIndex(
+        //         (element) => element === itemToRemove
+        //     );
+        //     currentColumns.splice(index, 1);
+        // }
+        // currentColumns.push("Example");
+        const currentColumns = ["Tag", "Color Name", "# of Swipes", "Example"];
         return currentColumns;
     }
 
@@ -66,6 +68,9 @@ const Table: FC<ITableTags> = ({ title, data }) => {
                             </tr>
                         );
                     })}
+                    <tr>
+                        <StyledCell colspan="4">Add Tag</StyledCell>
+                    </tr>
                 </tbody>
             </StyledTable>
         </div>
@@ -82,12 +87,14 @@ const StyledColumnHeading = styled.th<ColumnProps>`
     width: ${(props) =>
         props.colNumber ? `calc(100vw/${props.colNumber})` : "300px"};
     min-width: 300px;
-    border: 0.5px solid grey;
+    border: 1px solid hsl(202, 10%, 88%);
 `;
 
 const StyledCell = styled.td`
     text-align: left;
     padding-left: 5px;
+    border-bottom: 1px solid hsl(202, 10%, 88%);
+    border-left: 1px solid hsl(202, 10%, 88%);
 `;
 
 const StyledTable = styled.table`
