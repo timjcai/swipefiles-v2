@@ -32,7 +32,7 @@ const Table: FC<ITableTags> = ({ title, data }) => {
     return (
         <div>
             <h1>{title}</h1>
-            <table>
+            <StyledTable>
                 <thead>
                     <tr>
                         {columnTitle.map((title) => {
@@ -67,7 +67,7 @@ const Table: FC<ITableTags> = ({ title, data }) => {
                         );
                     })}
                 </tbody>
-            </table>
+            </StyledTable>
         </div>
     );
 };
@@ -88,4 +88,11 @@ const StyledColumnHeading = styled.th<ColumnProps>`
 const StyledCell = styled.td`
     text-align: left;
     padding-left: 5px;
+`;
+
+const StyledTable = styled.table`
+    margin-top: 20px;
+    display: inline-block;
+    overflow: scroll;
+    height: calc(100vh - 150px);
 `;
