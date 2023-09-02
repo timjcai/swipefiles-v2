@@ -13,6 +13,8 @@ export interface ISwipeData {
     last_update?: Date;
 }
 
+export type ReadOnlyProps = { [key in keyof ISwipeData]: boolean };
+
 export type PlatformTypes =
     | "Facebook"
     | "Linkedin"

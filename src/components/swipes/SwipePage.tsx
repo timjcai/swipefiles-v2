@@ -22,7 +22,6 @@ export const SwipePage: FC<ISwipePage> = ({ swipedata }) => {
         board_id: boards,
     } = swipedata;
 
-    console.log(tags);
     return (
         <div>
             <p>

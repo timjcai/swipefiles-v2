@@ -11,11 +11,12 @@ import {
     Dashboard,
     Settings,
     SwipesIndex,
+    SingleSwipe,
+    Tags,
+    EditSingleSwipe,
 } from "./pages";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
-import { SingleSwipe } from "./pages/App/SingleSwipe";
 import { SwipeActionsProvider } from "./context/SwipeActionsProvider";
-import Tags from "./pages/App/Tags";
 
 export const App = () => {
     return (
@@ -74,6 +75,14 @@ export const App = () => {
                                 element={
                                     <ProtectedRoute>
                                         <SingleSwipe />
+                                    </ProtectedRoute>
+                                }
+                            />
+                            <Route
+                                path="/swipes/edit/:id"
+                                element={
+                                    <ProtectedRoute>
+                                        <EditSingleSwipe />
                                     </ProtectedRoute>
                                 }
                             />

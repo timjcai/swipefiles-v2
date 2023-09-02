@@ -9,7 +9,7 @@ type RoundButtonProps = {
     label: IconType;
     backgroundColor: string;
     color: string;
-    url: string;
+    url?: string;
     onClick?: (e: MouseEvent) => void;
 };
 export const RoundButton: FC<RoundButtonProps> = ({
@@ -38,7 +38,7 @@ export const RoundButton: FC<RoundButtonProps> = ({
         button = (
             <>
                 <CircleWrapper backgroundColor={backgroundColor} color={color}>
-                    <Link to={`/${url}`}>
+                    <Link to={`${url}`}>
                         <Icon label={label} className={"white"} />
                     </Link>
                 </CircleWrapper>
@@ -83,5 +83,5 @@ const IntExtLinkMap = {
     Share: "Internal",
     notes: "Internal",
     Delete: "Action",
-    Edit: "Action",
+    Edit: "Internal",
 };

@@ -386,5 +386,3 @@ export const Tags: FC = () => {
         </div>
     );
 };
-
-export default Tags;

@@ -90,10 +90,10 @@ export const Swipecard: FC<SwipecardProps> = ({ swipedata, onDeleteCard }) => {
                         url={hyperlink}
                     />
                     <RoundButton
-                        label={"notes"}
+                        label={"Edit"}
                         backgroundColor="#3272F7"
                         color="#ffffff"
-                        url={hyperlink}
+                        url={`/swipes/edit/${id}`}
                     />
                     <RoundButton
                         label={"Share"}
@@ -105,7 +105,6 @@ export const Swipecard: FC<SwipecardProps> = ({ swipedata, onDeleteCard }) => {
                         label={"Delete"}
                         backgroundColor="#C70039"
                         color="#ffffff"
-                        url={hyperlink}
                         onClick={(e) => {
                             e.preventDefault();
                             onDeleteCard(id);
