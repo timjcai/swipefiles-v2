@@ -2,11 +2,12 @@ import React, { FC, useState } from "react";
 import styled from "styled-components";
 import { ITableTags, ITagTableDB } from "../../types";
 import { ColorTag, KeywordTag } from "../form";
-import { Icon } from ".";
+import { Icon } from "../common";
 
-const Table: FC<ITableTags> = ({ title, data }) => {
+export const TagTable: FC<ITableTags> = ({ title, data }) => {
     const [columnTitle, setColumnTitle] = useState(columns(data));
     const [tableData, setTableData] = useState(data);
+    const [addingTag, setAddingTag] = useState<boolean>(true);
 
     function columns(data: ITagTableDB[]) {
         // get all keys of the object in the first element + "example"
@@ -27,7 +28,7 @@ const Table: FC<ITableTags> = ({ title, data }) => {
         //     currentColumns.splice(index, 1);
         // }
         // currentColumns.push("Example");
-        const currentColumns = ["Tag", "Color Name", "# of Swipes", "Example"];
+        const currentColumns = ["Tag", "Color Name", "# of Swipes"];
         return currentColumns;
     }
 
@@ -52,32 +53,38 @@ const Table: FC<ITableTags> = ({ title, data }) => {
                     {tableData.map((data, index) => {
                         return (
                             <tr key={index}>
-                                <StyledCell>{data.tag}</StyledCell>
                                 <StyledCell>
-                                    <ColorTag colorname={data.colorname} />
-                                </StyledCell>
-                                <StyledCell>{data.numberOfSwipes}</StyledCell>
-                                <StyledCell>
+                                    {" "}
                                     <KeywordTag
                                         tag={data.tag}
                                         id={index}
                                         bgcolor={data.colorcode}
-                                        color={"#000000"}
                                     />
                                 </StyledCell>
+                                <StyledCell>
+                                    <ColorTag colorname={data.colorname} />
+                                </StyledCell>
+                                <StyledCell>{data.numberOfSwipes}</StyledCell>
                             </tr>
                         );
                     })}
-                    <tr>
-                        <StyledCell colspan="4">Add Tag</StyledCell>
-                    </tr>
+                    {addingTag && (
+                        <tr>
+                            <StyledCell>
+                                <AddTagInput autoFocus></AddTagInput>
+                            </StyledCell>
+                            <StyledCell>
+                                <AddTagInput></AddTagInput>
+                            </StyledCell>
+                            <StyledCell>0</StyledCell>
+                        </tr>
+                    )}
                 </tbody>
+                <button>Add Tag</button>
             </StyledTable>
         </div>
     );
 };
-
-export default Table;
 
 type ColumnProps = {
     colNumber?: number;
@@ -102,4 +109,11 @@ const StyledTable = styled.table`
     display: inline-block;
     overflow: scroll;
     height: calc(100vh - 150px);
+`;
+
+const AddTagInput = styled.input`
+    border: none;
+    outline: none;
+    background: none;
+    color: inherit;
 `;
