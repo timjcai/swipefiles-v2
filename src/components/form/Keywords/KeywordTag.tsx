@@ -1,8 +1,9 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Icon } from "../../common/Icon";
-import { tagColorObject2 } from "../../../util/colorUtils";
+import { colorSelectOptions, tagColorObject2 } from "../../../util/colorUtils";
 import { DefaultColors } from "../../../types";
+import { PopupSelector, SelectPicker } from "../SelectPicker";
 
 type KeywordTagProps = {
     tag: string;
@@ -63,14 +64,83 @@ const TagButtonWrapper = styled.div``;
 
 type ColorTagProps = {
     colorname: DefaultColors;
+    handleSelectChange: (e: any) => void;
+    state: string;
+    id?: string;
 };
-export const ColorTag: FC<ColorTagProps> = ({ colorname }) => {
+
+export const ColorTag: FC<ColorTagProps> = ({
+    colorname,
+    handleSelectChange,
+    state,
+    id,
+    tag,
+}) => {
+    const [selectItem, setSelectItem] = useState<string>(colorname);
+    const [isHidden, setIsHidden] = useState<boolean>(true);
+    const selectorRef = useRef(null);
+
+    // what does stopPropagation do?
+    const handlePopup = (e: MouseEvent) => {
+        e.stopPropagation();
+        setIsHidden((prevState) => !prevState);
+    };
+
+    const handleSelect = (e: MouseEvent) => {
+        if (e.target !== null) {
+            const value = e.target.id;
+            console.log(value);
+            // setSelectItem(value);
+            handleSelectChange(e);
+            setIsHidden(true);
+        }
+    };
+
+    // unable to implement a closepopup box - not sure how to implement this after 2-3 hours of work
+
+    useEffect(() => {
+        function closePopup(e: MouseEvent) {
+            if (e.target !== selectorRef.current) {
+                setIsHidden(true);
+            }
+        }
+
+        document.addEventListener("click", closePopup);
+
+        return () => {
+            document.removeEventListener("click", closePopup);
+        };
+    }, []);
+
     return (
         <>
-            <TagStyle>
+            <TagStyle
+                type="button"
+                aria-controls="dropdownOptions"
+                ref={selectorRef}
+                onClick={handlePopup}
+            >
                 <Icon label={"Square"} color={tagColorObject2[colorname]} />
                 <p>{colorname}</p>
             </TagStyle>
+            <PopupSelector
+                id="dropdownOptions"
+                dataid={id}
+                datatag={tag}
+                role="listbox"
+                aria-label="Options"
+                selected={state}
+                list={colorSelectOptions}
+                isHidden={isHidden}
+                handleSelect={handleSelect}
+            />
+            {/* <SelectPicker
+                placeholder={"color name"}
+                list={colorSelectOptions}
+                color={"#212121"}
+                onChange={handleSelectChange}
+                state={state}
+            /> */}
         </>
     );
 };

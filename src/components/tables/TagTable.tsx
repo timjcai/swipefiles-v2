@@ -1,13 +1,28 @@
 import React, { FC, useState } from "react";
 import styled from "styled-components";
-import { ITableTags, ITagTableDB } from "../../types";
+import {
+    DefaultColors,
+    ITableTags,
+    ITagColorDB,
+    ITagTableDB,
+} from "../../types";
 import { ColorTag, KeywordTag } from "../form";
 import { Icon } from "../common";
+import { DEFAULT_TAG_SETTING, tagColorObject2 } from "../../util";
+import { useAuth } from "../../hooks/useAuth";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../../../firebase-config";
 
-export const TagTable: FC<ITableTags> = ({ title, data }) => {
+export const TagTable: FC<ITableTags> = ({
+    title,
+    data,
+    handleSelectChange,
+}) => {
     const [columnTitle, setColumnTitle] = useState(columns(data));
     const [tableData, setTableData] = useState(data);
     const [addingTag, setAddingTag] = useState<boolean>(true);
+    const [selectedTag, setSelectedTag] = useState<ITagColorDB>("");
+    const user = useAuth();
 
     function columns(data: ITagTableDB[]) {
         // get all keys of the object in the first element + "example"
@@ -51,10 +66,10 @@ export const TagTable: FC<ITableTags> = ({ title, data }) => {
                 </thead>
                 <tbody>
                     {tableData.map((data, index) => {
+                        console.log(data);
                         return (
                             <tr key={index}>
                                 <StyledCell>
-                                    {" "}
                                     <KeywordTag
                                         tag={data.tag}
                                         id={index}
@@ -62,7 +77,13 @@ export const TagTable: FC<ITableTags> = ({ title, data }) => {
                                     />
                                 </StyledCell>
                                 <StyledCell>
-                                    <ColorTag colorname={data.colorname} />
+                                    <ColorTag
+                                        id={data.id}
+                                        tag={data.tag}
+                                        colorname={data.colorname}
+                                        handleSelectChange={handleSelectChange}
+                                        state={data.colorname}
+                                    />
                                 </StyledCell>
                                 <StyledCell>{data.numberOfSwipes}</StyledCell>
                             </tr>

@@ -1,10 +1,18 @@
 import React, { FC, useEffect, useState } from "react";
 import { TagTable } from "../../components/tables/TagTable";
 import { Loading } from "./Loading";
-import { ITagTableDB } from "../../types";
+import { DefaultColors, ITagTableDB } from "../../types";
 import { useAuth } from "../../hooks/useAuth";
 import { db } from "../../../firebase-config";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+    collection,
+    doc,
+    getDocs,
+    query,
+    updateDoc,
+    where,
+} from "firebase/firestore";
+import { tagColorObject2 } from "../../util";
 
 export const Tags: FC = () => {
     const [tableData, setTableData] = useState<ITagTableDB[]>([]);
@@ -33,9 +41,40 @@ export const Tags: FC = () => {
         setLoading(false);
     };
 
+    const handleSelectChange = async (e: any) => {
+        const id = e.target.parentNode.dataset.id;
+        const tag = e.target.parentNode.dataset.tag;
+        const colorname: DefaultColors = e.target.id;
+        const colorcode = tagColorObject2[colorname];
+        const payload = {
+            id: id,
+            colorname: colorname,
+            colorcode: colorcode,
+            user_id: user.uid,
+            tag: tag,
+        };
+
+        const tagRef = doc(db, "tags", id);
+        await updateDoc(tagRef, payload);
+        console.log(`succesfully updated: ${payload}`);
+
+        console.log(
+            tableData.find((element) => {
+                element.id === id;
+            })
+        );
+        setTableData((prevState) => [...prevState]);
+    };
+
     return (
         <div>
-            {!loading && <TagTable title={"Tags"} data={tableData} />}
+            {!loading && (
+                <TagTable
+                    title={"Tags"}
+                    data={tableData}
+                    handleSelectChange={handleSelectChange}
+                />
+            )}
             {/* {!loading && <Table title={"Tags"} data={exampleData} />} */}
             {loading && <Loading />}
         </div>

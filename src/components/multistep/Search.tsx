@@ -2,7 +2,6 @@ import React, { FC, useEffect, useState } from "react";
 import { FormWrapper, KWFormWrapper } from ".";
 import { useGetAllBoards } from "../../hooks/useGetAllBoards";
 import { useAuth } from "../../hooks/useAuth";
-import { SelectPicker } from "../form/SelectPicker";
 import { db } from "../../../firebase-config";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { KeywordTagInput } from "../form";

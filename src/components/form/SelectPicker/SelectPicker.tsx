@@ -13,7 +13,7 @@ import {
 } from ".";
 
 interface ISelectPicker {
-    label: string;
+    label?: string;
     placeholder: string | EventProps;
     list: string[];
     onChange: (e: MouseEvent) => void;
@@ -118,6 +118,8 @@ type PopupSelectorProps = {
     handleSelect: (e: MouseEvent) => void;
     selected: string;
     label: string;
+    dataid?: string;
+    datatag?: string;
 };
 
 export const PopupSelector: FC<PopupSelectorProps> = ({
@@ -126,13 +128,20 @@ export const PopupSelector: FC<PopupSelectorProps> = ({
     handleSelect,
     selected,
     label,
+    dataid,
+    datatag,
 }) => {
     const isTrue = (item: string): boolean => {
         return item === selected;
     };
     return (
-        <PopupWrapper ishidden={isHidden} onClick={(e) => e.stopPropagation}>
-            <PopupMenu>
+        <PopupWrapper
+            ishidden={isHidden}
+            onClick={(e) => e.stopPropagation}
+            data-id={dataid}
+            data-tag={datatag}
+        >
+            <PopupMenu data-id={dataid} data-tag={datatag}>
                 {list &&
                     list.map((items) => {
                         return (
@@ -145,7 +154,7 @@ export const PopupSelector: FC<PopupSelectorProps> = ({
                                 aria-selected={isTrue(items)}
                             >
                                 <SelectIconSpacer>
-                                    <Icon label={items} />
+                                    {/* <Icon label={items} /> */}
                                     {items}
                                 </SelectIconSpacer>
                             </PopupMenuItem>

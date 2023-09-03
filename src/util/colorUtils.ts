@@ -58,7 +58,7 @@ export const tagColorObject2:{[key in DefaultColors]: string }= {
     Orange: "rgb(245, 130, 49)" ,
     Apricot: "rgb(252, 187, 122)" ,
     Olive: "rgb(128, 128, 0)" ,
-    Yellow: "rgb(255, 229, 0)" ,
+    Yellow: "rgb(255, 229, 0, 0.83)" ,
     Beige: "rgb(203, 177, 100)" ,
     Lime: "rgb(191, 239, 69)" ,
     Green: "rgb(60, 180, 75)" ,

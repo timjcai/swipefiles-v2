@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useState } from "react";
+import React, { FC, useState } from "react";
 import styled from "styled-components";
 import { useMultistepForm } from "../../hooks/useMultistepForm";
 import { Hyperlink, IDdetails, Notes } from "../../components/multistep";
@@ -7,7 +7,6 @@ import {
     Column2,
     ColumnContainer,
     ExitButton,
-    Icon,
 } from "../../components/common";
 import { Swipecard } from "../../components/swipes/Swipecard";
 import { ISwipeData, ITagColorDB, PlatformTypes } from "../../types";
@@ -15,26 +14,7 @@ import { Search } from "../../components/multistep/Search";
 import { Timestamp, collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase-config";
 import { useAuth } from "../../hooks/useAuth";
-
-const INITIAL_FORMSTATE: ISwipeData = {
-    author: "",
-    board_id: [],
-    images: [],
-    keyword_tags: [],
-    hyperlink: "",
-    notes: "",
-    platform: "",
-    title: "",
-    user_id: "",
-    id: "",
-};
-
-const DEFAULT_TAG_SETTINGS: ITagColorDB = {
-    colorname: "Mint",
-    colorcode: "rgb(170, 255, 195)",
-    tag: "",
-    user_id: "",
-};
+import { DEFAULT_TAG_SETTINGS, INITIAL_FORMSTATE } from "../../util";
 
 export const Create: FC = () => {
     const [data, setData] = useState<ISwipeData>(INITIAL_FORMSTATE);
