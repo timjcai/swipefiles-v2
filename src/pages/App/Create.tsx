@@ -2,7 +2,13 @@ import React, { FC, FormEvent, useState } from "react";
 import styled from "styled-components";
 import { useMultistepForm } from "../../hooks/useMultistepForm";
 import { Hyperlink, IDdetails, Notes } from "../../components/multistep";
-import { Column1, Column2, ColumnContainer } from "../../components/common";
+import {
+    Column1,
+    Column2,
+    ColumnContainer,
+    ExitButton,
+    Icon,
+} from "../../components/common";
 import { Swipecard } from "../../components/swipes/Swipecard";
 import { ISwipeData, PlatformTypes } from "../../types";
 import { Search } from "../../components/multistep/Search";
@@ -124,6 +130,7 @@ export const Create: FC = () => {
 
     return (
         <div>
+            <ExitButton />
             <h1>All Boards Page</h1>
             <ColumnContainer>
                 <Column1>

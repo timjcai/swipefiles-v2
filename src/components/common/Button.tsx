@@ -85,3 +85,20 @@ const IntExtLinkMap = {
     Delete: "Action",
     Edit: "Internal",
 };
+
+export const ExitButton: FC = () => {
+    return (
+        <StaticExitButton>
+            <Link to={"/swipes"}>
+                <Icon label="Back" />
+            </Link>
+        </StaticExitButton>
+    );
+};
+
+const StaticExitButton = styled.div`
+    position: absolute;
+    margin-left: -32px;
+    top: 44px;
+    font-size: 24px;
+`;

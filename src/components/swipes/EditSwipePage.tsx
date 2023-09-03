@@ -3,16 +3,29 @@ import { ISwipeData, ReadOnlyProps } from "../../types";
 import { Link } from "react-router-dom";
 import { KeywordSection, SummarySection } from ".";
 import { QuillEditor } from "../quilljs";
-import { KeywordTag } from "../form";
+import { KeywordTag, KeywordTagInput } from "../form";
 import { Icon } from "../common";
 import styled from "styled-components";
 
 interface ISwipePage {
     swipedata: ISwipeData;
     updateFields?: (id: ISwipeData) => void;
+    handleKeywordState: (e: PointerEvent) => void;
+    deleteTags: (e: PointerEvent) => void;
+    addTags: (keyword: string) => void;
+    allKeywords: string[];
+    currentKeyword: string;
 }
 
-export const EditSwipePage: FC<ISwipePage> = ({ swipedata, updateFields }) => {
+export const EditSwipePage: FC<ISwipePage> = ({
+    swipedata,
+    updateFields,
+    handleKeywordState,
+    deleteTags,
+    addTags,
+    allKeywords,
+    currentKeyword,
+}) => {
     const {
         title,
         id,
@@ -27,12 +40,6 @@ export const EditSwipePage: FC<ISwipePage> = ({ swipedata, updateFields }) => {
     return (
         <div>
             <div>
-                <p>
-                    <Link to={"/swipes"}>
-                        <Icon label="Back" />
-                    </Link>
-                </p>
-                <h2>{id}</h2>
                 <EditHeading
                     type="text"
                     onChange={(e) => updateFields({ title: e.target.value })}
@@ -63,18 +70,13 @@ export const EditSwipePage: FC<ISwipePage> = ({ swipedata, updateFields }) => {
                     <p className="board_id">{boards}</p>
                 </SummarySection>
                 <KeywordSection>
-                    {tags.map((tag) => {
-                        return (
-                            <KeywordTag
-                                id={tag}
-                                key={tag}
-                                tag={tag}
-                                bgcolor={"blue"}
-                                color={"white"}
-                                onXClick={() => {}}
-                            />
-                        );
-                    })}
+                    <KeywordTagInput
+                        tags={allKeywords}
+                        addKeywordTags={() => addTags(currentKeyword)}
+                        deleteTags={deleteTags}
+                        handleKeywordState={handleKeywordState}
+                        state={currentKeyword}
+                    />
                 </KeywordSection>
                 <p>{swipedata.notes}</p>
             </div>

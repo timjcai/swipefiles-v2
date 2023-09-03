@@ -11,5 +11,5 @@ export const SummarySection = styled.section`
 
 export const KeywordSection = styled.section`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 `;

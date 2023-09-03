@@ -24,12 +24,6 @@ export const SwipePage: FC<ISwipePage> = ({ swipedata }) => {
 
     return (
         <div>
-            <p>
-                <Link to={"/swipes"}>
-                    <Icon label="Back" />
-                </Link>
-            </p>
-            <h2>{id}</h2>
             <h1>{title}</h1>
             <SummarySection>
                 <p>User Id:</p>

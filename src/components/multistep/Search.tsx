@@ -14,6 +14,11 @@ type SearchFormData = {
 
 type NoteFormProps = SearchFormData & {
     updateFields: (fields: Partial<SearchFormData>) => void;
+    handleKeywordState: (e: PointerEvent) => void;
+    deleteTags: (e: PointerEvent) => void;
+    addTags: (keyword: string) => void;
+    allKeywords: string[];
+    currentKeyword: string;
 };
 
 type BoardProps = {
@@ -36,7 +41,6 @@ export const Search: FC<NoteFormProps> = ({
     const [loading, setLoading] = useState<boolean>(true);
     const user = useAuth();
     const boardCollection = collection(db, "boards");
-    const TITLES = [];
 
     const getAllBoards = async (user) => {
         const userQuery = query(

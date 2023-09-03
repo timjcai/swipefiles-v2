@@ -78,6 +78,7 @@ button {
     background-color: #1a1a1a;
     cursor: pointer;
     transition: border-color 0.25s;
+    height: fit-content;
     /* color: #ffffff; */
 
     /* p {
