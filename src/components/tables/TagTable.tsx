@@ -17,11 +17,15 @@ export const TagTable: FC<ITableTags> = ({
     title,
     data,
     handleSelectChange,
+    newtagstate,
+    newcolorstate,
+    handleNewTagInput,
+    handleNewTagSelectColor,
+    createTag,
 }) => {
     const [columnTitle, setColumnTitle] = useState(columns(data));
     const [tableData, setTableData] = useState(data);
     const [addingTag, setAddingTag] = useState<boolean>(true);
-    const [selectedTag, setSelectedTag] = useState<ITagColorDB>("");
     const user = useAuth();
 
     function columns(data: ITagTableDB[]) {
@@ -66,7 +70,6 @@ export const TagTable: FC<ITableTags> = ({
                 </thead>
                 <tbody>
                     {tableData.map((data, index) => {
-                        console.log(data);
                         return (
                             <tr key={index}>
                                 <StyledCell>
@@ -92,16 +95,25 @@ export const TagTable: FC<ITableTags> = ({
                     {addingTag && (
                         <tr>
                             <StyledCell>
-                                <AddTagInput autoFocus></AddTagInput>
+                                <AddTagInput
+                                    autoFocus
+                                    onChange={handleNewTagInput}
+                                    value={newtagstate}
+                                />
                             </StyledCell>
                             <StyledCell>
-                                <AddTagInput></AddTagInput>
+                                <ColorTag
+                                    tag={newtagstate}
+                                    colorname={newcolorstate}
+                                    handleSelectChange={handleNewTagSelectColor}
+                                    state={newcolorstate}
+                                />
                             </StyledCell>
                             <StyledCell>0</StyledCell>
                         </tr>
                     )}
                 </tbody>
-                <button>Add Tag</button>
+                <button onClick={createTag}>Add Tag</button>
             </StyledTable>
         </div>
     );

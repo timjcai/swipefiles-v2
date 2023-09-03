@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { TagTable } from "../../components/tables/TagTable";
 import { Loading } from "./Loading";
-import { DefaultColors, ITagTableDB } from "../../types";
+import { DefaultColors, ITagColorDB, ITagTableDB } from "../../types";
 import { useAuth } from "../../hooks/useAuth";
 import { db } from "../../../firebase-config";
 import {
@@ -9,14 +9,19 @@ import {
     doc,
     getDocs,
     query,
+    setDoc,
     updateDoc,
     where,
 } from "firebase/firestore";
-import { tagColorObject2 } from "../../util";
+import { DEFAULT_TAG_SETTINGS, tagColorObject2 } from "../../util";
 
 export const Tags: FC = () => {
     const [tableData, setTableData] = useState<ITagTableDB[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const [keywordPayload, setKeywordPayload] =
+        useState<ITagColorDB>(DEFAULT_TAG_SETTINGS);
+    const [currentTag, setCurrentTag] = useState<string>("");
+    const [currentColor, setCurrentColor] = useState<DefaultColors>("Mint");
     const user = useAuth();
     const tagCollection = collection(db, "tags");
 
@@ -58,13 +63,33 @@ export const Tags: FC = () => {
         await updateDoc(tagRef, payload);
         console.log(`succesfully updated: ${payload}`);
 
-        console.log(
-            tableData.find((element) => {
-                element.id === id;
-            })
-        );
-        setTableData((prevState) => [...prevState]);
+        // how do I update and change the state of the tableData - when we update the tagColor
+
+        // const object = tableData.find((element) => {
+        //     element.id === id;
+        // });
+        // console.log(object);
+        // setTableData((prevState) => [...prevState, payload]);
     };
+
+    const createTag = async () => {
+        const tagRef = doc(collection(db, "tags"));
+        const payload = {
+            colorname: currentColor,
+            tag: currentTag,
+            user_id: user.uid,
+            swipes: [],
+            colorcode: tagColorObject2[currentColor],
+        };
+        await setDoc(tagRef, payload);
+        console.log("successfully created tag");
+        resetTagPayload();
+    };
+
+    function resetTagPayload() {
+        setCurrentTag("Mint");
+        setCurrentTag("");
+    }
 
     return (
         <div>
@@ -73,6 +98,13 @@ export const Tags: FC = () => {
                     title={"Tags"}
                     data={tableData}
                     handleSelectChange={handleSelectChange}
+                    newtagstate={currentTag}
+                    newcolorstate={currentColor}
+                    handleNewTagInput={(e) => setCurrentTag(e.target.value)}
+                    handleNewTagSelectColor={(e) =>
+                        setCurrentColor(e.target.id)
+                    }
+                    createTag={createTag}
                 />
             )}
             {/* {!loading && <Table title={"Tags"} data={exampleData} />} */}
