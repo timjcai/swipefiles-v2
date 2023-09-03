@@ -10,7 +10,7 @@ import {
     Icon,
 } from "../../components/common";
 import { Swipecard } from "../../components/swipes/Swipecard";
-import { ISwipeData, PlatformTypes } from "../../types";
+import { ISwipeData, ITagColorDB, PlatformTypes } from "../../types";
 import { Search } from "../../components/multistep/Search";
 import { Timestamp, collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase-config";
@@ -29,9 +29,18 @@ const INITIAL_FORMSTATE: ISwipeData = {
     id: "",
 };
 
+const DEFAULT_TAG_SETTINGS: ITagColorDB = {
+    colorname: "Mint",
+    colorcode: "rgb(170, 255, 195)",
+    tag: "",
+    user_id: "",
+};
+
 export const Create: FC = () => {
     const [data, setData] = useState<ISwipeData>(INITIAL_FORMSTATE);
     const [currentKeyword, setCurrentKeyword] = useState<string>("");
+    const [keywordPayload, setKeywordPayload] =
+        useState<ITagColorDB>(DEFAULT_TAG_SETTINGS);
     const user = useAuth();
     const {
         steps,
@@ -88,6 +97,12 @@ export const Create: FC = () => {
 
     function addKeywordtoList(keyword: string): void {
         const keywordArray = data.keyword_tags;
+        const currentPayload = keywordPayload;
+        currentPayload["tag"] = keyword;
+        currentPayload["user_id"] = user.uid;
+        console.log(currentPayload);
+        setKeywordPayload(currentPayload);
+        createTag(currentPayload);
 
         keywordArray.push(keyword);
         setData((prevState) => ({
@@ -122,10 +137,14 @@ export const Create: FC = () => {
         goTo(0);
     }
 
-    const createSwipe = async (payload) => {
+    const createSwipe = async (payload: ISwipeData) => {
         const newSwipesRef = doc(collection(db, "swipes"));
-        const docRef = await setDoc(newSwipesRef, payload);
-        docRef;
+        await setDoc(newSwipesRef, payload);
+    };
+
+    const createTag = async (keywordPayload: ITagColorDB) => {
+        const tagRef = doc(collection(db, "tags"));
+        await setDoc(tagRef, keywordPayload);
     };
 
     return (
