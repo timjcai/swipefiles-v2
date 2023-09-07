@@ -22,17 +22,35 @@ export const KeywordTag: FC<KeywordTagProps> = ({
     editable = false,
     onXClick = () => {},
 }) => {
+    const [showDelete, setShowDelete] = useState<boolean>(false);
+
+    function deleteIsActive() {
+        console.log("show deletebutton");
+        setShowDelete(true);
+    }
+    function deleteisHidden() {
+        console.log("hiding deletebutton");
+        setShowDelete(false);
+    }
+
     return (
-        <>
+        <TagWrapper onMouseOver={deleteIsActive} onMouseLeave={deleteisHidden}>
             <TagStyle role="button" bgcolor={bgcolor} color={color} id={id}>
                 <p>{tag}</p>
-                {editable && (
+                {/* {editable && (
                     <TagButtonWrapper onClick={onXClick} data-label={id}>
                         {editable && <Icon label="Remove" data-label={id} />}
                     </TagButtonWrapper>
-                )}
+                )} */}
             </TagStyle>
-        </>
+            <TagButtonWrapper
+                show={showDelete}
+                onClick={onXClick}
+                data-label={id}
+            >
+                {editable && <Icon label="Remove" data-label={id} />}
+            </TagButtonWrapper>
+        </TagWrapper>
     );
 };
 
@@ -40,6 +58,11 @@ type TagStyleProps = {
     bgcolor?: string;
     color?: string;
 };
+
+const TagWrapper = styled.div`
+    position: relative;
+    width: fit-content;
+`;
 
 const TagStyle = styled.div<TagStyleProps>`
     background-color: ${(props) => props.bgcolor};
@@ -59,8 +82,27 @@ const TagStyle = styled.div<TagStyleProps>`
     overflow: hidden;
     gap: 10px;
 `;
+type TagButtonWrapperProps = {
+    show: boolean;
+};
 
-const TagButtonWrapper = styled.div``;
+const TagButtonWrapper = styled.div<TagButtonWrapperProps>`
+    position: absolute;
+    background: black;
+    border-radius: 50%;
+    padding: 2px 2px;
+    font-size: 10px;
+    color: white;
+    height: 10px;
+    width: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: -4px;
+    z-index: 1;
+    top: -4px;
+    display: ${(props) => (props.show ? "" : "none")};
+`;
 
 type ColorTagProps = {
     colorname: DefaultColors;

@@ -66,11 +66,15 @@ export const TagTable: FC<ITableTags> = ({
                         return (
                             <tr key={index}>
                                 <StyledCell>
-                                    <KeywordTag
-                                        tag={data.tag}
-                                        id={index}
-                                        bgcolor={data.colorcode}
-                                    />
+                                    <div>
+                                        {" "}
+                                        <KeywordTag
+                                            tag={data.tag}
+                                            id={index}
+                                            bgcolor={data.colorcode}
+                                            editable={true}
+                                        />
+                                    </div>
                                 </StyledCell>
                                 <StyledCell>
                                     <ColorTag
