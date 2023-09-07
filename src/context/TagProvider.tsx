@@ -14,18 +14,27 @@ import {
     getDocs,
     query,
     setDoc,
+    updateDoc,
     where,
 } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import { tagColorObject2 } from "../util";
 
-type TagContextType = {
+interface ITagContext {
     allTags: ITagDataObject[];
+    loading: boolean;
+    currentTag: string;
+    currentColor: string;
+    setCurrentTag: () => void;
+    setCurrentColor: () => void;
     generateColorMap: () => void;
     deleteTag: (tagid: string) => Promise<void>;
-};
+    getTagData: (user) => Promise<void>;
+    createTag: () => Promise<void>;
+    changeTagColor: () => void;
+}
 
-export const TagContext = createContext<TagContextType | null>(null);
+export const TagContext = createContext<ITagContext>({} as ITagContext);
 
 export const TagProvider = ({ children }) => {
     const user = useAuth();
@@ -96,7 +105,24 @@ export const TagProvider = ({ children }) => {
         [user]
     );
 
-    const changeTagColor = useCallback(() => {}, []);
+    const changeTagColor = useCallback(async (e) => {
+        const id = e.target.parentNode.dataset.id;
+        const tag = e.target.parentNode.dataset.tag;
+        const colorname: DefaultColors = e.target.id;
+        const colorcode = tagColorObject2[colorname];
+        const payload = {
+            id: id,
+            colorname: colorname,
+            colorcode: colorcode,
+            user_id: user.uid,
+            tag: tag,
+        };
+
+        const tagRef = doc(db, "tags", id);
+        await updateDoc(tagRef, payload);
+        await getTagData(user);
+        console.log(`succesfully updated: ${payload}`);
+    }, []);
     const contextValue = useMemo(
         () => ({
             allTags,
@@ -109,6 +135,7 @@ export const TagProvider = ({ children }) => {
             generateColorMap,
             createTag,
             deleteTag,
+            changeTagColor,
         }),
         [
             allTags,
@@ -121,6 +148,7 @@ export const TagProvider = ({ children }) => {
             generateColorMap,
             createTag,
             deleteTag,
+            changeTagColor,
         ]
     );
 
