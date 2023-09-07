@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import { TagTable } from "../../components/tables/TagTable";
 import { Loading } from "./Loading";
 import { DefaultColors, ITagDataObject, ITagTableDB } from "../../types";
@@ -14,37 +14,16 @@ import {
     where,
 } from "firebase/firestore";
 import { DEFAULT_TAG_SETTINGS, tagColorObject2 } from "../../util";
+import { TagContext } from "../../context/TagProvider";
 
 export const Tags: FC = () => {
-    const [tableData, setTableData] = useState<ITagTableDB[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
+    const { allTags, loading } = useContext(TagContext);
     const [keywordPayload, setKeywordPayload] =
         useState<ITagDataObject>(DEFAULT_TAG_SETTINGS);
     const [currentTag, setCurrentTag] = useState<string>("");
     const [currentColor, setCurrentColor] = useState<DefaultColors>("Mint");
     const user = useAuth();
     const tagCollection = collection(db, "tags");
-
-    useEffect(() => {
-        getTagData(user);
-    }, [user]);
-
-    const getTagData = async (user) => {
-        const userQuery = query(
-            tagCollection,
-            where("user_id", "==", `${user.uid}`)
-        );
-        setLoading(true);
-        const data = await getDocs(userQuery);
-        setTableData(
-            data.docs.map((doc) => ({
-                ...doc.data(),
-                id: doc.id,
-                numberOfSwipes: doc.data().swipes.length,
-            }))
-        );
-        setLoading(false);
-    };
 
     const handleSelectChange = async (e: any) => {
         const id = e.target.parentNode.dataset.id;
@@ -96,7 +75,7 @@ export const Tags: FC = () => {
             {!loading && (
                 <TagTable
                     title={"Tags"}
-                    data={tableData}
+                    data={allTags}
                     handleSelectChange={handleSelectChange}
                     newtagstate={currentTag}
                     newcolorstate={currentColor}

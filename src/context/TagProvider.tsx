@@ -35,7 +35,7 @@ export const TagProvider = ({ children }) => {
         getTagData(user);
     }, [user]);
 
-    const getTagData = async (user) => {
+    const getTagData = useCallback(async (user) => {
         const userQuery = query(
             tagCollection,
             where("user_id", "==", `${user.uid}`)
@@ -50,7 +50,7 @@ export const TagProvider = ({ children }) => {
             }))
         );
         setLoading(false);
-    };
+    }, []);
 
     const generateColorMap = useCallback(() => {
         const tagColorMap = {};
@@ -71,10 +71,12 @@ export const TagProvider = ({ children }) => {
     const contextValue = useMemo(
         () => ({
             allTags,
+            loading,
             generateColorMap,
             deleteTag,
+            getTagData,
         }),
-        [allTags, generateColorMap, deleteTag]
+        [allTags, generateColorMap, deleteTag, getTagData]
     );
 
     return (

@@ -21,7 +21,6 @@ export const KeywordTag: FC<KeywordTagProps> = ({
     bgcolor,
     color,
     editable = false,
-    onXClick = () => {},
 }) => {
     const [showDelete, setShowDelete] = useState<boolean>(false);
     const { deleteTag } = useContext(TagContext);
@@ -43,13 +42,15 @@ export const KeywordTag: FC<KeywordTagProps> = ({
                     </TagButtonWrapper>
                 )} */}
             </TagStyle>
-            <TagButtonWrapper
-                show={showDelete}
-                onClick={() => deleteTag(id)}
-                data-label={id}
-            >
-                {editable && <Icon label="Remove" data-label={id} />}
-            </TagButtonWrapper>
+            {editable && (
+                <TagButtonWrapper
+                    show={showDelete}
+                    onClick={() => deleteTag(id)}
+                    data-label={id}
+                >
+                    {editable && <Icon label="Remove" data-label={id} />}
+                </TagButtonWrapper>
+            )}
         </TagWrapper>
     );
 };

@@ -52,8 +52,9 @@ export const SwipePage: FC<ISwipePage> = ({ swipedata }) => {
                             id={tag}
                             key={tag}
                             tag={tag}
-                            bgcolor={colorMap[tag]}
+                            bgcolor={colorMap[tag] ? colorMap[tag] : "black"}
                             color={"white"}
+                            editable={true}
                             onXClick={() => {}}
                         />
                     );
