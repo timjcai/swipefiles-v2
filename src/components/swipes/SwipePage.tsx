@@ -1,10 +1,11 @@
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import { ISwipeData } from "../../types";
 import { Link } from "react-router-dom";
 import { KeywordSection, SummarySection } from ".";
 import { QuillEditor } from "../quilljs";
 import { KeywordTag } from "../form";
 import { Icon } from "../common";
+import { TagContext } from "../../context/TagProvider";
 
 interface ISwipePage {
     swipedata: ISwipeData;
@@ -21,6 +22,11 @@ export const SwipePage: FC<ISwipePage> = ({ swipedata }) => {
         user_id,
         board_id: boards,
     } = swipedata;
+
+    console.log(tags);
+    const { allTags } = useContext(TagContext);
+
+    console.log(allTags);
 
     return (
         <div>

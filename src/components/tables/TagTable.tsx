@@ -1,14 +1,7 @@
 import React, { FC, useState } from "react";
 import styled from "styled-components";
-import {
-    DefaultColors,
-    ITableTags,
-    ITagColorDB,
-    ITagTableDB,
-} from "../../types";
+import { DefaultColors, ITableTags, ITagTableDB } from "../../types";
 import { ColorTag, KeywordTag } from "../form";
-import { Icon } from "../common";
-import { DEFAULT_TAG_SETTING, tagColorObject2 } from "../../util";
 import { useAuth } from "../../hooks/useAuth";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../firebase-config";

@@ -9,7 +9,7 @@ import {
     ExitButton,
 } from "../../components/common";
 import { Swipecard } from "../../components/swipes/Swipecard";
-import { ISwipeData, ITagColorDB, PlatformTypes } from "../../types";
+import { ISwipeData, ITagDataObject, PlatformTypes } from "../../types";
 import { Search } from "../../components/multistep/Search";
 import { Timestamp, collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase-config";
@@ -20,7 +20,7 @@ export const Create: FC = () => {
     const [data, setData] = useState<ISwipeData>(INITIAL_FORMSTATE);
     const [currentKeyword, setCurrentKeyword] = useState<string>("");
     const [keywordPayload, setKeywordPayload] =
-        useState<ITagColorDB>(DEFAULT_TAG_SETTINGS);
+        useState<ITagDataObject>(DEFAULT_TAG_SETTINGS);
     const user = useAuth();
     const {
         steps,
@@ -122,7 +122,7 @@ export const Create: FC = () => {
         await setDoc(newSwipesRef, payload);
     };
 
-    const createTag = async (keywordPayload: ITagColorDB) => {
+    const createTag = async (keywordPayload: ITagDataObject) => {
         const tagRef = doc(collection(db, "tags"));
         await setDoc(tagRef, keywordPayload);
     };

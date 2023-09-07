@@ -1,6 +1,6 @@
-import { ISwipeData, ITagColorDB } from "../types";
+import { ISwipeData, ITagDataObject } from "../types";
 
-export const DEFAULT_TAG_SETTINGS: ITagColorDB = {
+export const DEFAULT_TAG_SETTINGS: ITagDataObject = {
     colorname: "Mint",
     colorcode: "rgb(170, 255, 195)",
     tag: "",

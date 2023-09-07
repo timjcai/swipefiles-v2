@@ -1,6 +1,6 @@
 import { DefaultColors } from ".";
 
-export interface ITagColorDB {
+export interface ITagDataObject {
     colorname: DefaultColors;
     colorcode: string;
     tag: string;
@@ -9,7 +9,7 @@ export interface ITagColorDB {
     id: string;
 }
 
-export interface ITagTableDB extends ITagColorDB {
+export interface ITagTableDB extends ITagDataObject {
     numberOfSwipes: number;
 }
 
@@ -17,4 +17,9 @@ export interface ITableTags {
     title: string;
     data: ITagTableDB[];
     handleSelectChange: (e: any)=> Promise<void>;
+    newtagstate: string;
+    newcolorstate: string;
+    handleNewTagInput: () => void;
+    handleNewTagSelectColor: () => void;
+    createTag: () => void;
 }

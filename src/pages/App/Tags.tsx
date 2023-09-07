@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { TagTable } from "../../components/tables/TagTable";
 import { Loading } from "./Loading";
-import { DefaultColors, ITagColorDB, ITagTableDB } from "../../types";
+import { DefaultColors, ITagDataObject, ITagTableDB } from "../../types";
 import { useAuth } from "../../hooks/useAuth";
 import { db } from "../../../firebase-config";
 import {
@@ -19,7 +19,7 @@ export const Tags: FC = () => {
     const [tableData, setTableData] = useState<ITagTableDB[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [keywordPayload, setKeywordPayload] =
-        useState<ITagColorDB>(DEFAULT_TAG_SETTINGS);
+        useState<ITagDataObject>(DEFAULT_TAG_SETTINGS);
     const [currentTag, setCurrentTag] = useState<string>("");
     const [currentColor, setCurrentColor] = useState<DefaultColors>("Mint");
     const user = useAuth();
