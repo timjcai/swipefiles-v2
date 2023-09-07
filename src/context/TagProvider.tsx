@@ -6,6 +6,7 @@ import { db } from "../../firebase-config";
 
 type TagContextType = {
     allTags: ITagDataObject[];
+    generateColorMap: () => void;
 };
 
 export const TagContext = createContext<TagContextType | null>(null);
@@ -20,7 +21,6 @@ export const TagProvider = ({ children }) => {
         getTagData(user);
     }, [user]);
 
-    console.log(`user is: ${user}`);
     const getTagData = async (user) => {
         const userQuery = query(
             tagCollection,
@@ -38,7 +38,15 @@ export const TagProvider = ({ children }) => {
         setLoading(false);
     };
 
-    const value = { allTags };
+    function generateColorMap() {
+        const tagColorMap = {};
+        allTags.map((tagdata) => {
+            tagColorMap[tagdata.tag] = tagdata.colorcode;
+        });
+        return tagColorMap;
+    }
+
+    const value = { allTags, generateColorMap };
 
     return (
         <TagContext.Provider value={value}>

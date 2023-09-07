@@ -24,9 +24,9 @@ export const SwipePage: FC<ISwipePage> = ({ swipedata }) => {
     } = swipedata;
 
     console.log(tags);
-    const { allTags } = useContext(TagContext);
+    const { allTags, generateColorMap } = useContext(TagContext);
 
-    console.log(allTags);
+    const colorMap = generateColorMap();
 
     return (
         <div>
@@ -52,7 +52,7 @@ export const SwipePage: FC<ISwipePage> = ({ swipedata }) => {
                             id={tag}
                             key={tag}
                             tag={tag}
-                            bgcolor={"blue"}
+                            bgcolor={colorMap[tag]}
                             color={"white"}
                             onXClick={() => {}}
                         />
