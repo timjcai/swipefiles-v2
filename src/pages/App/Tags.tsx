@@ -17,11 +17,19 @@ import { DEFAULT_TAG_SETTINGS, tagColorObject2 } from "../../util";
 import { TagContext } from "../../context/TagProvider";
 
 export const Tags: FC = () => {
-    const { allTags, loading } = useContext(TagContext);
+    const {
+        allTags,
+        loading,
+        createTag,
+        currentTag,
+        currentColor,
+        setCurrentColor,
+        setCurrentTag,
+    } = useContext(TagContext);
     const [keywordPayload, setKeywordPayload] =
         useState<ITagDataObject>(DEFAULT_TAG_SETTINGS);
-    const [currentTag, setCurrentTag] = useState<string>("");
-    const [currentColor, setCurrentColor] = useState<DefaultColors>("Mint");
+    // const [currentTag, setCurrentTag] = useState<string>("");
+    // const [currentColor, setCurrentColor] = useState<DefaultColors>("Mint");
     const user = useAuth();
     const tagCollection = collection(db, "tags");
 
@@ -51,19 +59,19 @@ export const Tags: FC = () => {
         // setTableData((prevState) => [...prevState, payload]);
     };
 
-    const createTag = async () => {
-        const tagRef = doc(collection(db, "tags"));
-        const payload = {
-            colorname: currentColor,
-            tag: currentTag,
-            user_id: user.uid,
-            swipes: [],
-            colorcode: tagColorObject2[currentColor],
-        };
-        await setDoc(tagRef, payload);
-        console.log("successfully created tag");
-        resetTagPayload();
-    };
+    // const createTag = async () => {
+    //     const tagRef = doc(collection(db, "tags"));
+    //     const payload = {
+    //         colorname: currentColor,
+    //         tag: currentTag,
+    //         user_id: user.uid,
+    //         swipes: [],
+    //         colorcode: tagColorObject2[currentColor],
+    //     };
+    //     await setDoc(tagRef, payload);
+    //     console.log("successfully created tag");
+    //     resetTagPayload();
+    // };
 
     function resetTagPayload() {
         setCurrentTag("Mint");

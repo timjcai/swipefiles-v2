@@ -6,16 +6,18 @@ import React, {
     useState,
 } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { ITagDataObject } from "../types";
+import { DefaultColors, ITagDataObject } from "../types";
 import {
     collection,
     deleteDoc,
     doc,
     getDocs,
     query,
+    setDoc,
     where,
 } from "firebase/firestore";
 import { db } from "../../firebase-config";
+import { tagColorObject2 } from "../util";
 
 type TagContextType = {
     allTags: ITagDataObject[];
@@ -29,6 +31,8 @@ export const TagProvider = ({ children }) => {
     const user = useAuth();
     const [allTags, setAllTags] = useState<ITagDataObject[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const [currentTag, setCurrentTag] = useState<string>("");
+    const [currentColor, setCurrentColor] = useState<DefaultColors>("Mint");
     const tagCollection = collection(db, "tags");
 
     useEffect(() => {
@@ -60,23 +64,64 @@ export const TagProvider = ({ children }) => {
         return tagColorMap;
     }, []);
 
-    const deleteTag = useCallback(async (tagid: string) => {
-        console.log(tagid);
-        const tagRef = doc(db, "tags", tagid);
-        await deleteDoc(tagRef);
-        await getTagData(user);
-        console.log(`deleting tag: ${tagid}`);
+    const resetTagPayload = useCallback(() => {
+        setCurrentTag("Mint");
+        setCurrentTag("");
     }, []);
 
+    const createTag = useCallback(async () => {
+        const tagRef = doc(collection(db, "tags"));
+        const payload = {
+            colorname: currentColor,
+            tag: currentTag,
+            user_id: user.uid,
+            swipes: [],
+            colorcode: tagColorObject2[currentColor],
+        };
+        console.log(payload);
+        await setDoc(tagRef, payload);
+        await getTagData(user);
+        console.log("successfully created tag");
+        resetTagPayload();
+    }, [currentColor, currentTag, user, resetTagPayload]);
+
+    const deleteTag = useCallback(
+        async (tagid: string) => {
+            console.log(tagid);
+            const tagRef = doc(db, "tags", tagid);
+            await deleteDoc(tagRef);
+            await getTagData(user);
+            console.log(`deleting tag: ${tagid}`);
+        },
+        [user]
+    );
+
+    const changeTagColor = useCallback(() => {}, []);
     const contextValue = useMemo(
         () => ({
             allTags,
             loading,
-            generateColorMap,
-            deleteTag,
+            currentTag,
+            setCurrentTag,
+            currentColor,
+            setCurrentColor,
             getTagData,
+            generateColorMap,
+            createTag,
+            deleteTag,
         }),
-        [allTags, generateColorMap, deleteTag, getTagData]
+        [
+            allTags,
+            loading,
+            currentTag,
+            setCurrentTag,
+            currentColor,
+            setCurrentColor,
+            getTagData,
+            generateColorMap,
+            createTag,
+            deleteTag,
+        ]
     );
 
     return (
