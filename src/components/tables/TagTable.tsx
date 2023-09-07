@@ -70,7 +70,7 @@ export const TagTable: FC<ITableTags> = ({
                                         {" "}
                                         <KeywordTag
                                             tag={data.tag}
-                                            id={index}
+                                            id={data.id}
                                             bgcolor={data.colorcode}
                                             editable={true}
                                         />

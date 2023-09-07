@@ -1,9 +1,10 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Icon } from "../../common/Icon";
 import { colorSelectOptions, tagColorObject2 } from "../../../util/colorUtils";
 import { DefaultColors } from "../../../types";
 import { PopupSelector, SelectPicker } from "../SelectPicker";
+import { TagContext } from "../../../context/TagProvider";
 
 type KeywordTagProps = {
     tag: string;
@@ -23,13 +24,12 @@ export const KeywordTag: FC<KeywordTagProps> = ({
     onXClick = () => {},
 }) => {
     const [showDelete, setShowDelete] = useState<boolean>(false);
+    const { deleteTag } = useContext(TagContext);
 
     function deleteIsActive() {
-        console.log("show deletebutton");
         setShowDelete(true);
     }
     function deleteisHidden() {
-        console.log("hiding deletebutton");
         setShowDelete(false);
     }
 
@@ -45,7 +45,7 @@ export const KeywordTag: FC<KeywordTagProps> = ({
             </TagStyle>
             <TagButtonWrapper
                 show={showDelete}
-                onClick={onXClick}
+                onClick={() => deleteTag(id)}
                 data-label={id}
             >
                 {editable && <Icon label="Remove" data-label={id} />}

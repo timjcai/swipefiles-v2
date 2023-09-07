@@ -1,12 +1,26 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, {
+    createContext,
+    useCallback,
+    useEffect,
+    useMemo,
+    useState,
+} from "react";
 import { useAuth } from "../hooks/useAuth";
 import { ITagDataObject } from "../types";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+    collection,
+    deleteDoc,
+    doc,
+    getDocs,
+    query,
+    where,
+} from "firebase/firestore";
 import { db } from "../../firebase-config";
 
 type TagContextType = {
     allTags: ITagDataObject[];
     generateColorMap: () => void;
+    deleteTag: (tagid: string) => Promise<void>;
 };
 
 export const TagContext = createContext<TagContextType | null>(null);
@@ -38,18 +52,33 @@ export const TagProvider = ({ children }) => {
         setLoading(false);
     };
 
-    function generateColorMap() {
+    const generateColorMap = useCallback(() => {
         const tagColorMap = {};
         allTags.map((tagdata) => {
             tagColorMap[tagdata.tag] = tagdata.colorcode;
         });
         return tagColorMap;
-    }
+    }, []);
 
-    const value = { allTags, generateColorMap };
+    const deleteTag = useCallback(async (tagid: string) => {
+        console.log(tagid);
+        const tagRef = doc(db, "tags", tagid);
+        await deleteDoc(tagRef);
+        await getTagData(user);
+        console.log(`deleting tag: ${tagid}`);
+    }, []);
+
+    const contextValue = useMemo(
+        () => ({
+            allTags,
+            generateColorMap,
+            deleteTag,
+        }),
+        [allTags, generateColorMap, deleteTag]
+    );
 
     return (
-        <TagContext.Provider value={value}>
+        <TagContext.Provider value={contextValue}>
             {!loading && children}
         </TagContext.Provider>
     );
