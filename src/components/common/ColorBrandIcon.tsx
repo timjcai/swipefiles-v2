@@ -181,7 +181,7 @@ const ColorBrandMapping: { [key in PlatformTypes]: JSX.Element } = {
             <path
                 fill="none"
                 stroke="#ea4c89"
-                stroke-miterlimit="10"
+                strokeMiterlimit="10"
                 d="M28.352 36.914c0 0-3.032-21.087-15.63-34.292M1.269 17.848c0 0 24.2 2.117 32.075-11.102M7.804 34.152c0 0 8.624-19.807 31.058-12.194"
             ></path>
         </svg>
@@ -370,7 +370,7 @@ const ColorBrandMapping: { [key in PlatformTypes]: JSX.Element } = {
                     stroke="#fff"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    stroke-miterlimit="10"
+                    strokeMiterlimit="10"
                     stroke-width="2"
                     d="M30,11H18c-3.9,0-7,3.1-7,7v12c0,3.9,3.1,7,7,7h12c3.9,0,7-3.1,7-7V18C37,14.1,33.9,11,30,11z"
                 ></path>
@@ -385,7 +385,7 @@ const ColorBrandMapping: { [key in PlatformTypes]: JSX.Element } = {
                     stroke="#fff"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    stroke-miterlimit="10"
+                    strokeMiterlimit="10"
                     stroke-width="2"
                 ></circle>
             </g>

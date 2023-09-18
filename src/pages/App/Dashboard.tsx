@@ -8,33 +8,6 @@ export const Dashboard = () => {
 
     return (
         <>
-            {/* <h1>Testing Colors</h1>
-            <div style={{ backgroundColor: "#ffffff" }}>
-                <h2>Light Theme</h2>
-                {colorData.map((item) => {
-                    return (
-                        <KeywordTag
-                            tag={item.name}
-                            id={item.name}
-                            bgcolor={item.color}
-                            color={"#000000"}
-                        />
-                    );
-                })}
-            </div>
-            <div style={{ backgroundColor: "#1D1D1D" }}>
-                <h2 style={{ color: "#FFFFFF" }}>Dark Theme</h2>
-                {colorData.map((item) => {
-                    return (
-                        <KeywordTag
-                            tag={item.name}
-                            id={item.name}
-                            bgcolor={item.color}
-                            color={"#FFFFFF"}
-                        />
-                    );
-                })}
-            </div> */}
             <div
                 style={{
                     display: "flex",

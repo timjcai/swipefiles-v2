@@ -1,20 +1,19 @@
-import React, { FC, useContext } from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
 import { Icon } from "./Icon";
 import { IconType } from "../../types";
 import { Link } from "react-router-dom";
-import { SwipeActionsContext } from "../../context/SwipeActionsProvider";
 
 type RoundButtonProps = {
     label: IconType;
-    backgroundColor: string;
+    bgcolor: string;
     color: string;
     url?: string;
     onClick?: (e: MouseEvent) => void;
 };
 export const RoundButton: FC<RoundButtonProps> = ({
     label,
-    backgroundColor,
+    bgcolor,
     color,
     url,
     onClick,
@@ -27,7 +26,7 @@ export const RoundButton: FC<RoundButtonProps> = ({
     if (linkType === "External") {
         button = (
             <>
-                <CircleWrapper backgroundColor={backgroundColor} color={color}>
+                <CircleWrapper bgcolor={bgcolor} color={color}>
                     <a href={url}>
                         <Icon label={label} className={"white"} />
                     </a>
@@ -37,7 +36,7 @@ export const RoundButton: FC<RoundButtonProps> = ({
     } else if (linkType === "Internal") {
         button = (
             <>
-                <CircleWrapper backgroundColor={backgroundColor} color={color}>
+                <CircleWrapper bgcolor={bgcolor} color={color}>
                     <Link to={`${url}`}>
                         <Icon label={label} className={"white"} />
                     </Link>
@@ -48,7 +47,7 @@ export const RoundButton: FC<RoundButtonProps> = ({
         button = (
             <>
                 <CircleWrapper
-                    backgroundColor={backgroundColor}
+                    bgcolor={bgcolor}
                     color={color}
                     onClick={onClick}
                 >
@@ -62,7 +61,7 @@ export const RoundButton: FC<RoundButtonProps> = ({
 };
 
 type CircleWrapperProps = {
-    backgroundColor?: string;
+    bgcolor?: string;
     color?: string;
     size?: string;
 };
@@ -74,7 +73,7 @@ export const CircleWrapper = styled.div<CircleWrapperProps>`
     width: ${(props) => (props.size ? props.size : "28px")};
     padding: 0.25em 0.25em;
     border-radius: 50%;
-    background-color: ${(props) => props.backgroundColor};
+    background-color: ${(props) => props.bgcolor};
     color: ${(props) => props.color};
 `;
 

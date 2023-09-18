@@ -46,8 +46,6 @@ export const Swipecard: FC<SwipecardProps> = ({ swipedata, onDeleteCard }) => {
     const numbBoards = board_id.length;
     const numbImages = images.length;
 
-    console.log(colorMap);
-
     return (
         <StyledSwipecard key={id}>
             <Link to={`/swipes/${id}`}>
@@ -59,9 +57,10 @@ export const Swipecard: FC<SwipecardProps> = ({ swipedata, onDeleteCard }) => {
                     <SwipecardHeading>{title}</SwipecardHeading>
                     <KeywordWrapper>
                         {keyword_tags &&
-                            keyword_tags.map((tag, i) => {
+                            keyword_tags.map((tag) => {
                                 return (
                                     <KeywordTag
+                                        id={tag}
                                         key={tag}
                                         bgcolor={
                                             colorMap[tag]
@@ -95,25 +94,25 @@ export const Swipecard: FC<SwipecardProps> = ({ swipedata, onDeleteCard }) => {
                 <BottomRow>
                     <RoundButton
                         label={"hyperlink"}
-                        backgroundColor="#3272F7"
+                        bgcolor="#3272F7"
                         color="#ffffff"
                         url={hyperlink}
                     />
                     <RoundButton
                         label={"Edit"}
-                        backgroundColor="#3272F7"
+                        bgcolor="#3272F7"
                         color="#ffffff"
                         url={`/swipes/edit/${id}`}
                     />
                     <RoundButton
                         label={"Share"}
-                        backgroundColor="#3272F7"
+                        bgcolor="#3272F7"
                         color="#ffffff"
                         url={hyperlink}
                     />
                     <RoundButton
                         label={"Delete"}
-                        backgroundColor="#C70039"
+                        bgcolor="#C70039"
                         color="#ffffff"
                         onClick={(e) => {
                             e.preventDefault();
