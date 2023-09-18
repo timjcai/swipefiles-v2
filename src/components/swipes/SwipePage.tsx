@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { KeywordSection, SummarySection } from ".";
 import { QuillEditor } from "../quilljs";
 import { KeywordTag } from "../form";
-import { Icon } from "../common";
+import { ExitButton, Icon } from "../common";
 import { TagContext } from "../../context/TagProvider";
 
 interface ISwipePage {
@@ -23,13 +23,14 @@ export const SwipePage: FC<ISwipePage> = ({ swipedata }) => {
         board_id: boards,
     } = swipedata;
 
-    console.log(tags);
     const { allTags, generateColorMap } = useContext(TagContext);
 
     const colorMap = generateColorMap();
+    console.log(colorMap);
 
     return (
         <div>
+            <ExitButton />
             <h1>{title}</h1>
             <SummarySection>
                 <p>User Id:</p>
@@ -52,8 +53,7 @@ export const SwipePage: FC<ISwipePage> = ({ swipedata }) => {
                             id={tag}
                             key={tag}
                             tag={tag}
-                            bgcolor={colorMap[tag] ? colorMap[tag] : "black"}
-                            color={"white"}
+                            bgcolor={colorMap[tag] ? colorMap[tag] : "grey"}
                             editable={true}
                             onXClick={() => {}}
                         />

@@ -27,7 +27,7 @@ interface ITagContext {
     currentColor: string;
     setCurrentTag: () => void;
     setCurrentColor: () => void;
-    generateColorMap: () => void;
+    generateColorMap: () => {};
     deleteTag: (tagid: string) => Promise<void>;
     getTagData: (user) => Promise<void>;
     createTag: () => Promise<void>;
@@ -123,6 +123,7 @@ export const TagProvider = ({ children }) => {
         await getTagData(user);
         console.log(`succesfully updated: ${payload}`);
     }, []);
+
     const contextValue = useMemo(
         () => ({
             allTags,

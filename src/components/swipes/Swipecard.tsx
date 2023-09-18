@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { FC } from "react";
+import React, { FC, useContext } from "react";
 import { ISwipeData } from "../../types";
 import { generateRandomString } from "../../util/randomUtils";
 import { ColorBrandIcon } from "../common/ColorBrandIcon";
@@ -18,6 +18,7 @@ import { KeywordTag } from "../form";
 import { Icon } from "../common/Icon";
 import { RoundButton } from "../common/Button";
 import { Link } from "react-router-dom";
+import { TagContext } from "../../context/TagProvider";
 
 type SwipecardProps = {
     swipedata: ISwipeData;
@@ -38,8 +39,14 @@ export const Swipecard: FC<SwipecardProps> = ({ swipedata, onDeleteCard }) => {
         id,
     } = swipedata;
 
+    const { generateColorMap } = useContext(TagContext);
+
+    const colorMap = generateColorMap();
+
     const numbBoards = board_id.length;
     const numbImages = images.length;
+
+    console.log(colorMap);
 
     return (
         <StyledSwipecard key={id}>
@@ -52,13 +59,16 @@ export const Swipecard: FC<SwipecardProps> = ({ swipedata, onDeleteCard }) => {
                     <SwipecardHeading>{title}</SwipecardHeading>
                     <KeywordWrapper>
                         {keyword_tags &&
-                            keyword_tags.map((words, i) => {
+                            keyword_tags.map((tag, i) => {
                                 return (
                                     <KeywordTag
-                                        key={i}
-                                        bgcolor={"#009956"}
-                                        color={"#ffffff"}
-                                        tag={words}
+                                        key={tag}
+                                        bgcolor={
+                                            colorMap[tag]
+                                                ? colorMap[tag]
+                                                : "grey"
+                                        }
+                                        tag={tag}
                                     />
                                 );
                             })}

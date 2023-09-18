@@ -52,19 +52,9 @@ export const SwipesIndex = () => {
                     swipes.map((swipe: ISwipeData) => {
                         return (
                             <Swipecard
+                                key={swipe.id}
                                 swipedata={swipe}
                                 onDeleteCard={deleteCard}
-                                // key={swipe.id}
-                                // title={swipe.title}
-                                // author={swipe.author}
-                                // board_id={swipe.board_id}
-                                // hyperlink={swipe.hyperlink}
-                                // platform={swipe.platform}
-                                // user_id={swipe.user_id}
-                                // id={swipe.id}
-                                // notes={swipe.notes}
-                                // images={swipe.images}
-                                // keyword_tags={swipe.keyword_tags}
                             />
                         );
                     })}
