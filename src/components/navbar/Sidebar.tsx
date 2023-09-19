@@ -21,16 +21,16 @@ export const Sidebar = () => {
                         <div>Logo</div>
                     </BetweenRow>
                     <InlineColumn>
-                        <Link to="/dashboard">
+                        {/* <Link to="/dashboard">
                             <SidenavButton
                                 label="Home"
                                 selected={selected}
                                 onClick={handleClick}
                             />
-                        </Link>
+                        </Link> */}
                         <Link to="/swipes">
                             <SidenavButton
-                                label="Swipes"
+                                label="Home"
                                 selected={selected}
                                 onClick={handleClick}
                             />
@@ -42,13 +42,13 @@ export const Sidebar = () => {
                                 onClick={handleClick}
                             />
                         </Link>
-                        <Link to="/boards">
+                        {/* <Link to="/boards">
                             <SidenavButton
                                 label="Boards"
                                 selected={selected}
                                 onClick={handleClick}
                             />
-                        </Link>
+                        </Link> */}
                         <Link to="/tags">
                             <SidenavButton
                                 label="Tags"
@@ -91,6 +91,7 @@ export const NonsidebarWrapper = styled.div`
     height: 100vh;
     width: 100vw;
     padding-left: 64px;
+    overflow: scroll;
 `;
 
 export const InAppWrapper = styled.div`
