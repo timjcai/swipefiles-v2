@@ -2,9 +2,9 @@ import React, { FC, useContext, useState, createContext } from "react";
 import { Icon } from "../components/common/Icon";
 import styled from "styled-components";
 
-const ThemeContext = createContext(null);
+export const ThemeContext = createContext(null);
 
-type Theme = "light" | "dark" | "vaporwave";
+type Theme = "light" | "dark";
 
 export const ThemeProvider = ({ children }) => {
     const [theme, setTheme] = useState<Theme>("light");

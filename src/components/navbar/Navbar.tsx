@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useAuth } from "../../hooks/useAuth";
 import { Badge } from "../landingpage";
+import { Logo } from "../common/Logo";
 
 export const Navbar = () => {
     const user = useAuth();
     return (
         <NavbarWrapper>
             <NavbarSection>
-                <Link to="/">Logo</Link>
+                <Link to="/">
+                    <Logo />
+                </Link>
             </NavbarSection>
             <NavbarSection>
                 <Link to="/pricing">Pricing</Link>
@@ -22,7 +25,7 @@ export const Navbar = () => {
                 )}
                 {user && (
                     <Badge size="16px">
-                        <Link to="/dashboard">Dashboard</Link>
+                        <Link to="/swipes">Dashboard</Link>
                     </Badge>
                 )}
             </NavbarSection>

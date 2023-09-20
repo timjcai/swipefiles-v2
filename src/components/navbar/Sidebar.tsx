@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Icon } from "../common/Icon";
 import { NavigationTypes } from "../../types";
 import { ThemeButton } from "../../context";
+import { Logo } from "../common/Logo";
 
 export const Sidebar = () => {
     const [selected, setSelected] = useState(null);
@@ -17,7 +18,11 @@ export const Sidebar = () => {
         <SidebarWrapper>
             <StyledDiv padding={"3rem 1.5rem"} justify={"space-between"}>
                 <div>
-                    <BetweenRow>{/* <div>Logo</div> */}</BetweenRow>
+                    <BetweenRow>
+                        <div>
+                            <Logo />
+                        </div>
+                    </BetweenRow>
                     <InlineColumn>
                         {/* <Link to="/dashboard">
                             <SidenavButton

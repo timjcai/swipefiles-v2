@@ -10,7 +10,7 @@ export const Badge = styled.div<BadgeStylingProps>`
     background: ${(props) => (props.bgcolor ? props.bgcolor : "#e2eeff")};
     border-radius: 20px;
     overflow: clip;
-    max-height: 16px;
+    max-height: 28px;
     max-width: 150px;
 `;
 

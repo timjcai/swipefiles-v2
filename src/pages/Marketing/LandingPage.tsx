@@ -29,7 +29,6 @@ const fakeData = {
 
 export const LandingPage = () => {
     const user = useAuth();
-    console.log(user);
     return (
         <LandingPageWrapper>
             <Navbar />
