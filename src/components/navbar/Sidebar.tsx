@@ -17,9 +17,7 @@ export const Sidebar = () => {
         <SidebarWrapper>
             <StyledDiv padding={"3rem 1.5rem"} justify={"space-between"}>
                 <div>
-                    <BetweenRow>
-                        <div>Logo</div>
-                    </BetweenRow>
+                    <BetweenRow>{/* <div>Logo</div> */}</BetweenRow>
                     <InlineColumn>
                         {/* <Link to="/dashboard">
                             <SidenavButton
@@ -60,7 +58,7 @@ export const Sidebar = () => {
                 </div>
                 <div>
                     <ThemeButton />
-                    <div>Picture</div>
+                    {/* <div>Picture</div> */}
                     <div>
                         <Link to="/settings" onClick={handleClick}>
                             <SidenavButton

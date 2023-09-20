@@ -124,6 +124,10 @@ export const TagProvider = ({ children }) => {
         console.log(`succesfully updated: ${payload}`);
     }, []);
 
+    // add swipe id to tag
+    // update tag
+    // delete swipe from tag
+
     const contextValue = useMemo(
         () => ({
             allTags,

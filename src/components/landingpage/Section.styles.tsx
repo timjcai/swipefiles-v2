@@ -4,11 +4,14 @@ export const Badge = styled.div<BadgeStylingProps>`
     display: inline-block;
     padding: 4px 12px 5px 12px;
     font-weight: 700;
-    line-height: 1.35;
+    line-height: 1.5;
     font-size: ${(props) => (props.size ? props.size : "12px")};
     color: ${(props) => (props.bgcolor ? props.bgcolor : "#0669ff")};
     background: ${(props) => (props.bgcolor ? props.bgcolor : "#e2eeff")};
     border-radius: 20px;
+    overflow: clip;
+    max-height: 16px;
+    max-width: 150px;
 `;
 
 type BadgeStylingProps = {
