@@ -125,6 +125,9 @@ const StyledColumnHeading = styled.th<ColumnProps>`
         props.colNumber ? `calc(100vw/${props.colNumber})` : "300px"};
     min-width: 300px;
     border: 1px solid hsl(202, 10%, 88%);
+    background-color: #f3f3f3;
+    margin: 0;
+    padding: 0;
 `;
 
 const StyledCell = styled.td`
@@ -139,6 +142,7 @@ const StyledTable = styled.table`
     display: inline-block;
     overflow: scroll;
     height: calc(100vh - 150px);
+    border-collapse: collapse;
 `;
 
 const AddTagInput = styled.input`
