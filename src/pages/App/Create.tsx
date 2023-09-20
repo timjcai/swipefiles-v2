@@ -11,16 +11,16 @@ import {
 import { Swipecard } from "../../components/swipes/Swipecard";
 import { ISwipeData, ITagDataObject, PlatformTypes } from "../../types";
 import { Search } from "../../components/multistep/Search";
-import { Timestamp, collection, doc, setDoc } from "firebase/firestore";
+import { Timestamp, addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase-config";
 import { useAuth } from "../../hooks/useAuth";
 import { DEFAULT_TAG_SETTINGS, INITIAL_FORMSTATE } from "../../util";
 
 export const Create: FC = () => {
-    const [data, setData] = useState<ISwipeData>(INITIAL_FORMSTATE);
+    const [data, setData] = useState<Partial<ISwipeData>>(INITIAL_FORMSTATE);
     const [currentKeyword, setCurrentKeyword] = useState<string>("");
     const [keywordPayload, setKeywordPayload] =
-        useState<ITagDataObject>(DEFAULT_TAG_SETTINGS);
+        useState<Partial<ITagDataObject>>(DEFAULT_TAG_SETTINGS);
     const user = useAuth();
     const {
         steps,
@@ -113,18 +113,21 @@ export const Create: FC = () => {
             create_date: Timestamp.fromDate(new Date()),
         };
         createSwipe(payload);
-        resetForm();
-        goTo(0);
+        // resetForm();
+        // goTo(0);
     }
 
     const createSwipe = async (payload: ISwipeData) => {
         const newSwipesRef = doc(collection(db, "swipes"));
         await setDoc(newSwipesRef, payload);
+        // return swipeid
+        console.log(newSwipesRef.id);
     };
 
     const createTag = async (keywordPayload: ITagDataObject) => {
         const tagRef = doc(collection(db, "tags"));
         await setDoc(tagRef, keywordPayload);
+        // we will need to store TagIDs in state - current list of TagIds
     };
 
     return (

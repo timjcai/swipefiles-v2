@@ -1,6 +1,6 @@
 import { ISwipeData, ITagDataObject } from "../types";
 
-export const DEFAULT_TAG_SETTINGS: ITagDataObject = {
+export const DEFAULT_TAG_SETTINGS: Partial<ITagDataObject> = {
     colorname: "Mint",
     colorcode: "rgb(170, 255, 195)",
     tag: "",
@@ -8,7 +8,7 @@ export const DEFAULT_TAG_SETTINGS: ITagDataObject = {
     swipes: [],
 };
 
-export const INITIAL_FORMSTATE: ISwipeData = {
+export const INITIAL_FORMSTATE: Partial<ISwipeData> = {
     author: "",
     board_id: [],
     images: [],
@@ -18,5 +18,4 @@ export const INITIAL_FORMSTATE: ISwipeData = {
     platform: "",
     title: "",
     user_id: "",
-    id: "",
 };
