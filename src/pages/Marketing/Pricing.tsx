@@ -170,6 +170,15 @@ export const Pricing = () => {
                         </div>
                     </CompareColumn>
                 </CompareColumnWrapper>
+                <section>
+                    <h2>Compare our plans</h2>
+                </section>
+                <section>
+                    <h2>Additional Questions?</h2>
+                </section>
+                <section>
+                    <h2>FAQ?</h2>
+                </section>
             </CenterColumn>
         </div>
     );
