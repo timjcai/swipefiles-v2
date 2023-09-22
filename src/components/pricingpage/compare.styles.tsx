@@ -28,3 +28,23 @@ export const CompareColumn = styled.div`
     padding-left: 1.5rem;
     padding-right: 1.5rem;
 `;
+
+export const Grid2x2 = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    grid-template-columns: auto minmax(auto, 400px);
+    font-size: 14px;
+`;
+
+export const InlineRow = styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+`;
+
+export const FeatureListParagraph = styled.p`
+    height: fit-content;
+    margin-bottom: 12px;
+    margin-top: -4px;
+`;

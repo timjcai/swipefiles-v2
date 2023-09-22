@@ -22,7 +22,11 @@ export const PricePerMonth: FC<PricePerMonthProps> = ({ price }) => {
                     {priceIsNumber && "per seat/month billed annually"}
                 </DescriptorText>
             </PriceWrapper>
-            <div>{priceIsNumber && `$${price * 1.2} billed monthly`}</div>
+            <div style={{ marginBottom: "24px" }}>
+                {priceIsNumber
+                    ? `$${price * 1.2} billed monthly`
+                    : "no monthly charge"}
+            </div>
         </>
     );
 };

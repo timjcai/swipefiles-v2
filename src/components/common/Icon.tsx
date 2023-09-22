@@ -7,6 +7,7 @@ import {
     IconDefinition,
     faAt,
     faChalkboard,
+    faCheck,
     faChevronLeft,
     faChevronRight,
     faCircleCheck,
@@ -107,6 +108,7 @@ const iconMapping: {
     Dark: faMoon,
     Upload: faUpload,
     Download: faDownload,
+    Included: faCheck,
 };
 
 type IconProps = {

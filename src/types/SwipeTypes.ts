@@ -51,6 +51,7 @@ export type ActionTypes =
     | "Download"
     | "Back"
     | "Square"
+    | "Included"
 
 export type NavigationTypes = 
     | "Home" 
