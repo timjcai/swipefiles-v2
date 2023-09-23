@@ -51,6 +51,7 @@ const data = [
 export const PricingFAQ: FC = () => {
     return (
         <PricingFAQWrapper>
+            <h2 style={{ textAlign: "center" }}>FAQ?</h2>
             {data.map((items: AccordionProps) => {
                 return (
                     <Accordion

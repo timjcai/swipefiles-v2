@@ -1,8 +1,12 @@
 import React, { FC } from "react";
 import { Navbar } from "../../components/navbar/Navbar";
 import styled from "styled-components";
-import { CenterColumn, PricingHero } from "../../components/pricingpage";
-import PricingFAQ from "../../components/pricingpage/PricingFAQ";
+import {
+    CenterColumn,
+    PricingAdditionalQuestions,
+    PricingHero,
+    PricingFAQ,
+} from "../../components/pricingpage";
 
 export const Pricing = () => {
     return (
@@ -14,10 +18,9 @@ export const Pricing = () => {
                     <h2>Compare our plans</h2>
                 </section>
                 <section>
-                    <h2>Additional Questions?</h2>
+                    <PricingAdditionalQuestions />
                 </section>
                 <section>
-                    <h2>FAQ?</h2>
                     <PricingFAQ />
                 </section>
             </CenterColumn>
