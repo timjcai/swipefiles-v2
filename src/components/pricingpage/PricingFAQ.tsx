@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Accordion, AccordionProps } from "../common/Accordion";
+import styled from "styled-components";
 
 const data = [
     {
@@ -49,7 +50,7 @@ const data = [
 
 export const PricingFAQ: FC = () => {
     return (
-        <div>
+        <PricingFAQWrapper>
             {data.map((items: AccordionProps) => {
                 return (
                     <Accordion
@@ -58,6 +59,12 @@ export const PricingFAQ: FC = () => {
                     />
                 );
             })}
-        </div>
+        </PricingFAQWrapper>
     );
 };
+
+const PricingFAQWrapper = styled.div`
+    margin-right: 10vw;
+    margin-left: 10vw;
+    margin-bottom: 10vh;
+`;
