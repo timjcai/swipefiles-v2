@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { Navbar } from "../../components/navbar/Navbar";
 import styled from "styled-components";
 import { CenterColumn, PricingHero } from "../../components/pricingpage";
+import PricingFAQ from "../../components/pricingpage/PricingFAQ";
 
 export const Pricing = () => {
     return (
@@ -17,6 +18,7 @@ export const Pricing = () => {
                 </section>
                 <section>
                     <h2>FAQ?</h2>
+                    <PricingFAQ />
                 </section>
             </CenterColumn>
         </div>

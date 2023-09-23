@@ -52,6 +52,7 @@ export type ActionTypes =
     | "Back"
     | "Square"
     | "Included"
+    | "Open"
 
 export type NavigationTypes = 
     | "Home" 
