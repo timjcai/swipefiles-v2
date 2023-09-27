@@ -18,6 +18,8 @@ import { DEFAULT_TAG_SETTINGS, INITIAL_FORMSTATE } from "../../util";
 
 export const Create: FC = () => {
     const [data, setData] = useState<Partial<ISwipeData>>(INITIAL_FORMSTATE);
+    const [lastSwipe, setLastSwipe] = useState<string>("");
+    const [previousTagIds, setPreviousTagIds] = useState<string[]>([]);
     const [currentKeyword, setCurrentKeyword] = useState<string>("");
     const [keywordPayload, setKeywordPayload] =
         useState<Partial<ITagDataObject>>(DEFAULT_TAG_SETTINGS);
@@ -113,15 +115,15 @@ export const Create: FC = () => {
             create_date: Timestamp.fromDate(new Date()),
         };
         createSwipe(payload);
-        // resetForm();
-        // goTo(0);
+        resetForm();
+        goTo(0);
     }
 
     const createSwipe = async (payload: ISwipeData) => {
         const newSwipesRef = doc(collection(db, "swipes"));
         await setDoc(newSwipesRef, payload);
         // return swipeid
-        console.log(newSwipesRef.id);
+        setLastSwipe(newSwipesRef.id);
     };
 
     const createTag = async (keywordPayload: ITagDataObject) => {
@@ -134,6 +136,7 @@ export const Create: FC = () => {
         <div>
             <ExitButton />
             <h1>All Boards Page</h1>
+            <p>{lastSwipe}</p>
             <ColumnContainer>
                 <Column1>
                     <FormContainer>

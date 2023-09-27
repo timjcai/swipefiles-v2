@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { FormWrapper, KWFormWrapper } from ".";
+import { KWFormWrapper } from ".";
 import { useGetAllBoards } from "../../hooks/useGetAllBoards";
 import { useAuth } from "../../hooks/useAuth";
 import { db } from "../../../firebase-config";
