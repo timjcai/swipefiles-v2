@@ -89,6 +89,7 @@ export const TagProvider = ({ children }) => {
         };
         console.log(payload);
         await setDoc(tagRef, payload);
+        console.log(tagRef.id);
         await getTagData(user);
         console.log("successfully created tag");
         resetTagPayload();
@@ -126,7 +127,24 @@ export const TagProvider = ({ children }) => {
 
     // add swipe id to tag
     // update tag
+    const addSwipeOnTag = useCallback(
+        async (tagid: string, swipeid: string) => {
+            const tagRef = doc(db, "tags", tagid);
+            const data = await getDocs(
+                query(tagCollection, where("id", "==", tagid))
+            );
+            const payload = data.docs.map((doc) => ({
+                ...doc.data(),
+            }))[0];
+            const swipecontainer = payload.swipes;
+            swipecontainer.push(swipeid);
+            payload.swipes = swipecontainer;
+            await updateDoc(tagRef, payload);
+        },
+        []
+    );
     // delete swipe from tag
+    const deleteSwipeOnTag = useCallback(async (tagid: string) => {}, []);
 
     const contextValue = useMemo(
         () => ({
@@ -141,6 +159,7 @@ export const TagProvider = ({ children }) => {
             createTag,
             deleteTag,
             changeTagColor,
+            addSwipeOnTag,
         }),
         [
             allTags,
@@ -154,6 +173,7 @@ export const TagProvider = ({ children }) => {
             createTag,
             deleteTag,
             changeTagColor,
+            addSwipeOnTag,
         ]
     );
 
