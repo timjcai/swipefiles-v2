@@ -84,9 +84,10 @@ export const Create: FC = () => {
         currentPayload["user_id"] = user.uid;
         console.log(currentPayload);
         setKeywordPayload(currentPayload);
-        createTag(currentPayload);
-
+        const keywordId = createTag(currentPayload);
         keywordArray.push(keyword);
+        setPreviousTagIds((prevState) => [...prevState, keywordId]);
+        console.log(previousTagIds);
         setData((prevState) => ({
             ...prevState,
             ["keyword_tags"]: keywordArray,
@@ -103,7 +104,7 @@ export const Create: FC = () => {
         const newForm = { ...INITIAL_FORMSTATE };
         // newForm["keyword_tags"] = [];
         console.log(newForm);
-        setData(newForm);
+        setData({ ...INITIAL_FORMSTATE, ["keyword_tags"]: [] });
     }
 
     function submitHandler(e) {
@@ -129,6 +130,8 @@ export const Create: FC = () => {
     const createTag = async (keywordPayload: ITagDataObject) => {
         const tagRef = doc(collection(db, "tags"));
         await setDoc(tagRef, keywordPayload);
+        console.log(tagRef.id);
+        return tagRef.id;
         // we will need to store TagIDs in state - current list of TagIds
     };
 
@@ -137,6 +140,9 @@ export const Create: FC = () => {
             <ExitButton />
             <h1>All Boards Page</h1>
             <p>{lastSwipe}</p>
+            {previousTagIds.map((keywords) => {
+                <p>{keywords}</p>;
+            })}
             <ColumnContainer>
                 <Column1>
                     <FormContainer>
