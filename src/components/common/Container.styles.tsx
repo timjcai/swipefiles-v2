@@ -9,6 +9,12 @@ export const StyledCreateForm = styled.form`
 export const ColumnContainer = styled.div`
     display: flex;
     flex-direction: row;
+
+    @media (max-width: 1200px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
 export const Column1 = styled.div`

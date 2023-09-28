@@ -179,7 +179,8 @@ const FormContainer = styled.div`
     padding: 2rem;
     margin: 1rem;
     border-radius: 0.5rem;
-    max-width: max-content;
+    width: 400px;
+    align-self: center;
 `;
 
 const StepContainer = styled.div`
