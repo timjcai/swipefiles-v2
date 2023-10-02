@@ -93,7 +93,6 @@ export const Create: FC = () => {
         const generatedColors = randomColor();
         currentPayload["colorcode"] = generatedColors.colorcode;
         currentPayload["colorname"] = generatedColors.colorname;
-        console.log(currentPayload);
         setKeywordPayload(currentPayload);
         createTag(currentPayload).then((result) => {
             keywordId = result;
@@ -114,9 +113,6 @@ export const Create: FC = () => {
     }
 
     function resetForm() {
-        const newForm = { ...INITIAL_FORMSTATE };
-        // newForm["keyword_tags"] = [];
-        console.log(newForm);
         setData({ ...INITIAL_FORMSTATE, ["keyword_tags"]: [] });
     }
 

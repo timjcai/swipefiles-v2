@@ -91,17 +91,13 @@ export const TagProvider = ({ children }) => {
             swipes: [],
             colorcode: tagColorObject2[currentColor],
         };
-        console.log(payload);
         await setDoc(tagRef, payload);
-        console.log(tagRef.id);
         await getTagData(user);
-        console.log("successfully created tag");
         resetTagPayload();
     }, [currentColor, currentTag, user, resetTagPayload]);
 
     const deleteTag = useCallback(
         async (tagid: string) => {
-            console.log(tagid);
             const tagRef = doc(db, "tags", tagid);
             await deleteDoc(tagRef);
             await getTagData(user);
@@ -138,13 +134,10 @@ export const TagProvider = ({ children }) => {
             const data = await getDocs(
                 query(tagCollection, where("__name__", "==", tagid))
             );
-            console.log(data);
             const payload = data.docs.map((doc) => ({
                 ...doc.data(),
             }))[0];
-            console.log(payload);
             const swipecontainer = payload.swipes;
-            console.log(`we in the swipe container: ${swipecontainer}`);
             swipecontainer.push(swipeid);
             payload.swipes = swipecontainer;
             await updateDoc(tagRef, payload);
