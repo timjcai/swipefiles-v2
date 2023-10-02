@@ -73,4 +73,10 @@ export const tagColorObject2:{[key in DefaultColors]: string }= {
     Grey: "rgb(169, 169, 169)" ,
 }
 
+export function randomColor(){
+    const randomIndex = Math.floor(Math.random() * colorSelectOptions.length);
+    const randomColor = colorSelectOptions[randomIndex]
+    return {colorname: randomColor, colorcode: tagColorObject2[randomColor]}
+}
+
 export const colorSelectOptions: DefaultColors[] = ['Maroon', 'Red', 'Pink', 'Brown', 'Orange', 'Apricot', 'Olive', 'Yellow', 'Beige', 'Lime', 'Green', 'Mint', 'Teal', 'Cyan', 'Blue', 'Navy', 'Purple', 'Lavender', 'Magenta', 'Grey'];

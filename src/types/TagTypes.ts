@@ -1,7 +1,7 @@
 import { DefaultColors } from ".";
 
 export interface ITagDataObject {
-    colorname: DefaultColors;
+    colorname: DefaultColors | "";
     colorcode: string;
     tag: string;
     user_id?: string;

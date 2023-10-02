@@ -1,8 +1,8 @@
 import { ISwipeData, ITagDataObject } from "../types";
 
 export const DEFAULT_TAG_SETTINGS: Partial<ITagDataObject> = {
-    colorname: "Mint",
-    colorcode: "rgb(170, 255, 195)",
+    colorname: "",
+    colorcode: "",
     tag: "",
     user_id: "",
     swipes: [],
