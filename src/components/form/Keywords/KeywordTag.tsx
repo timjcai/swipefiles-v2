@@ -23,7 +23,7 @@ export const KeywordTag: FC<KeywordTagProps> = ({
     editable = false,
 }) => {
     const [showDelete, setShowDelete] = useState<boolean>(false);
-    const { deleteTag, addSwipeOnTag } = useContext(TagContext);
+    const { deleteTag } = useContext(TagContext);
 
     function deleteIsActive() {
         setShowDelete(true);

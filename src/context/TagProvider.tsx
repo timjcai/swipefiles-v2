@@ -20,6 +20,9 @@ import {
 import { db } from "../../firebase-config";
 import { tagColorObject2 } from "../util";
 
+type TagId = string;
+type SwipeId = string;
+
 interface ITagContext {
     allTags: ITagDataObject[];
     loading: boolean;
@@ -32,6 +35,7 @@ interface ITagContext {
     getTagData: (user) => Promise<void>;
     createTag: () => Promise<void>;
     changeTagColor: () => void;
+    addSwipeOnTag: (tagid: TagId, swipeid: SwipeId) => void;
 }
 
 export const TagContext = createContext<ITagContext>({} as ITagContext);
@@ -126,20 +130,25 @@ export const TagProvider = ({ children }) => {
     }, []);
 
     // add swipe id to tag
+
     // update tag
     const addSwipeOnTag = useCallback(
         async (tagid: string, swipeid: string) => {
             const tagRef = doc(db, "tags", tagid);
             const data = await getDocs(
-                query(tagCollection, where("id", "==", tagid))
+                query(tagCollection, where("__name__", "==", tagid))
             );
+            console.log(data);
             const payload = data.docs.map((doc) => ({
                 ...doc.data(),
             }))[0];
+            console.log(payload);
             const swipecontainer = payload.swipes;
+            console.log(`we in the swipe container: ${swipecontainer}`);
             swipecontainer.push(swipeid);
             payload.swipes = swipecontainer;
             await updateDoc(tagRef, payload);
+            console.log(`successfully updated: ${payload}`);
         },
         []
     );

@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 import styled from "styled-components";
 import { useMultistepForm } from "../../hooks/useMultistepForm";
 import { Hyperlink, IDdetails, Notes } from "../../components/multistep";
@@ -11,10 +11,21 @@ import {
 import { Swipecard } from "../../components/swipes/Swipecard";
 import { ISwipeData, ITagDataObject, PlatformTypes } from "../../types";
 import { Search } from "../../components/multistep/Search";
-import { Timestamp, addDoc, collection, doc, setDoc } from "firebase/firestore";
+import {
+    Timestamp,
+    addDoc,
+    collection,
+    doc,
+    getDocs,
+    query,
+    setDoc,
+    updateDoc,
+    where,
+} from "firebase/firestore";
 import { db } from "../../../firebase-config";
 import { useAuth } from "../../hooks/useAuth";
 import { DEFAULT_TAG_SETTINGS, INITIAL_FORMSTATE } from "../../util";
+import { TagContext } from "../../context/TagProvider";
 
 export const Create: FC = () => {
     const [data, setData] = useState<Partial<ISwipeData>>(INITIAL_FORMSTATE);
@@ -24,6 +35,8 @@ export const Create: FC = () => {
     const [keywordPayload, setKeywordPayload] =
         useState<Partial<ITagDataObject>>(DEFAULT_TAG_SETTINGS);
     const user = useAuth();
+    const tagCollection = collection(db, "tags");
+    const { addSwipeOnTag } = useContext(TagContext);
     const {
         steps,
         currentStepIndex,
@@ -121,6 +134,7 @@ export const Create: FC = () => {
         };
         createSwipe(payload);
         resetForm();
+        connectSwipeIdtoTag(lastSwipe);
         goTo(0);
     }
 
@@ -136,6 +150,11 @@ export const Create: FC = () => {
         await setDoc(tagRef, keywordPayload);
         return tagRef.id;
         // we will need to store TagIDs in state - current list of TagIds
+    };
+
+    const connectSwipeIdtoTag = async (swipeId: string) => {
+        previousTagIds.forEach((tagId) => addSwipeOnTag(tagId, swipeId));
+        setPreviousTagIds([]);
     };
 
     return (
