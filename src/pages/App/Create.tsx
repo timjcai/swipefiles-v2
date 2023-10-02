@@ -80,14 +80,18 @@ export const Create: FC = () => {
     function addKeywordtoList(keyword: string): void {
         const keywordArray = data.keyword_tags;
         const currentPayload = keywordPayload;
+        let keywordId: string;
+        const existingTags = previousTagIds;
         currentPayload["tag"] = keyword;
         currentPayload["user_id"] = user.uid;
         console.log(currentPayload);
         setKeywordPayload(currentPayload);
-        const keywordId = createTag(currentPayload);
+        createTag(currentPayload).then((result) => {
+            keywordId = result;
+            existingTags.push(keywordId);
+        });
         keywordArray.push(keyword);
-        setPreviousTagIds((prevState) => [...prevState, keywordId]);
-        console.log(previousTagIds);
+        setPreviousTagIds(existingTags);
         setData((prevState) => ({
             ...prevState,
             ["keyword_tags"]: keywordArray,
@@ -130,7 +134,6 @@ export const Create: FC = () => {
     const createTag = async (keywordPayload: ITagDataObject) => {
         const tagRef = doc(collection(db, "tags"));
         await setDoc(tagRef, keywordPayload);
-        console.log(tagRef.id);
         return tagRef.id;
         // we will need to store TagIDs in state - current list of TagIds
     };
@@ -138,10 +141,10 @@ export const Create: FC = () => {
     return (
         <div>
             <ExitButton />
-            <h1>All Boards Page</h1>
+            <h1>Create Swipe</h1>
             <p>{lastSwipe}</p>
             {previousTagIds.map((keywords) => {
-                <p>{keywords}</p>;
+                return <p>{keywords}</p>;
             })}
             <ColumnContainer>
                 <Column1>
